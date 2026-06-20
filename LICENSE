@@ -1,0 +1,95 @@
+NO‑HARM, NO‑EXTRACTION LICENSE (NHEL‑1.1)
+
+Copyright (c) 2026 NoLLM Project
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (“the Software”), to use, copy, modify, merge, publish, and distribute the Software, subject to the following conditions:
+
+1. Purpose
+The Software is created and released to support human dignity, reduce harm, and provide a non‑extractive alternative to large‑scale AI systems.
+It is offered freely under a gift‑economy model.
+It is not intended for use in systems that exploit, deceive, or harm individuals or communities.
+
+2. Prohibited Uses
+The Software may not be used, directly or indirectly, for any of the following purposes:
+
+2.1 Worker Exploitation
+replacing workers in ways that result in layoffs, wage suppression, or union‑busting
+
+automating roles primarily to reduce labor costs rather than reduce human burden
+
+2.2 Surveillance or Policing
+surveillance of individuals or communities
+
+predictive policing
+
+monitoring, profiling, or tracking without explicit consent
+
+2.3 Military or Defense
+weapons development
+
+autonomous targeting
+
+intelligence gathering
+
+battlefield decision systems
+
+2.4 Extractive or Harmful AI Practices
+training or operating large‑scale machine‑learning models requiring significant datacenter expansion
+
+contributing to energy‑intensive AI systems that accelerate environmental harm
+
+reinforcing the LLM arms race or similar extractive architectures
+
+2.5 Environmental Harm
+any use that increases fossil‑fuel consumption, water consumption, or grid strain through unnecessary compute
+
+any use that contributes to harmful datacenter expansion
+
+2.6 Oppression or Discrimination
+systems that discriminate on the basis of race, gender, sexuality, disability, nationality, or economic status
+
+systems that restrict human rights or civil liberties
+
+2.7 Synthetic Media and Deceptive Content (Anti‑Deepfake Clause)
+The Software may not be used to generate, assist in generating, or distribute synthetic media intended to deceive, impersonate, manipulate, or mislead individuals or the public.
+This includes, but is not limited to:
+
+deepfakes of real people
+
+synthetic impersonation of voices, likenesses, or identities
+
+manipulated media presented as authentic
+
+covert synthetic content used for political, commercial, or social influence
+
+any generative system attached to the Software for the purpose of creating deceptive or fabricated media
+
+Any attempt to integrate the Software with generative models, diffusion systems, or other synthetic‑media engines for deceptive purposes constitutes a violation of this license and immediately terminates all rights granted.
+
+3. Required Notices
+Any distribution of the Software, modified or unmodified, must include:
+
+this license
+
+a clear notice of the prohibited uses
+
+attribution to the original author
+
+4. Contribution Governance
+The Software’s core architecture (“the Hotel”) is governed and may only be modified by the original author or designated maintainers.
+Community contributions are limited to documentation, bug fixes, and non‑architectural improvements unless explicitly approved.
+
+The ecosystem layer (“the District”) will open for contributions at a later stage.
+Until then, District‑level contributions will not be accepted.
+
+5. No Warranty
+The Software is provided “as is,” without warranty of any kind.
+
+6. Termination
+Any use of the Software in violation of Section 2 automatically terminates all rights granted under this license.
+
+7. Reinstatement
+Rights may be reinstated only with explicit written permission from the original author.
+
+8. Interpretation
+This license shall be interpreted in favor of preventing harm, exploitation, deception, and extractive uses of technology.
