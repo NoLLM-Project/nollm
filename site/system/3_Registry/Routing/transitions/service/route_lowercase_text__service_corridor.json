@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_lowercase_text_to_service_corridor",
+    "source": "lowercase_text",
+    "target": "service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_service_corridor_to_lowercase_text",
+    "source": "service_corridor",
+    "target": "lowercase_text",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]

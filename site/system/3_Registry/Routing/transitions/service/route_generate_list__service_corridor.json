@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_corridor_to_generate_list",
+    "source": "coord_service_corridor",
+    "target": "coord_generate_list",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_generate_list_to_service_corridor",
+    "source": "coord_generate_list",
+    "target": "coord_service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]
