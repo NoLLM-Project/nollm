@@ -1,0 +1,23 @@
+// surfaces/ui/pipeline/send_message.js
+// Build envelope → call runner → deliver output back to Surfaces.
+
+import { buildEnvelope } from "./build_envelope.js";
+import { receiveMessage } from "./receive_message.js";
+
+// Your real workflow engine
+import { runWorkflow } from "../../../system/runner.js";
+
+export async function sendMessage(text) {
+
+  // 1. Build the envelope (message + tag)
+  const envelope = buildEnvelope(text);
+
+  // 2. Call the real runner with the envelope
+  const workflowContext = await runWorkflow(envelope);
+
+  // 3. Convert runner output to a displayable string
+  const systemText = JSON.stringify(workflowContext, null, 2);
+
+  // 4. Deliver system output back into Surfaces
+  receiveMessage(systemText);
+}
