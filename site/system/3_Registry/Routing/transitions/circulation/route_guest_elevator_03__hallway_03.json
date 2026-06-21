@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_guest_elevator_03_to_hallway_03",
+    "source": "guest_elevator_03",
+    "target": "hallway_03",
+    "conditions": ["navigation"],
+    "transitions": ["exit_elevator"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hallway_03_to_guest_elevator_03",
+    "source": "hallway_03",
+    "target": "guest_elevator_03",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]
