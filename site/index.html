@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoLLM UI</title>
+
+  <!-- Your merged CSS file -->
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- ------------------------------------------------------------
+         SURFACES UI (chat window, input bar, menu)
+         ------------------------------------------------------------ -->
+    <div id="surfaces-ui">
+
+      <!-- CHAT WINDOW -->
+      <div id="chat-window" class="chat-window"></div>
+
+      <!-- CHAT INPUT BAR -->
+      <div id="chat-input-bar" class="chat-input-bar">
+        <input
+          id="chat-input"
+          class="chat-input"
+          type="text"
+          placeholder="Type a message..."
+          autocomplete="off"
+        />
+        <button id="chat-send" class="chat-send">Send</button>
+      </div>
+
+      <!-- MENU -->
+      <div id="menu" class="menu-bar">
+        <button id="menu-reset-user" class="menu-btn">Reset User</button>
+        <button id="menu-new-conversation" class="menu-btn">New Conversation</button>
+        <button id="menu-clear-history" class="menu-btn">Clear History</button>
+      </div>
+
+    </div>
+
+
+    <!-- ------------------------------------------------------------
+         SYSTEM UI PANELS (your existing architecture)
+         ------------------------------------------------------------ -->
+    <div id="input-panel"></div>
+    <div id="workflow-panel"></div>
+    <div id="carrier-panel"></div>
+    <div id="output-panel"></div>
+
+  </div>
+
+  <!-- Surfaces + system UI bootstrap -->
+  <script type="module" src="/surfaces/ui/ui.js"></script>
+</body>
+</html>
