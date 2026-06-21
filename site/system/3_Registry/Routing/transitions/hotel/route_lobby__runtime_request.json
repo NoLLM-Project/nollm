@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_lobby_to_runtime_request",
+    "source": "lobby",
+    "target": "runtime_request",
+    "conditions": ["navigation"],
+    "transitions": ["open_runtime_request"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_runtime_request_to_lobby",
+    "source": "runtime_request",
+    "target": "lobby",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]
