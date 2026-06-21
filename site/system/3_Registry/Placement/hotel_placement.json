@@ -1,0 +1,268 @@
+[
+  {
+    "id": "place_hotel_shell",
+    "object_id": "hotel_shell",
+    "allowed_parents": ["world_root"],
+    "allowed_children": ["hotel_root"],
+    "constraints": {
+      "must_be_inside": ["world_root"],
+      "cannot_be_inside": ["districts", "tower", "field"]
+    },
+    "invariants": ["shell_contains_hotel"]
+  },
+  {
+    "id": "place_hotel_root",
+    "object_id": "hotel_root",
+    "allowed_parents": ["hotel_shell"],
+    "allowed_children": [
+      "floor_01",
+      "floor_02",
+      "floor_03",
+      "service_floor",
+      "public_floor",
+      "lobby"
+    ],
+    "constraints": {
+      "must_be_inside": ["world_root"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["hotel_must_have_at_least_one_floor"]
+  },
+  {
+    "id": "place_stairs_01",
+    "object_id": "stairs_01",
+    "allowed_parents": ["floor_01"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_01"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["stairwells_connect_floors"]
+  },
+  {
+    "id": "place_stairs_02",
+    "object_id": "stairs_02",
+    "allowed_parents": ["floor_02"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_02"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["stairwells_connect_floors"]
+  },
+  {
+    "id": "place_guest_elevator",
+    "object_id": "guest_elevator",
+    "allowed_parents": ["floor_01", "floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_01", "floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["elevators_connect_floors"]
+  },
+  {
+    "id": "place_public_elevator",
+    "object_id": "public_elevator",
+    "allowed_parents": ["lobby", "public_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby", "public_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["elevators_connect_floors"]
+  },
+  {
+    "id": "place_service_elevator",
+    "object_id": "service_elevator",
+    "allowed_parents": ["lobby", "hotel_root", "service_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby", "hotel_root", "service_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["elevators_connect_floors"]
+  },
+  {
+    "id": "place_lobby",
+    "object_id": "lobby",
+    "allowed_parents": ["hotel_root"],
+    "allowed_children": [
+      "front_desk",
+      "directory",
+      "vending_machine",
+      "bulletin",
+      "district_door",
+      "map",
+      "invariant_request",
+      "runtime_request",
+      "coat_room"
+    ],
+    "constraints": {
+      "must_be_inside": ["hotel_root"],
+      "cannot_be_inside": ["floor_01", "world_root"]
+    },
+    "invariants": ["lobby_is_entry_point", "lobby_hosts_service_objects"]
+  },
+  {
+    "id": "place_front_desk",
+    "object_id": "front_desk",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": ["hotel_floor"]
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_directory",
+    "object_id": "directory",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": []
+    },
+    "invariants": [
+      "directory_behaviors_are_service_plane"
+    ]
+  },
+  {
+    "id": "place_vending_machine",
+    "object_id": "vending_machine",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": []
+    },
+    "invariants": [
+      "vending_behaviors_are_service_plane"
+    ]
+  },
+  {
+    "id": "place_bulletin",
+    "object_id": "bulletin",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": ["bulletin_behaviors_are_service_plane"]
+    },
+    "invariants": ["bulletin_behaviors_are_service_plane"]
+  },
+  {
+    "id": "place_map",
+    "object_id": "map",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_district_door",
+    "object_id": "district_door",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_coat_room",
+    "object_id": "coat_room",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [
+      "anchor_reflective_mode",
+      "anchor_architectural_altitude",
+      "anchor_avoid_drift",
+      "anchor_stay_literal",
+      "anchor_steady_stance",
+      "coat_room_notepad"
+    ],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["coat_room_contains_anchors",
+      "notepad_is_user_authored"]
+  },
+  {
+    "id": "place_invariants_request",
+    "object_id": "invariants_request",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_runtime_request",
+    "object_id": "runtime_request",
+    "allowed_parents": ["lobby"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["lobby"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_public_floor",
+    "object_id": "public_floor",
+    "allowed_parents": ["hotel_root"],
+    "allowed_children": [
+      "dining",
+      "lounge",
+      "fitness",
+      "public_corridor",
+      "public_elevator"
+    ]
+    "constraints": {
+      "must_be_inside": ["hotel_root"],
+      "cannot_be_inside": ["districts", "tower", "field"]
+    },
+    "invariants": ["floor_must_have_rooms"]
+  },
+  {
+    "id": "place_dining",
+    "object_id": "dining",
+    "allowed_parents": ["public_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["public_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_lounge",
+    "object_id": "lounge",
+    "allowed_parents": ["public_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["public_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_fitness",
+    "object_id": "fitness",
+    "allowed_parents": ["public_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["public_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  }
+]

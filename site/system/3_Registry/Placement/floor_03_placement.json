@@ -1,0 +1,416 @@
+[
+  {
+    "id": "place_floor_03",
+    "object_id": "floor_03",
+    "allowed_parents": ["hotel_root"],
+    "allowed_children": [
+      "hallway_03",
+      "guest_elevator",
+
+      "encode_base64",
+      "decode_base64",
+      "encode_url",
+      "decode_url",
+      "encode_html_entities",
+      "decode_html_entities",
+      "compute_math",
+
+      "symbolic_simplify",
+      "symbolic_expand",
+      "symbolic_factor",
+      "symbolic_substitute",
+      "symbolic_differentiate",
+      "symbolic_integrate",
+      "symbolic_evaluate",
+      "symbolic_normalize",
+
+      "convert_markdown_to_html",
+      "convert_html_to_text",
+      "convert_json_to_yaml",
+      "convert_yaml_to_json",
+      "convert_csv_to_json",
+      "convert_text_to_uppercase",
+      "convert_text_to_lowercase",
+      "convert_text_to_titlecase",
+
+      "object_rename_keys",
+      "object_remove_keys",
+      "object_pick_keys",
+      "object_merge",
+      "object_flatten",
+      "object_nest",
+      "object_map_values",
+      "object_sort_keys",
+
+      "summarize_text"
+    ],
+    "constraints": {
+      "must_be_inside": ["hotel_root"],
+      "cannot_be_inside": ["districts", "tower", "field"]
+    },
+    "invariants": ["floor_must_have_rooms"]
+  },
+  {
+    "id": "place_hallway_03",
+    "object_id": "hallway_03",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": ["circulation_paths_do_not_host_rooms"]
+  },
+  {
+    "id": "place_encode_base64",
+    "object_id": "encode_base64",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_decode_base64",
+    "object_id": "decode_base64",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_encode_url",
+    "object_id": "encode_url",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_decode_url",
+    "object_id": "decode_url",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_encode_html_entities",
+    "object_id": "encode_html_entities",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_decode_html_entities",
+    "object_id": "decode_html_entities",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_compute_math",
+    "object_id": "compute_math",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_simplify",
+    "object_id": "symbolic_simplify",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_expand",
+    "object_id": "symbolic_expand",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_factor",
+    "object_id": "symbolic_factor",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_substitute",
+    "object_id": "symbolic_substitute",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_differentiate",
+    "object_id": "symbolic_differentiate",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_integrate",
+    "object_id": "symbolic_integrate",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_evaluate",
+    "object_id": "symbolic_evaluate",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_symbolic_normalize",
+    "object_id": "symbolic_normalize",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_markdown_to_html",
+    "object_id": "convert_markdown_to_html",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_html_to_text",
+    "object_id": "convert_html_to_text",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_json_to_yaml",
+    "object_id": "convert_json_to_yaml",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_yaml_to_json",
+    "object_id": "convert_yaml_to_json",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_csv_to_json",
+    "object_id": "convert_csv_to_json",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_text_to_uppercase",
+    "object_id": "convert_text_to_uppercase",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_text_to_lowercase",
+    "object_id": "convert_text_to_lowercase",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_convert_text_to_titlecase",
+    "object_id": "convert_text_to_titlecase",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_rename_keys",
+    "object_id": "object_rename_keys",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_remove_keys",
+    "object_id": "object_remove_keys",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_pick_keys",
+    "object_id": "object_pick_keys",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_merge",
+    "object_id": "object_merge",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_flatten",
+    "object_id": "object_flatten",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_nest",
+    "object_id": "object_nest",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_map_values",
+    "object_id": "object_map_values",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_object_sort_keys",
+    "object_id": "object_sort_keys",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_summarize_text",
+    "object_id": "summarize_text",
+    "allowed_parents": ["floor_03"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["floor_03"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  }
+]
