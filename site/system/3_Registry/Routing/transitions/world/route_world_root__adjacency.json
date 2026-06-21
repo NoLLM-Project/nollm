@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_world_root_to_adjacency",
+    "source": "world_root",
+    "target": "adjacency",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_adjacency_to_world_root",
+    "source": "adjacency",
+    "target": "world_root",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

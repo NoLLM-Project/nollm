@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_world_root_to_districts",
+    "source": "world_root",
+    "target": "districts",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_districts_to_world_root",
+    "source": "districts",
+    "target": "world_root",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]
