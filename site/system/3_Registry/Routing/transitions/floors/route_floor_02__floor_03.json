@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_floor_02_to_floor_03",
+    "source": "floor_02",
+    "target": "floor_03",
+    "conditions": ["navigation"],
+    "transitions": ["move_up"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_floor_03_to_floor_02",
+    "source": "floor_03",
+    "target": "floor_02",
+    "conditions": [],
+    "transitions": ["move_down"],
+    "profile": "standard",
+    "invariants": []
+  }
+]
