@@ -1,0 +1,65 @@
+[
+  {
+    "id": "route_apply_error_colors",
+    "source": "error_invalid_node",
+    "target": "map_style_error_colors",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["apply_error_colors"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_apply_error_outline",
+    "source": "error_invalid_node",
+    "target": "map_style_error_outline",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["apply_error_outline"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_apply_error_pulse",
+    "source": "error_invalid_node",
+    "target": "map_style_error_pulse",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["apply_error_pulse"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_error_accessibility_invalid_node",
+    "source": "error_invalid_node",
+    "target": "map_error_accessibility",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["announce_invalid_node", "apply_error_focus_ring"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_error_highlight_to_error_layer",
+    "source": "error_invalid_node",
+    "target": "map_layer_error",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["draw_error_highlight"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_error_outline_to_error_layer",
+    "source": "error_invalid_node",
+    "target": "map_layer_error",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["draw_error_outline"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_error_pulse_to_error_layer",
+    "source": "error_invalid_node",
+    "target": "map_layer_error",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["draw_error_pulse"],
+    "profile": "ui",
+    "invariants": []
+  }
+]
