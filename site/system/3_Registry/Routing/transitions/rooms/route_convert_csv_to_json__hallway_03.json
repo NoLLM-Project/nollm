@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_convert_csv_to_json_to_hallway_03",
+    "source": "convert_csv_to_json",
+    "target": "hallway_03",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hallway_03_to_convert_csv_to_json",
+    "source": "hallway_03",
+    "target": "convert_csv_to_json",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "standard",
+    "invariants": []
+  }
+]

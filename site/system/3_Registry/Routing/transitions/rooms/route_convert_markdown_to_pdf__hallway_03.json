@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_convert_markdown_to_pdf_to_hallway_03",
+    "source": "convert_markdown_to_pdf",
+    "target": "hallway_03",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hallway_03_to_convert_markdown_to_pdf",
+    "source": "hallway_03",
+    "target": "convert_markdown_to_pdf",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "standard",
+    "invariants": []
+  }
+]
