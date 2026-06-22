@@ -1,0 +1,8 @@
+{
+  "id": "string",		// canonical name ID
+  "canonical_name": "string",	// the official name
+  "aliases": ["string"],	// legacy names
+  "type": "string",		// object type (room, module, surface, etc.)
+  "layer": "string",		// semantic, functional, container
+  "description": "string"	// human-readable meaning
+}

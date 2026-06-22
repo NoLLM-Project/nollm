@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_corridor_to_match_chunks",
+    "source": "coord_service_corridor",
+    "target": "coord_match_chunks",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_match_chunks_to_service_corridor",
+    "source": "coord_match_chunks",
+    "target": "coord_service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  }
+]

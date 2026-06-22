@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_housekeeping_to_service_corridor",
+    "source": "housekeeping",
+    "target": "service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_service_corridor_to_housekeeping",
+    "source": "service_corridor",
+    "target": "housekeeping",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]

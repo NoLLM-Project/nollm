@@ -1,0 +1,10 @@
+{
+  "id": "string",		// coordinate ID
+  "x": "number", 
+  "y": "number", 
+  "z": "number", 
+  "parent": "string",		// parent coordinate system (world, hotel, floor)
+  "children": ["string"],	// nested cooridnate systems
+  "adjacent": ["string"],	// adjacent list
+  "tags": ["string"],		// optional semantic tags
+}

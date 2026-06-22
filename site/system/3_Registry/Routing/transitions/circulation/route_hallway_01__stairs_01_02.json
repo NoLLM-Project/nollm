@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_hallway_01_to_stairs_01_02",
+    "source": "hallway_01",
+    "target": "stairs_01_02",
+    "conditions": ["navigation"],
+    "transitions": ["enter_stairs"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_stairs_01_02_to_hallway_01",
+    "source": "stairs_01_02",
+    "target": "hallway_01",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

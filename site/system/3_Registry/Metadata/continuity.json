@@ -1,0 +1,43 @@
+{
+  "stable": {
+    "description": "Object identity persists across sessions and updates.",
+    "allowed_operations": ["read", "update_metadata"],
+    "forbidden_operations": ["auto_generate", "auto_infer"]
+  },
+
+  "volatile": {
+    "description": "Object identity may change or reset depending on world state.",
+    "allowed_operations": ["read"],
+    "forbidden_operations": ["persist", "cache"]
+  },
+
+  "fixed": {
+    "description": "Object identity is immutable and cannot change.",
+    "allowed_operations": ["read"],
+    "forbidden_operations": ["update_metadata", "rename"]
+  },
+
+  "template": {
+    "description": "Object serves as a structural template for other objects.",
+    "allowed_operations": ["instantiate"],
+    "forbidden_operations": ["direct_interaction"]
+  },
+
+  "omnipresent": {
+    "description": "Object exists across all scenes and contexts.",
+    "allowed_operations": ["read", "invoke"],
+    "forbidden_operations": ["remove", "disable"]
+  },
+
+  "user_authored": {
+    "description": "Content is written by the user and must not be altered.",
+    "allowed_operations": ["read"],
+    "forbidden_operations": ["write", "summarize", "infer", "expand"]
+  },
+
+  "ephemeral": {
+    "description": "Object exists only during error or transient states.",
+    "allowed_operations": ["read"],
+    "forbidden_operations": ["persist"]
+  }
+}

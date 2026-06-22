@@ -1,0 +1,56 @@
+{
+  "identity": {
+    "unique_ids": true,
+    "name_matches_canonical": true,
+    "require_valid_sku": true,
+    "require_valid_coordinate": true
+  },
+
+  "anchors": {
+    "identity_matches_canonical": true,
+    "continuity_allowed_values_file": "continuity.json",
+    "stability_allowed_values_file": "anchors.json",
+    "anchors_must_not_contradict": true
+  },
+
+  "category": {
+    "category_matches_true_type": true,
+    "category_must_exist_in_file": "metadata_type.json",
+    "category_must_not_drift": true
+  },
+
+  "properties": {
+    "properties_literal_only": true,
+    "forbid_inference": true,
+    "forbid_prediction": true,
+    "forbid_semantic_expansion": true,
+    "forbid_auto_summaries": true,
+    "forbid_hidden_behavior": true,
+    "properties_must_be_structural": true
+  },
+
+  "coordinates": {
+    "metadata_coordinates_match_sku_coordinates": true,
+    "spatial_objects_require_numeric_xyz": true,
+    "abstract_objects_require_null_xyz": true
+  },
+
+  "sku": {
+    "sku_must_map_back_to_same_object": true,
+    "sku_category_must_match_metadata_category": true
+  },
+
+  "integrity": {
+    "no_orphan_metadata": true,
+    "no_contradictions_with_naming_coordinates_skus": true,
+    "no_duplicate_metadata_objects": true
+  },
+
+  "enforcement": {
+    "validate_on_startup": true,
+    "validate_on_registry_updates": true,
+    "validate_on_world_updates": true,
+    "validate_on_module_loading": true,
+    "reject_on_violation": true
+  }
+}

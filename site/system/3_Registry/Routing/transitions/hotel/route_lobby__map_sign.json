@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_lobby_to_map_sign",
+    "source": "lobby",
+    "target": "map_sign",
+    "conditions": ["navigation"],
+    "transitions": ["approach_map_sign"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_map_sign_to_lobby",
+    "source": "map_sign",
+    "target": "lobby",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

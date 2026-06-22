@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_detokenize_text_to_service_corridor",
+    "source": "detokenize_text",
+    "target": "service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_service_corridor_to_detokenize_text",
+    "source": "service_corridor",
+    "target": "detokenize_text",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]
