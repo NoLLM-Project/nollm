@@ -1,0 +1,1196 @@
+[
+  {
+    "id": "world_root",
+    "canonical_name": "A_World",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "Root container for all world-plane structures."
+  },
+  {
+    "id": "districts",
+    "canonical_name": "B_Districts",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "Container grouping district-level world-plane regions."
+  },
+  {
+    "id": "district_01",
+    "canonical_name": "District_01",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "World-plane district container."
+  },
+  {
+    "id": "hotel_root",
+    "canonical_name": "C_Hotel",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "World-plane container referencing the hotel-plane root."
+  },
+  {
+    "id": "tower",
+    "canonical_name": "D_Tower",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "World-plane container representing the tower structure."
+  },
+  {
+    "id": "field",
+    "canonical_name": "Field",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "World-plane container for semantic mappings."
+  },
+  {
+    "id": "collapse",
+    "canonical_name": "Collapse",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "World-plane container for failure and breakdown definitions."
+  },
+  {
+    "id": "adjacency",
+    "canonical_name": "Adjacency",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "World-plane container for placement and adjacency rules."
+  },
+  {
+    "id": "invariants",
+    "canonical_name": "Invariants",
+    "aliases": [],
+    "type": "container",
+    "layer": "world",
+    "description": "World-plane container for system invariants."
+  },
+  {
+    "id": "hotel_shell",
+    "canonical_name": "Hotel_Shell",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Structural boundary container for the hotel-plane."
+  },
+  {
+    "id": "lobby",
+    "canonical_name": "Lobby",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Primary entry container for the hotel-plane."
+  },
+  {
+    "id": "front_desk",
+    "canonical_name": "Front_Desk",
+    "aliases": [],
+    "type": "surface",
+    "layer": "hotel",
+    "description": "Surface for guest initialization and request intake."
+  },
+  {
+    "id": "directory",
+    "canonical_name": "Directory",
+    "aliases": [],
+    "type": "surface",
+    "layer": "hotel",
+    "description": "Lookup surface for hotel-plane navigation."
+  },
+  {
+    "id": "vending_machine",
+    "canonical_name": "Vending_Machine",
+    "aliases": [],
+    "type": "structure",
+    "layer": "hotel",
+    "description": "Ignition structure for utility access."
+  },
+  {
+    "id": "bulletin",
+    "canonical_name": "Bulletin",
+    "aliases": [],
+    "type": "surface",
+    "layer": "hotel",
+    "description": "Posting surface for hotel-plane notices."
+  },
+  {
+    "id": "map",
+    "canonical_name": "Map",
+    "aliases": [],
+    "type": "surface",
+    "layer": "hotel",
+    "description": "Navigation surface for hotel-plane layout."
+  },
+  {
+    "id": "district_door",
+    "canonical_name": "District_Door",
+    "aliases": [],
+    "type": "surface",
+    "layer": "hotel",
+    "description": "Surface representing the transition to district scenes."
+  },
+  {
+    "id": "coat_room",
+    "canonical_name": "Coat_Room",
+    "aliases": [],
+    "type": "container",
+    "layer": "runtime",
+    "description": "Buffer container for soft-failure routing."
+  },
+  {
+    "id": "invariants_request",
+    "canonical_name": "Invariants_Request",
+    "aliases": [],
+    "type": "container",
+    "layer": "runtime",
+    "description": "Runtime container for invariants handoff."
+  },
+  {
+    "id": "runtime_request",
+    "canonical_name": "Runtime_Request",
+    "aliases": [],
+    "type": "container",
+    "layer": "runtime",
+    "description": "Runtime container for execution handoff."
+  },
+  {
+    "id": "public_floor",
+    "canonical_name": "Public_Floor",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Back-of-house floor for public spaces."
+  },
+  {
+    "id": "dining",
+    "canonical_name": "Dining",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Public room providing shared utilities."
+  },
+  {
+    "id": "lounge",
+    "canonical_name": "Lounge",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Public room providing shared utilities."
+  },
+  {
+    "id": "fitness",
+    "canonical_name": "Fitness",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Public room providing shared utilities."
+  },
+  {
+    "id": "service_floor",
+    "canonical_name": "Service_Floor",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Back-of-house floor for service operations and preprocessing rooms."
+  },
+  {
+    "id": "room_service",
+    "canonical_name": "Room_Service",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Service endpoint delivering utilities to rooms."
+  },
+  {
+    "id": "preprocess_service",
+    "canonical_name": "Preprocess_Service",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Back-of-house preprocess endpoint."
+  },
+  {
+    "id": "postprocess_service",
+    "canonical_name": "Postprocess_Service",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Back-of-house postprocess endpoint."
+  },
+  {
+    "id": "housekeeping",
+    "canonical_name": "Housekeeping",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Back-of-house postprocess container."
+  },
+  {
+    "id": "maintenance",
+    "canonical_name": "Maintenance",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Back-of-house repair container."
+  },
+  {
+    "id": "guest_elevator",
+    "canonical_name": "Guest_Elevator",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Primary circulation elevator."
+  },
+  {
+    "id": "public_elevator",
+    "canonical_name": "Public_Elevator",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Public circulation elevator."
+  },
+  {
+    "id": "service_elevator",
+    "canonical_name": "Service_Elevator",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Back-of-house elevator."
+  },
+  {
+    "id": "stairs_01",
+    "canonical_name": "Stairs_01",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Primary stairwell."
+  },
+  {
+    "id": "stairs_02",
+    "canonical_name": "Stairs_02",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Secondary stairwell."
+  },
+  {
+    "id": "floor_01",
+    "canonical_name": "Floor_01",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Runtime boundary floor for LLM-only operations."
+  },
+  {
+    "id": "hallway_01",
+    "canonical_name": "Hallway_01",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Primary hallway for floor_01."
+  },
+  {
+    "id": "service_corridor",
+    "canonical_name": "Service_Corridor",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Primary hallway for Service_Floor."
+  },
+  {
+    "id": "public_corridor",
+    "canonical_name": "Public_Corridor",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Primary hallway for Public_Floor."
+  },
+  {
+    "id": "floor_02",
+    "canonical_name": "Floor_02",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Runtime boundary floor for shared operations."
+  },
+  {
+    "id": "hallway_02",
+    "canonical_name": "Hallway_02",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "hotel",
+    "description": "Primary hallway for floor_02."
+  },
+  {
+    "id": "floor_03",
+    "canonical_name": "Floor_03",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Runtime boundary floor for NoLLM operations."
+  },
+  {
+    "id": "hallway_03",
+    "canonical_name": "Hallway_03",
+    "aliases": [],
+    "type": "circulation",
+    "layer": "circulation",
+    "description": "Primary hallway for floor_03."
+  },
+  {
+    "id": "generate_text_literal",
+    "canonical_name": "Generate_Text_Literal",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate text exactly as instructed, without tone, structure, or semantic inference."
+  },
+  {
+    "id": "generate_title",
+    "canonical_name": "Generate_Title",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate a title from provided input or constraints."
+  },
+  {
+    "id": "generate_list",
+    "canonical_name": "Generate_List",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate a list of items in a deterministic structure."
+  },
+  {
+    "id": "generate_bullets",
+    "canonical_name": "Generate_Bullets",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate bullet‑formatted items from provided input."
+  },
+  {
+    "id": "generate_outline",
+    "canonical_name": "Generate_Outline",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate a structured outline with hierarchical sections."
+  },
+  {
+    "id": "generate_paragraph",
+    "canonical_name": "Generate_Paragraph",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate a paragraph of text in a deterministic structure."
+  },
+  {
+    "id": "generate_description",
+    "canonical_name": "Generate_Description",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate a descriptive text segment based on provided input."
+  },
+  {
+    "id": "rewrite_text_literal",
+    "canonical_name": "Rewrite_Text_Literal",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rewrite text while preserving meaning."
+  },
+  {
+    "id": "rewrite_tone",
+    "canonical_name": "Rewrite_Tone",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rewrite text to match a target tone."
+  },
+  {
+    "id": "rewrite_structure",
+    "canonical_name": "Rewrite_Structure",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rewrite text to improve or change structural organization."
+  },
+  {
+    "id": "rewrite_summary",
+    "canonical_name": "Rewrite_Summary",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rewrite text into a shorter, condensed form."
+  },
+  {
+    "id": "rewrite_clarity",
+    "canonical_name": "Rewrite_Clarity",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rewrite text to improve clarity and readability."
+  },
+  {
+    "id": "rewrite_professionalism",
+    "canonical_name": "Rewrite_Professionalism",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rewrite text to sound more formal and professional."
+  },
+  {
+    "id": "parse_json",
+    "canonical_name": "Parse_JSON",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Parse JSON input into a structured object."
+  },
+  {
+    "id": "parse_yaml",
+    "canonical_name": "Parse_YAML",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Parse YAML input into a structured object."
+  },
+  {
+    "id": "parse_xml",
+    "canonical_name": "Parse_XML",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Parse XML input into a structured object."
+  },
+  {
+    "id": "parse_csv",
+    "canonical_name": "Parse_CSV",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Parse CSV input into a structured table."
+  },
+  {
+    "id": "parse_ini",
+    "canonical_name": "Parse_INI",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Parse INI configuration input into key/value sections."
+  },
+  {
+    "id": "parse_toml",
+    "canonical_name": "Parse_TOML",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Parse TOML configuration input into a structured object."
+  },
+  {
+    "id": "parse_query_string",
+    "canonical_name": "Parse_Query_String",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Parse URL query string input into key/value pairs."
+  },
+  {
+    "id": "convert_markdown_to_html",
+    "canonical_name": "Convert_Markdown_To_HTML",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert Markdown input into HTML output."
+  },
+  {
+    "id": "convert_html_to_text",
+    "canonical_name": "Convert_HTML_To_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert HTML input into plain text output."
+  },
+  {
+    "id": "convert_json_to_yaml",
+    "canonical_name": "Convert_JSON_To_YAML",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert JSON input into YAML output."
+  },
+  {
+    "id": "convert_yaml_to_json",
+    "canonical_name": "Convert_YAML_To_JSON",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert YAML input into JSON output."
+  },
+  {
+    "id": "convert_csv_to_json",
+    "canonical_name": "Convert_CSV_To_JSON",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert CSV input into JSON output."
+  },
+  {
+    "id": "convert_text_to_uppercase",
+    "canonical_name": "Convert_Text_To_Uppercase",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert text input into uppercase output."
+  },
+  {
+    "id": "convert_text_to_lowercase",
+    "canonical_name": "Convert_Text_To_Lowercase",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert text input into lowercase output."
+  },
+  {
+    "id": "convert_text_to_titlecase",
+    "canonical_name": "Convert_Text_To_Titlecase",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert text input into title‑case output."
+  },
+  {
+    "id": "http_get",
+    "canonical_name": "HTTP_GET",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an HTTP GET request to a specified URL."
+  },
+  {
+    "id": "http_post",
+    "canonical_name": "HTTP_POST",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an HTTP POST request to a specified URL with a request body."
+  },
+  {
+    "id": "http_put",
+    "canonical_name": "HTTP_PUT",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an HTTP PUT request to a specified URL with a request body."
+  },
+  {
+    "id": "http_delete",
+    "canonical_name": "HTTP_DELETE",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an HTTP DELETE request to a specified URL."
+  },
+  {
+    "id": "http_head",
+    "canonical_name": "HTTP_HEAD",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an HTTP HEAD request to a specified URL."
+  },
+  {
+    "id": "http_patch",
+    "canonical_name": "HTTP_PATCH",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an HTTP PATCH request to a specified URL with a request body."
+  },
+  {
+    "id": "http_options",
+    "canonical_name": "HTTP_OPTIONS",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an HTTP OPTIONS request to a specified URL."
+  },
+  {
+    "id": "object_rename_keys",
+    "canonical_name": "Object_Rename_Keys",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rename keys in an object according to a provided mapping."
+  },
+  {
+    "id": "object_remove_keys",
+    "canonical_name": "Object_Remove_Keys",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Remove specified keys from an object."
+  },
+  {
+    "id": "object_pick_keys",
+    "canonical_name": "Object_Pick_Keys",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Select only specified keys from an object."
+  },
+  {
+    "id": "object_merge",
+    "canonical_name": "Object_Merge",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Merge two objects into a single object."
+  },
+  {
+    "id": "object_flatten",
+    "canonical_name": "Object_Flatten",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Flatten a nested object into a single-level object."
+  },
+  {
+    "id": "object_nest",
+    "canonical_name": "Object_Nest",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Nest a flat object into a structured object."
+  },
+  {
+    "id": "object_map_values",
+    "canonical_name": "Object_Map_Values",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Apply a deterministic mapping to each value in an object."
+  },
+  {
+    "id": "object_sort_keys",
+    "canonical_name": "Object_Sort_Keys",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Sort the keys of an object deterministically."
+  },
+  {
+    "id": "search_web_text",
+    "canonical_name": "Search_Web_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform a text-based web search."
+  },
+  {
+    "id": "search_web_images",
+    "canonical_name": "Search_Web_Images",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform an image-based web search."
+  },
+  {
+    "id": "search_web_videos",
+    "canonical_name": "Search_Web_Videos",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform a video-based web search."
+  },
+  {
+    "id": "search_web_news",
+    "canonical_name": "Search_Web_News",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform a news-specific web search."
+  },
+  {
+    "id": "search_web_definitions",
+    "canonical_name": "Search_Web_Definitions",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform a dictionary or lexicon lookup via web search."
+  },
+  {
+    "id": "search_web_reference",
+    "canonical_name": "Search_Web_Reference",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Perform a reference‑oriented web search (encyclopedic or knowledge sources)."
+  },
+  {
+    "id": "llm_generate_text",
+    "canonical_name": "LLM_Generate_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Generate freeform text using the LLM."
+  },
+  {
+    "id": "llm_answer_question",
+    "canonical_name": "LLM_Answer_Question",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Answer a question using the LLM."
+  },
+  {
+    "id": "llm_rewrite_text",
+    "canonical_name": "LLM_Rewrite_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Rewrite text using the LLM."
+  },
+  {
+    "id": "llm_expand_text",
+    "canonical_name": "LLM_Expand_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Expand text using the LLM."
+  },
+  {
+    "id": "summarize_text",
+    "canonical_name": "Summarize_Text",
+    "aliases": [
+      "summarize",
+      "summarize this",
+      "summarize it",
+      "make summary",
+      "give me a summary",
+      "create summary",
+      "write a summary",
+      "summary please",
+      "shorten this",
+      "shorten it",
+      "make it shorter",
+      "condense this",
+      "condense it",
+      "tl;dr",
+      "brief version",
+      "make brief",
+      "boil this down",
+      "reduce this",
+      "compress this",
+      "what’s the gist",
+      "give me the gist",
+      "key points",
+      "main points",
+      "extract main points"
+    ],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Deterministic summarization using the primitive sentence-scoring summarizer. No creativity, no inference, no drift."
+  },
+  {
+    "id": "llm_summarize_text",
+    "canonical_name": "LLM_Summarize_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Use the LLM wrapper to summarize text with drift detection, clarity shaping, and strict mode-locking."
+  },
+  {
+    "id": "extract_keywords",
+    "canonical_name": "Extract_Keywords",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract salient keywords from text using a deterministic scoring method."
+  },
+  {
+    "id": "translate_text",
+    "canonical_name": "Translate_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Translate text from a specified source language to a specified target language."
+  },
+  {
+    "id": "clean_text",
+    "canonical_name": "Clean_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Apply deterministic text‑cleaning operations such as removing control characters, normalizing whitespace, and stripping markup."
+  },
+  {
+    "id": "compute_math",
+    "canonical_name": "Compute_Math",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Evaluate numeric expressions deterministically."
+  },
+  {
+    "id": "extract_emails",
+    "canonical_name": "Extract_Emails",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract email addresses from text."
+  },
+  {
+    "id": "extract_phone_numbers",
+    "canonical_name": "Extract_Phone_Numbers",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract phone numbers from text."
+  },
+  {
+    "id": "extract_urls",
+    "canonical_name": "Extract_URLs",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract URLs from text."
+  },
+  {
+    "id": "extract_dates",
+    "canonical_name": "Extract_Dates",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract dates from text."
+  },
+  {
+    "id": "extract_numbers",
+    "canonical_name": "Extract_Numbers",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract numeric values from text."
+  },
+  {
+    "id": "extract_hashtags",
+    "canonical_name": "Extract_Hashtags",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract hashtags from text."
+  },
+  {
+    "id": "extract_mentions",
+    "canonical_name": "Extract_Mentions",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract @mentions from text."
+  },
+  {
+    "id": "extract_code_blocks",
+    "canonical_name": "Extract_Code_Blocks",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract code blocks from text."
+  },
+  {
+    "id": "extract_quotes",
+    "canonical_name": "Extract_Quotes",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract quoted text."
+  },
+  {
+    "id": "extract_sentences",
+    "canonical_name": "Extract_Sentences",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract individual sentences from text."
+  },
+  {
+    "id": "extract_paragraphs",
+    "canonical_name": "Extract_Paragraphs",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Extract paragraphs from text."
+  },
+  {
+    "id": "symbolic_simplify",
+    "canonical_name": "Symbolic_Simplify",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Simplify a symbolic expression."
+  },
+  {
+    "id": "symbolic_expand",
+    "canonical_name": "Symbolic_Expand",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Expand a symbolic expression."
+  },
+  {
+    "id": "symbolic_factor",
+    "canonical_name": "Symbolic_Factor",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Factor a symbolic expression."
+  },
+  {
+    "id": "symbolic_substitute",
+    "canonical_name": "Symbolic_Substitute",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Substitute variables in a symbolic expression."
+  },
+  {
+    "id": "symbolic_differentiate",
+    "canonical_name": "Symbolic_Differentiate",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Compute the symbolic derivative of an expression."
+  },
+  {
+    "id": "symbolic_integrate",
+    "canonical_name": "Symbolic_Integrate",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Compute the symbolic integral of an expression."
+  },
+  {
+    "id": "symbolic_evaluate",
+    "canonical_name": "Symbolic_Evaluate",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Evaluate a symbolic expression numerically."
+  },
+  {
+    "id": "symbolic_normalize",
+    "canonical_name": "Symbolic_Normalize",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Normalize a symbolic expression into canonical form."
+  },
+  {
+    "id": "normalize_whitespace",
+    "canonical_name": "Normalize_Whitespace",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Normalize whitespace in text deterministically."
+  },
+  {
+    "id": "strip_whitespace",
+    "canonical_name": "Strip_Whitespace",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Strip leading and trailing whitespace from text."
+  },
+  {
+    "id": "lowercase_text",
+    "canonical_name": "Lowercase_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert text to lowercase deterministically."
+  },
+  {
+    "id": "uppercase_text",
+    "canonical_name": "Uppercase_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert text to uppercase deterministically."
+  },
+  {
+    "id": "titlecase_text",
+    "canonical_name": "Titlecase_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert text to title case deterministically."
+  },
+  {
+    "id": "slugify_text",
+    "canonical_name": "Slugify_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert text into a URL-safe slug deterministically."
+  },
+  {
+    "id": "tokenize_text",
+    "canonical_name": "Tokenize_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Split text into tokens deterministically."
+  },
+  {
+    "id": "detokenize_text",
+    "canonical_name": "Detokenize_Text",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Join tokens into text deterministically."
+  },
+  {
+    "id": "sort_lines",
+    "canonical_name": "Sort_Lines",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Sort lines of text deterministically."
+  },
+  {
+    "id": "dedupe_lines",
+    "canonical_name": "Dedupe_Lines",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Remove duplicate lines deterministically."
+  },
+  {
+    "id": "encode_base64",
+    "canonical_name": "Encode_Base64",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Encode text as Base64 deterministically."
+  },
+  {
+    "id": "decode_base64",
+    "canonical_name": "Decode_Base64",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Decode Base64 text deterministically."
+  },
+  {
+    "id": "encode_url",
+    "canonical_name": "Encode_URL",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "URL-encode text deterministically."
+  },
+  {
+    "id": "decode_url",
+    "canonical_name": "Decode_URL",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "URL-decode text deterministically."
+  },
+  {
+    "id": "encode_html_entities",
+    "canonical_name": "Encode_HTML_Entities",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Encode HTML entities deterministically."
+  },
+  {
+    "id": "decode_html_entities",
+    "canonical_name": "Decode_HTML_Entities",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Decode HTML entities deterministically."
+  },
+{
+    "id": "tokenize_for_atoms",
+    "canonical_name": "Tokenize_For_Atoms",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Convert raw text into a deterministic sequence of normalized tokens."
+  },
+  {
+    "id": "resolve_atoms",
+    "canonical_name": "Resolve_Atoms",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Map each token to a lexicon-defined atom using exact deterministic lookup rules."
+  },
+  {
+    "id": "match_phrases",
+    "canonical_name": "Match_Phrases",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Identify and collapse multi‑word phrase spans into single phrase atoms using fixed pattern matching."
+  },
+  {
+    "id": "match_chunks",
+    "canonical_name": "Match_Chunks",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Group atoms into structural chunks using a deterministic finite‑state pattern matcher."
+  },
+  {
+    "id": "normalize_chunks",
+    "canonical_name": "Normalize_Chunks",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Normalize chunk spans, ordering, and identifiers to ensure structural consistency."
+  },
+  {
+    "id": "segment_clauses",
+    "canonical_name": "Segment_Clauses",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Segment the chunk stream into clauses using a deterministic boundary automaton."
+  },
+  {
+    "id": "normalize_clauses",
+    "canonical_name": "Normalize_Clauses",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Normalize clause spans and identifiers to ensure consistent structural boundaries."
+  },
+  {
+    "id": "assemble_sentence",
+    "canonical_name": "Assemble_Sentence",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Assemble tokens, atoms, chunks, and clauses into a complete deterministic sentence structure."
+  },
+  {
+    "id": "atomize_service",
+    "canonical_name": "Atomize_Service",
+    "aliases": ["coord_atomize_service"],
+    "type": "service",
+    "layer": "hotel",
+    "description": "Checkpoint service room that validates atomization output—tokens, atoms, chunks, clauses, and assembled sentence—without  modifying the payload, then returns control to the front desk for routing."
+  }
+]
+
