@@ -1,6 +1,6 @@
 // system/5_Function/validators/validate_metadata_anchors.js
 
-import { loadJson } from "../../utils/load_json.js";
+import { loadJson } from "../../../utils/load_json.js";
 
 // Loader: async, uses the single JSON primitive
 export async function loadMetadataAnchors() {
