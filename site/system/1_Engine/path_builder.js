@@ -23,10 +23,15 @@ export function buildPath({ metadata, structural }) {
     };
   }
 
+  // ⭐ Convert routing nodes → coord_* IDs
+  const coordPath = path.map(n => `coord_${n}`);
+  const coordStart = `coord_${startNode}`;
+  const coordEnd = `coord_${endNode}`;
+
   return {
     ok: true,
-    path,
-    start: startNode,
-    end: endNode
+    path: coordPath,
+    start: coordStart,
+    end: coordEnd
   };
 }
