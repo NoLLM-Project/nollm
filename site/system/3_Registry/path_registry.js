@@ -1,57 +1,63 @@
 // system/3_Registry/path_registry.js
+// Minimal routing table. No semantics.
 
 export const pathRegistry = {
 
-    // ------------------------------------------------------------
-    // HOTEL LAYER
-    // ------------------------------------------------------------
+    // -------------------------
+    // HOTEL PLANE
+    // -------------------------
 
     "hotel_root": {
         coord: "coord_hotel_root",
-        layer: "hotel",
-        description: "Entry point for the hotel layer"
+        layer: "hotel"
     },
 
     "front_desk": {
         coord: "coord_front_desk",
-        layer: "hotel",
-        description: "Hotel front desk — routes to coat room, preprocess, invariants request"
+        layer: "hotel"
     },
 
     "coat_room": {
         coord: "coord_coat_room",
-        layer: "hotel",
-        description: "Coat room — applies stance anchors and notepad"
+        layer: "hotel"
     },
 
-    "preprocess_service_room": {
-        coord: "coord_preprocess_service_room",
-        layer: "hotel",
-        description: "Hotel → service corridor handoff for preprocessing"
+    "preprocess_service": {
+        coord: "coord_preprocess_service",
+        layer: "hotel"
     },
 
     "invariants_request": {
         coord: "coord_invariants_request",
-        layer: "hotel",
-        description: "Hotel membrane node — requests invariants check"
+        layer: "hotel"
     },
 
-    // NEW: Hard-failure return path
+    "runtime_request": {
+        coord: "coord_runtime_request",
+        layer: "hotel"
+    },
+
+    "postprocess_service": {
+        coord: "coord_postprocess_service",
+        layer: "hotel"
+    },
+
+    "atomize_service": {
+        coord: "coord_atomize_service",
+        layer: "hotel"
+    },
+
+    // -------------------------
+    // WORLD PLANE
+    // -------------------------
+
     "tower": {
         coord: "coord_tower",
-        layer: "hotel",
-        description: "Hard-failure return path — invariants hard failures go here"
+        layer: "world"
     },
-
-
-    // ------------------------------------------------------------
-    // SYSTEM LAYER (OUTSIDE HOTEL)
-    // ------------------------------------------------------------
 
     "invariants": {
         coord: "coord_invariants",
-        layer: "system",
-        description: "System-level invariants check (runner-only)"
+        layer: "world"
     }
-
 };
