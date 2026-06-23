@@ -1,6 +1,6 @@
 // surfaces/ui/ui.js
-// Surface Plane controller — the ONLY bridge between UI and system/
-// Clean, reversible, non-fused. Surfaces → runner_adapter → engine.
+// Surface controller — the ONLY bridge between UI and system/
+// Clean, reversible, non-fused. Surfaces → system receiver → workflow.
 
 import { uiState } from "./state/ui_state.js";
 import { eventBus } from "./state/event_bus.js";
@@ -27,10 +27,39 @@ import { ChatWindow } from "../components/chat_window.js";
 import { ChatInput } from "../components/chat_input.js";
 import { Menu } from "../components/menu.js";
 
-// -----------------------------
-// Runner adapter (NOT the engine)
-// -----------------------------
-import { runner } from "../../system/runner_adapter.js";
+
+// ------------------------------------------------------------
+// REMOVE THIS (illegal import)
+// ------------------------------------------------------------
+// import { runner } from "../../system/runner_adapter.js";
+
+
+// ------------------------------------------------------------
+// Minimal async bridge to system
+// ------------------------------------------------------------
+function sendToSystem(envelope) {
+  return new Promise((resolve, reject) => {
+    const fn = window.__system_handleEnvelope;
+    if (typeof fn !== "function") {
+      return reject(new Error("System receiver not registered"));
+    }
+
+    try {
+      fn(envelope, resolve);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+
+// ------------------------------------------------------------
+// Minimal error panel helper
+// ------------------------------------------------------------
+function showSystemError(text) {
+  const el = document.getElementById("system-error-panel");
+  if (el) el.textContent = text;
+}
 
 
 // ------------------------------------------------------------
@@ -59,10 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ------------------------------------------------------------
-// USER SUBMISSION HANDLER
-// (shared by Surfaces ChatInput + system InputPanel)
+// USER SUBMISSION HANDLER (async + error separation)
 // ------------------------------------------------------------
-function onUserSubmit(text) {
+async function onUserSubmit(text) {
 
   // 1. Surfaces: add user bubble
   addMessage({ type: "user", text });
@@ -84,17 +112,33 @@ function onUserSubmit(text) {
     }
   };
 
-  // 4. Send envelope to runner adapter
-  runner.handleEnvelope(envelope, (systemText) => {
+  try {
+    // ⭐ 4. Await system output
+    const systemText = await sendToSystem(envelope);
 
-    // 5. Surfaces: add system bubble
+    // 5. Surfaces: add system bubble (success)
     addMessage({ type: "system", text: systemText });
     ChatWindow.render();
 
     // 6. System UI: update output panel
     uiState.finalOutput = systemText;
     OutputPanel.render();
-  });
+
+    // Clear error panel on success
+    showSystemError("");
+
+  } catch (err) {
+
+    // ⭐ Error path: DO NOT add a chat bubble
+    const errorText = `System Error: ${err.message || err}`;
+
+    // Show error in separate panel
+    showSystemError(errorText);
+
+    // Still update finalOutput for debugging
+    uiState.finalOutput = errorText;
+    OutputPanel.render();
+  }
 }
 
 
