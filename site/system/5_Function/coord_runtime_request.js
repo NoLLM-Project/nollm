@@ -40,7 +40,7 @@ export function coord_runtime_request({ workflowContext, carrier }) {
     }
 
     // ------------------------------------------------------------
-    // 4. POP THE NEXT SPATIAL COORDINATE
+    // 4. POP THE NEXT COORD_* ID
     // ------------------------------------------------------------
     const [nextCoord, ...remaining] = path;
 
@@ -52,7 +52,7 @@ export function coord_runtime_request({ workflowContext, carrier }) {
     // ------------------------------------------------------------
     return {
         phase: "runtime_request",
-        next_runtime_coord: nextCoord,
-        next_path: nextCoord
+        next_runtime_coord: nextCoord,  // already a coord_* ID
+        next_path: nextCoord            // runner can execute directly
     };
 }
