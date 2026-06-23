@@ -24,7 +24,6 @@ export const PATH_REVERSE = [
     "coord_hotel_root",
     "coord_hotel_shell",
     "coord_world_root",
-    "coord_collapse",
     "coord_tower"
 ];
 
