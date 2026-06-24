@@ -2,9 +2,9 @@
 
 import { pathRegistry } from "./3_Registry/path_registry.js";
 import { createCoordRegistry } from "./3_Registry/coord_registry.js";
-import { PATH_FORWARD, PATH_PREPROCESS, PATH_POSTPROCESS, PATH_ATOMIZE } from "./1_Engine/paths.js"; // ⭐ added workflow arrays
+import { PATH_FORWARD, PATH_PREPROCESS, PATH_POSTPROCESS, PATH_ATOMIZE, PATH_REVERSE } from "./1_Engine/paths.js";
 import { ROUTER as behaviorMap } from "./router.js";
-import { createCarrier } from "./1_Engine/engine_core/carrier.js"; // movement engine
+import { createCarrier } from "./1_Engine/engine_core/carrier.js";
 
 export async function runWorkflow(initialPayload, userToken) {
 
@@ -58,7 +58,7 @@ export async function runWorkflow(initialPayload, userToken) {
     while (next_path) {
 
         // ------------------------------------------------------------
-        // ⭐ WORKFLOW ARRAY HANDLING (PATH_PREPROCESS, PATH_POSTPROCESS, PATH_ATOMIZE)
+        // WORKFLOW ARRAY HANDLING (PATH_PREPROCESS, PATH_POSTPROCESS, PATH_ATOMIZE)
         // ------------------------------------------------------------
         if (next_path.startsWith("PATH_")) {
 
@@ -99,9 +99,8 @@ export async function runWorkflow(initialPayload, userToken) {
 
                     workflowContext[endCoordId] = result;
 
-                    // Continue hotel-plane routing from the checkpoint
                     next_path = result?.next_path || null;
-                    continue; // back to hotel-plane loop
+                    continue;
                 }
 
                 // Normal coord step
@@ -129,7 +128,6 @@ export async function runWorkflow(initialPayload, userToken) {
                 workflowContext[coordId] = result;
             }
 
-            // After workflow array finishes, continue hotel-plane loop
             continue;
         }
 
@@ -165,6 +163,34 @@ export async function runWorkflow(initialPayload, userToken) {
         workflowContext[coordId] = result;
 
         next_path = result?.next_path || null;
+    }
+
+    // ------------------------------------------------------------
+    // PHASE 3 — RETURN PIPELINE (PATH_REVERSE)
+    // ------------------------------------------------------------
+    for (const coordId of PATH_REVERSE) {
+
+        const coordEntry = coordRegistry[coordId];
+        if (!coordEntry) {
+            throw new Error(`Unknown coord in PATH_REVERSE: ${coordId}`);
+        }
+
+        const xyz = coordEntry.xyz;
+        await carrier.moveTo(xyz);
+
+        const fn = behaviorMap[coordId];
+        if (!fn) {
+            throw new Error(`No behavior function for coord: ${coordId}`);
+        }
+
+        const result = fn({
+            workflowContext,
+            carrier,
+            userToken,
+            xyz
+        });
+
+        workflowContext[coordId] = result;
     }
 
     // ------------------------------------------------------------
