@@ -36,8 +36,7 @@ body {
   overflow-y: auto;
   gap: 10px;
   height: 400px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
 }
 
 #input-text {
@@ -70,7 +69,7 @@ body {
 
 
 /* ------------------------------------------------------------
-   SURFACES CHAT WINDOW
+   CHAT WINDOW
 ------------------------------------------------------------ */
 
 .chat-window {
@@ -80,14 +79,13 @@ body {
   background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-family: sans-serif;
   font-size: 14px;
   line-height: 1.4;
 }
 
 
 /* ------------------------------------------------------------
-   SURFACES CHAT BUBBLES
+   CHAT BUBBLES
 ------------------------------------------------------------ */
 
 .chat-bubble {
@@ -136,7 +134,7 @@ body {
 
 
 /* ------------------------------------------------------------
-   SURFACES INPUT BAR
+   INPUT BAR
 ------------------------------------------------------------ */
 
 .chat-input-bar {
@@ -152,7 +150,6 @@ body {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 15px;
-  line-height: 1.4;
   background: #fff;
   transition: border-color 0.15s ease-out;
 }
@@ -171,8 +168,7 @@ body {
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  transition: background 0.15s ease-out,
-              transform 0.1s ease-out;
+  transition: background 0.15s ease-out, transform 0.1s ease-out;
 }
 
 .chat-send:hover {
@@ -185,7 +181,7 @@ body {
 
 
 /* ------------------------------------------------------------
-   SIDEBAR (header + icons + hover tint + selected tint + collapse)
+   SIDEBAR
 ------------------------------------------------------------ */
 
 .sidebar {
@@ -197,11 +193,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  font-family: sans-serif;
-  transition: width 0.2s ease-out, padding 0.2s ease-out;
+  transition: width 0.25s ease, padding 0.25s ease;
 }
 
-/* Collapse Toggle Button */
+/* Collapse Toggle */
 .sidebar-toggle {
   background: #f7f7f7;
   border: 1px solid #ddd;
@@ -226,7 +221,7 @@ body {
   transition: transform 0.15s ease-out;
 }
 
-/* Sidebar Header Bar */
+/* Header */
 .sidebar-header {
   padding: 10px 12px;
   font-size: 14px;
@@ -241,7 +236,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 4px;
 }
 
 
@@ -271,7 +265,6 @@ body {
   stroke: #0078d4;
 }
 
-/* Collapsed tooltip support */
 .sidebar.collapsed .sidebar-new-convo span:not(.sidebar-icon) {
   display: none;
 }
@@ -304,51 +297,27 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  position: relative; /* required for tooltips */
+  position: relative;
 }
 
-.sidebar-item {
+.sidebar-item,
+.sidebar-setting-item {
   padding: 8px 10px;
   border-radius: 6px;
   font-size: 14px;
-  cursor: pointer;
   background: #f7f7f7;
   border: 1px solid #e0e0e0;
-  transition: background 0.15s ease-out,
-              border-color 0.15s ease-out;
+  cursor: pointer;
+  transition: background 0.15s ease-out, border-color 0.15s ease-out;
 }
 
-.sidebar-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  transition: opacity 0.15s ease-out;
+.sidebar-item:hover,
+.sidebar-setting-item:hover {
+  background: #eee;
+  border-color: #d0d0d0;
 }
 
-/* ICON HOVER TINT */
-.sidebar-item:hover .sidebar-icon svg,
-.sidebar-setting-item:hover .sidebar-icon svg {
-  stroke: #0078d4;
-  opacity: 0.9;
-}
-
-/* ICON SELECTED TINT */
-.sidebar-item.selected .sidebar-icon svg,
-.sidebar-setting-item.selected .sidebar-icon svg {
-  stroke: #005fa3;
-  opacity: 1;
-}
-
-/* SELECTED ITEM LEFT BORDER */
-.sidebar-item.selected {
-  background: #d9eaff;
-  border-color: #a8c8e8;
-  border-left: 3px solid #0078d4;
-  padding-left: 7px;
-}
-
+.sidebar-item.selected,
 .sidebar-setting-item.selected {
   background: #d9eaff;
   border-color: #a8c8e8;
@@ -356,9 +325,20 @@ body {
   padding-left: 7px;
 }
 
-.sidebar-item:hover {
-  background: #eee;
-  border-color: #d0d0d0;
+.sidebar-icon svg {
+  transition: stroke 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+.sidebar-item:hover .sidebar-icon svg,
+.sidebar-setting-item:hover .sidebar-icon svg {
+  stroke: #0078d4;
+  opacity: 0.9;
+}
+
+.sidebar-item.selected .sidebar-icon svg,
+.sidebar-setting-item.selected .sidebar-icon svg {
+  stroke: #005fa3;
+  opacity: 1;
 }
 
 .sidebar-settings {
@@ -368,22 +348,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.sidebar-setting-item {
-  padding: 8px 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  background: #f7f7f7;
-  border: 1px solid #e0e0e0;
-  cursor: pointer;
-  transition: background 0.15s ease-out,
-              border-color 0.15s ease-out;
-}
-
-.sidebar-setting-item:hover {
-  background: #eee;
-  border-color: #d0d0d0;
 }
 
 
@@ -414,12 +378,10 @@ body {
   stroke: #0078d4;
 }
 
-/* Collapsed footer text hidden */
 .sidebar.collapsed .sidebar-footer span:not(.sidebar-icon) {
   display: none;
 }
 
-/* Tooltip when collapsed */
 .sidebar.collapsed .sidebar-footer:hover::after {
   content: attr(data-label);
   position: absolute;
@@ -440,7 +402,7 @@ body {
 
 
 /* ------------------------------------------------------------
-   COLLAPSED SIDEBAR STATE
+   COLLAPSED SIDEBAR
 ------------------------------------------------------------ */
 
 .sidebar.collapsed {
@@ -449,14 +411,12 @@ body {
   overflow: hidden;
 }
 
-/* Hide text when collapsed */
 .sidebar.collapsed .sidebar-header,
 .sidebar.collapsed .sidebar-item span:not(.sidebar-icon),
 .sidebar.collapsed .sidebar-setting-item span:not(.sidebar-icon) {
   display: none;
 }
 
-/* Keep icons centered */
 .sidebar.collapsed .sidebar-icon {
   margin: 0 auto;
 }
@@ -489,7 +449,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  transition: right 0.25s ease-out;
+  transition: right 0.3s ease;
   z-index: 2000;
 }
 
@@ -572,7 +532,7 @@ body {
 
 
 /* ------------------------------------------------------------
-   SURFACES MENU BAR
+   MENU BAR
 ------------------------------------------------------------ */
 
 .menu-bar {

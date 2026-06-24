@@ -209,30 +209,36 @@
 
   <script type="module" src="/surfaces/ui/ui.js"></script>
 
-  <!-- Sidebar collapse/expand toggle -->
+  <!-- Sidebar + Settings Drawer Logic -->
   <script>
+    const sidebar = document.querySelector(".sidebar");
+    const settingsDrawer = document.getElementById("settings-drawer");
+    const settingsButton = document.querySelector(".sidebar-setting-item[data-label='Settings']");
+
+    // Sidebar collapse toggle
     document.getElementById("sidebar-toggle").addEventListener("click", () => {
-      document.querySelector(".sidebar").classList.toggle("collapsed");
+      sidebar.classList.toggle("collapsed");
+      settingsDrawer.classList.remove("open"); // close drawer when collapsing
     });
 
-    // Forward "New Conversation" button to existing menu action
+    // New Conversation forwards to menu button
     document.querySelector(".sidebar-new-convo").addEventListener("click", () => {
       document.getElementById("menu-new-conversation").click();
     });
 
-    // Open Settings Drawer
-    document.querySelector(".sidebar-setting-item[data-label='Settings']")
-      .addEventListener("click", () => {
-        document.getElementById("settings-drawer").classList.add("open");
+    // Settings toggle (open/close)
+    settingsButton.addEventListener("click", () => {
+      settingsDrawer.classList.toggle("open");
 
-        // Populate user ID
+      if (settingsDrawer.classList.contains("open")) {
         const id = localStorage.getItem("userId") || "(none)";
         document.getElementById("settings-user-id").textContent = id;
-      });
+      }
+    });
 
-    // Close Drawer
+    // Close drawer via X button
     document.getElementById("settings-close").addEventListener("click", () => {
-      document.getElementById("settings-drawer").classList.remove("open");
+      settingsDrawer.classList.remove("open");
     });
 
     // Reset User ID
