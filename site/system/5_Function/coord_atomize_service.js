@@ -1,57 +1,41 @@
-/**
- * Behavior for coord_atomize_service
- *
- * This is a checkpoint room. It does not transform the payload.
- * It validates the structural fields produced by PATH_ATOMIZE and
- * returns the next destination for the runner.
- *
- * Expected payload shape:
- * {
- *     tokens: [...],
- *     atoms: [...],
- *     chunks: [...],
- *     clauses: [...],
- *     sentence: {...}
- * }
- *
- * Output payload:
- * {
- *     next: "front_desk",
- *     payload: { ...unchanged payload... }
- * }
- */
+// system/5_Function/coord_atomize_service.js
 
-module.exports = async function(payload, context) {
-    // Basic validation: ensure the atomization pipeline produced the expected fields
-    const missing = [];
+export function coord_atomize_service_room({ workflowContext, carrier }) {
 
-    if (!payload || typeof payload !== "object") {
+    const hotelRoot = workflowContext["coord_hotel_root"];
+
+    // REQUIRE: hotel_root must have run
+    if (!hotelRoot || hotelRoot.phase !== "hotel_root") {
         return {
-            error: "coord_atomize_service: payload missing or invalid",
-            input: payload
+            phase: "atomize_service",
+            error: "Hotel Root has not run yet",
+            metadata_id: null,
+            next_path: null,
+            carrier
         };
     }
 
-    if (!Array.isArray(payload.tokens)) missing.push("tokens");
-    if (!Array.isArray(payload.atoms)) missing.push("atoms");
-    if (!Array.isArray(payload.chunks)) missing.push("chunks");
-    if (!Array.isArray(payload.clauses)) missing.push("clauses");
-    if (typeof payload.sentence !== "object" || payload.sentence === null) {
-        missing.push("sentence");
-    }
+    const metadataId = hotelRoot.metadata_id;
 
-    if (missing.length > 0) {
+    // ------------------------------------------------------------
+    // VESTIBULE
+    // ------------------------------------------------------------
+    if (workflowContext.__from_front_desk === true) {
         return {
-            error: "coord_atomize_service: missing required fields",
-            missing,
-            input: payload
+            phase: "atomize_service_vestibule",
+            metadata_id: metadataId,
+            next_path: "PATH_ATOMIZE",
+            carrier
         };
     }
 
-    // This room does not modify the payload.
-    // It simply returns control to the front desk.
+    // ------------------------------------------------------------
+    // CHECKPOINT
+    // ------------------------------------------------------------
     return {
-        next: "front_desk",
-        payload
+        phase: "atomize_service_checkpoint",
+        metadata_id: metadataId,
+        next_path: "front_desk",
+        carrier
     };
-};
+}

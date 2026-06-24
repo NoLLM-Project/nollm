@@ -1,6 +1,6 @@
 // system/5_Function/coord_front_desk.js
 
-import { HOTEL_PATH_REVERSE, PATH_RUNTIME } from "../1_Engine/hotel_paths.js";
+import { PATH_REVERSE } from "../1_Engine/paths.js";
 
 export function coord_front_desk({ workflowContext, carrier, userToken }) {
 
@@ -20,9 +20,12 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
 
     const metadataId = hotelRoot.metadata_id;
 
+    // NEW: atomize ordering
+    const atomizePosition = hotelRoot?.atomize_position || "before_runtime";
+
 
     // ------------------------------------------------------------
-    // 2. INVARIANTS REPORT HANDLING
+    // 2. INVARIANTS REPORT HANDLING (same invariants_request, multiple passes)
     // ------------------------------------------------------------
     const invariantsRequest = workflowContext["coord_invariants_request"];
 
@@ -31,7 +34,7 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         const report = invariantsRequest.invariants_report;
 
         if (report.overall_ok === true) {
-            // PASS → fall through
+            // PASS → fall through to next phase decision
         } else {
             const severity = report.severity;
             const domain = report.domain;
@@ -43,7 +46,7 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
                     metadata_id: metadataId,
                     reason: report.reason,
                     domain,
-                    next_path: "tower"
+                    next_path: "coord_tower"
                 };
             }
 
@@ -54,7 +57,7 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
                     metadata_id: metadataId,
                     reason: report.reason,
                     domain,
-                    next_path: "coat_room"
+                    next_path: "coord_coat_room"
                 };
             }
 
@@ -64,7 +67,7 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
                 metadata_id: metadataId,
                 reason: "Unknown invariants severity",
                 domain,
-                next_path: "tower"
+                next_path: "coord_tower"
             };
         }
     }
@@ -75,9 +78,12 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
     // ------------------------------------------------------------
     const coatRoomDone = Boolean(workflowContext["coord_coat_room"]);
     const preprocessDone = Boolean(workflowContext["coord_preprocess_service"]);
-    const invariantsRequested = Boolean(workflowContext["coord_invariants_request"]);
+    const atomizeDone = Boolean(workflowContext["coord_atomize_service"]);
     const runtimeRequestDone = Boolean(workflowContext["coord_runtime_request"]);
     const postprocessServiceDone = Boolean(workflowContext["coord_postprocess_service"]);
+
+    const lastInvReport = invariantsRequest?.invariants_report;
+    const lastInvDomain = lastInvReport?.domain;
 
 
     // ------------------------------------------------------------
@@ -87,7 +93,7 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         return {
             phase: "front_desk",
             metadata_id: metadataId,
-            next_path: "coat_room"
+            next_path: "coord_coat_room"
         };
     }
 
@@ -95,15 +101,63 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         return {
             phase: "front_desk",
             metadata_id: metadataId,
-            next_path: "preprocess_service"
+            next_path: "coord_preprocess_service"
         };
     }
 
-    if (!invariantsRequested) {
+    // PREPROCESS INVARIANTS
+    if (!lastInvReport) {
         return {
-            phase: "front_desk",
+            phase: "front_desk_preprocess_invariants_request",
             metadata_id: metadataId,
-            next_path: "invariants_request"
+            next_path: "coord_invariants_request",
+            carrier: {
+                payload: carrier?.payload,
+                domain: "preprocess"
+            }
+        };
+    }
+
+
+    // ------------------------------------------------------------
+    // ATOMIZE BEFORE RUNTIME
+    // ------------------------------------------------------------
+    if (atomizePosition === "before_runtime") {
+
+        if (!atomizeDone) {
+            return {
+                phase: "front_desk_atomize",
+                metadata_id: metadataId,
+                next_path: "coord_atomize_service"
+            };
+        }
+
+        if (atomizeDone && lastInvDomain !== "atomize") {
+            return {
+                phase: "front_desk_atomize_invariants_request",
+                metadata_id: metadataId,
+                next_path: "coord_invariants_request",
+                carrier: {
+                    payload: carrier?.payload,
+                    domain: "atomize"
+                }
+            };
+        }
+    }
+
+
+    // ------------------------------------------------------------
+    // ROUTE INVARIANTS (pass 1 + pass 2 handled inside invariants_request)
+    // ------------------------------------------------------------
+    if (lastInvDomain !== "route") {
+        return {
+            phase: "front_desk_route_invariants_request",
+            metadata_id: metadataId,
+            next_path: "coord_invariants_request",
+            carrier: {
+                payload: carrier?.payload,
+                domain: "route"
+            }
         };
     }
 
@@ -111,19 +165,7 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
     // ------------------------------------------------------------
     // 5. PHASE B: RUNTIME HANDOFF
     // ------------------------------------------------------------
-    const report = invariantsRequest?.invariants_report;
-
-    // ⭐ NEW: SKIP RUNTIME IF PATH_RUNTIME IS EMPTY
-    if (PATH_RUNTIME.length === 0 && !runtimeRequestDone) {
-        return {
-            phase: "front_desk_skip_runtime",
-            metadata_id: metadataId,
-            next_path: "coord_postprocess_service"
-        };
-    }
-
-    // Existing runtime handoff
-    if (report && report.overall_ok === true && !runtimeRequestDone) {
+    if (lastInvDomain === "route" && lastInvReport?.overall_ok === true && !runtimeRequestDone) {
         return {
             phase: "front_desk_runtime_request",
             metadata_id: metadataId,
@@ -131,23 +173,44 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         };
     }
 
-    // NEW: request runtime invariants
-    if (runtimeRequestDone && !workflowContext["coord_invariants_request_runtime"]) {
+    // RUNTIME INVARIANTS
+    if (runtimeRequestDone && lastInvDomain !== "runtime") {
         return {
             phase: "front_desk_runtime_invariants_request",
             metadata_id: metadataId,
-            next_path: "coord_invariants_request_runtime"
+            next_path: "coord_invariants_request",
+            carrier: {
+                payload: carrier?.payload,
+                domain: "runtime"
+            }
         };
     }
 
-    // NEW: runtime invariants checkpoint
-    const invRuntime = workflowContext["coord_invariants_request_runtime"];
-    if (invRuntime?.invariants_report?.overall_ok === true && !postprocessServiceDone) {
-        return {
-            phase: "front_desk_runtime_invariants_passed",
-            metadata_id: metadataId,
-            next_path: "coord_postprocess_service"
-        };
+
+    // ------------------------------------------------------------
+    // ATOMIZE AFTER RUNTIME
+    // ------------------------------------------------------------
+    if (atomizePosition === "after_runtime") {
+
+        if (runtimeRequestDone && !atomizeDone) {
+            return {
+                phase: "front_desk_atomize_after_runtime",
+                metadata_id: metadataId,
+                next_path: "coord_atomize_service"
+            };
+        }
+
+        if (runtimeRequestDone && atomizeDone && lastInvDomain !== "atomize") {
+            return {
+                phase: "front_desk_atomize_invariants_request_after_runtime",
+                metadata_id: metadataId,
+                next_path: "coord_invariants_request",
+                carrier: {
+                    payload: carrier?.payload,
+                    domain: "atomize"
+                }
+            };
+        }
     }
 
 
@@ -162,23 +225,25 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         };
     }
 
-    // NEW: request postprocess invariants
-    if (postprocessServiceDone && !workflowContext["coord_invariants_request_post"]) {
+    // POSTPROCESS INVARIANTS
+    if (postprocessServiceDone && lastInvDomain !== "postprocess") {
         return {
             phase: "front_desk_post_invariants_request",
             metadata_id: metadataId,
-            next_path: "coord_invariants_request_post"
+            next_path: "coord_invariants_request",
+            carrier: {
+                payload: carrier?.payload,
+                domain: "postprocess"
+            }
         };
     }
 
-    // NEW: postprocess invariants checkpoint
-    const invPost = workflowContext["coord_invariants_request_post"];
-    if (invPost?.invariants_report?.overall_ok === true) {
-        const firstReturnPath = HOTEL_PATH_REVERSE[0];
+    // FINAL CHECKPOINT (⭐ FIXED)
+    if (lastInvDomain === "postprocess" && lastInvReport?.overall_ok === true) {
         return {
             phase: "front_desk_post_invariants_passed",
             metadata_id: metadataId,
-            next_path: firstReturnPath
+            next_path: "PATH_REVERSE"
         };
     }
 
