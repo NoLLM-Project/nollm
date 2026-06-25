@@ -1,5 +1,5 @@
 // surfaces/ui/ui.js
-// Surface controller — the ONLY bridge between UI and system.
+// Surface controller — the ONLY bridge between UI and system/
 // Clean, reversible, non-fused. Surfaces → system receiver → workflow.
 
 import { uiState } from "./state/ui_state.js";
@@ -23,16 +23,15 @@ import { loadHistory, addMessage } from "./state/history.js";
 // -----------------------------
 // Surfaces components
 // -----------------------------
-import { ChatWindow } from "../components/chat_window.js";
-import { ChatInput } from "../components/chat_input.js";
-import { Menu } from "../components/menu.js";
+import { ChatWindow } from "./components/chat_window.js";
+import { ChatInput } from "./components/chat_input.js";
+import { Menu } from "./components/menu.js";
 
-// -----------------------------
-// UI Actions (your files)
-// -----------------------------
-import { actionResetUserId } from "./actions/reset_user_id.js";
-import { newConversationId as actionNewConversationId } from "./actions/new_conversation.js";
-import { clearHistory as actionClearHistory } from "./actions/delete_history.js";
+
+// ------------------------------------------------------------
+// REMOVE THIS (illegal import)
+// ------------------------------------------------------------
+// import { runner } from "../../system/runner_adapter.js";
 
 
 // ------------------------------------------------------------
@@ -64,7 +63,7 @@ function showSystemError(text) {
 
 
 // ------------------------------------------------------------
-// DOMContentLoaded — Surfaces init + merged UI wiring
+// INITIALIZATION
 // ------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -84,11 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
   CarrierPanel.init();
   OutputPanel.init();
 
-  // --- Event bus ---
   wireEventBus();
-
-  // --- Merged UI wiring ---
-  mergedUIInit();
 });
 
 
@@ -118,10 +113,10 @@ async function onUserSubmit(text) {
   };
 
   try {
-    // 4. Await system output
+    // ⭐ 4. Await system output
     const systemText = await sendToSystem(envelope);
 
-    // 5. Surfaces: add system bubble
+    // 5. Surfaces: add system bubble (success)
     addMessage({ type: "system", text: systemText });
     ChatWindow.render();
 
@@ -129,14 +124,18 @@ async function onUserSubmit(text) {
     uiState.finalOutput = systemText;
     OutputPanel.render();
 
+    // Clear error panel on success
     showSystemError("");
 
   } catch (err) {
 
+    // ⭐ Error path: DO NOT add a chat bubble
     const errorText = `System Error: ${err.message || err}`;
 
+    // Show error in separate panel
     showSystemError(errorText);
 
+    // Still update finalOutput for debugging
     uiState.finalOutput = errorText;
     OutputPanel.render();
   }
@@ -161,179 +160,10 @@ function wireEventBus() {
   eventBus.on("final_output", (output) => {
     uiState.finalOutput = output;
 
+    // Surfaces bubble
     addMessage({ type: "system", text: output });
     ChatWindow.render();
 
     OutputPanel.render();
   });
-}
-
-
-// ------------------------------------------------------------
-// MERGED UI LOGIC (formerly app.js)
-// ------------------------------------------------------------
-function mergedUIInit() {
-
-  // -------------------------------
-  // Local UI state
-  // -------------------------------
-  let conversations = [];
-  let activeConversationId = null;
-
-  // -------------------------------
-  // Helpers
-  // -------------------------------
-  function updateSettingsUserIdDisplay() {
-    const el = document.getElementById("settings-user-id");
-    if (el) el.textContent = getUserId();
-  }
-
-  function newConversation() {
-    const id = "conv-" + Math.random().toString(36).slice(2, 10);
-
-    conversations.push({
-      id,
-      messages: []
-    });
-
-    activeConversationId = id;
-    renderConversationList();
-    renderMessages();
-  }
-
-  function clearHistoryUI() {
-    const conv = conversations.find(c => c.id === activeConversationId);
-    if (conv) {
-      conv.messages = [];
-      renderMessages();
-    }
-  }
-
-  function renderConversationList() {
-    const list = document.getElementById("conversation-list");
-    list.innerHTML = "";
-
-    conversations.forEach(conv => {
-      const item = document.createElement("div");
-      item.className = "sidebar-item" + (conv.id === activeConversationId ? " selected" : "");
-      item.dataset.label = "Conversation";
-      item.innerHTML = `
-        <span class="icon">💬</span>
-        <span>${conv.id}</span>
-      `;
-
-      item.addEventListener("click", () => {
-        activeConversationId = conv.id;
-        renderConversationList();
-        renderMessages();
-      });
-
-      list.appendChild(item);
-    });
-  }
-
-  function renderMessages() {
-    const conv = conversations.find(c => c.id === activeConversationId);
-    const win = document.getElementById("chat-window");
-
-    if (!conv) {
-      win.innerHTML = "";
-      return;
-    }
-
-    win.innerHTML = conv.messages
-      .map(msg => `
-        <div class="chat-bubble ${msg.role === "user" ? "bubble-user" : "bubble-system"}">
-          ${msg.text}
-          <div class="timestamp">${msg.timestamp}</div>
-        </div>
-      `)
-      .join("");
-
-    win.scrollTop = win.scrollHeight;
-  }
-
-  function sendLocalUserMessage(text) {
-    const conv = conversations.find(c => c.id === activeConversationId);
-    if (!conv) return;
-
-    conv.messages.push({
-      role: "user",
-      text,
-      timestamp: new Date().toLocaleTimeString()
-    });
-
-    renderMessages();
-  }
-
-  // -------------------------------
-  // Wire UI buttons (with actions)
-  // -------------------------------
-  document.querySelector(".sidebar-new-convo").addEventListener("click", () => {
-    actionNewConversationId(); // system-level
-    newConversation();         // UI-level
-  });
-
-  document.getElementById("settings-reset-user").addEventListener("click", () => {
-    actionResetUserId();          // system-level
-    updateSettingsUserIdDisplay(); // UI-level
-  });
-
-  document.getElementById("settings-clear-history").addEventListener("click", () => {
-    actionClearHistory(); // system-level
-    clearHistoryUI();     // UI-level
-    ChatWindow.render();
-  });
-
-  document.getElementById("sidebar-toggle").addEventListener("click", () => {
-    document.getElementById("sidebar").classList.toggle("collapsed");
-  });
-
-  // -------------------------------
-  // Settings drawer wiring
-  // -------------------------------
-  const settingsDrawer = document.getElementById("settings-drawer");
-  const settingsOpenBtn = document.getElementById("open-settings");
-  const settingsCloseBtn = document.getElementById("settings-close");
-
-  if (settingsOpenBtn && settingsDrawer) {
-    settingsOpenBtn.addEventListener("click", () => {
-      settingsDrawer.classList.add("open");
-      updateSettingsUserIdDisplay();
-    });
-  }
-
-  if (settingsCloseBtn && settingsDrawer) {
-    settingsCloseBtn.addEventListener("click", () => {
-      settingsDrawer.classList.remove("open");
-    });
-  }
-
-  // -------------------------------
-  // Chat input wiring
-  // -------------------------------
-  document.getElementById("chat-send").addEventListener("click", () => {
-    const input = document.getElementById("chat-input");
-    const text = input.value.trim();
-    if (!text) return;
-    input.value = "";
-    sendLocalUserMessage(text);
-    onUserSubmit(text);
-  });
-
-  document.getElementById("chat-input").addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      const text = e.target.value.trim();
-      if (!text) return;
-      e.target.value = "";
-      sendLocalUserMessage(text);
-      onUserSubmit(text);
-    }
-  });
-
-  // -------------------------------
-  // Initialize UI
-  // -------------------------------
-  updateSettingsUserIdDisplay();
-  newConversation();
 }
