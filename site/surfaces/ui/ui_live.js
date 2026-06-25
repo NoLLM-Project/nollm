@@ -169,10 +169,6 @@ function wireEventBus() {
   });
 }
 
-
-// ------------------------------------------------------------
-// MERGED UI LOGIC (formerly app.js)
-// ------------------------------------------------------------
 function mergedUIInit() {
 
   // -------------------------------
@@ -212,6 +208,8 @@ function mergedUIInit() {
 
   function renderConversationList() {
     const list = document.getElementById("conversation-list");
+    if (!list) return;
+
     list.innerHTML = "";
 
     conversations.forEach(conv => {
@@ -237,8 +235,8 @@ function mergedUIInit() {
     const conv = conversations.find(c => c.id === activeConversationId);
     const win = document.getElementById("chat-window");
 
-    if (!conv) {
-      win.innerHTML = "";
+    if (!conv || !win) {
+      if (win) win.innerHTML = "";
       return;
     }
 
@@ -286,9 +284,17 @@ function mergedUIInit() {
     ChatWindow.render();
   });
 
-  document.getElementById("sidebar-toggle").addEventListener("click", () => {
-    document.getElementById("sidebar").classList.toggle("collapsed");
-  });
+  // -------------------------------
+  // Sidebar collapse
+  // -------------------------------
+  const sidebarToggle = document.getElementById("sidebar-toggle");
+  const sidebar = document.getElementById("sidebar");
+
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+    });
+  }
 
   // -------------------------------
   // Settings drawer wiring
@@ -307,6 +313,24 @@ function mergedUIInit() {
   if (settingsCloseBtn && settingsDrawer) {
     settingsCloseBtn.addEventListener("click", () => {
       settingsDrawer.classList.remove("open");
+    });
+  }
+
+  // -------------------------------
+  // Thinking + Diagnostics toggles
+  // -------------------------------
+  const thinkingToggle = document.getElementById("toggle-thinking");
+  const diagnosticsToggle = document.getElementById("toggle-diagnostics");
+
+  if (thinkingToggle) {
+    thinkingToggle.addEventListener("change", (e) => {
+      window.dispatchEvent(new CustomEvent("toggleThinking", { detail: e.target.checked }));
+    });
+  }
+
+  if (diagnosticsToggle) {
+    diagnosticsToggle.addEventListener("change", (e) => {
+      window.dispatchEvent(new CustomEvent("toggleDiagnostics", { detail: e.target.checked }));
     });
   }
 
@@ -338,3 +362,4 @@ function mergedUIInit() {
   updateSettingsUserIdDisplay();
   newConversation();
 }
+
