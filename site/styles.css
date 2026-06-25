@@ -439,23 +439,22 @@ body {
 .settings-drawer {
   position: fixed;
   top: 0;
-  right: -360px;
+  right: 0;
   width: 360px;
   height: 100%;
   background: #ffffff;
   border-left: 1px solid #ddd;
   box-shadow: -2px 0 6px rgba(0,0,0,0.1);
   padding: 20px;
-  display: flex;
   flex-direction: column;
   gap: 24px;
   transition: right 0.3s ease;
   z-index: 2000;
-  overflow: hidden;
+  display: none;
 }
 
 .settings-drawer.open {
-  right: 0;
+  display: flex;
 }
 
 .settings-header {
