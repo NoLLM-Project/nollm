@@ -1,7 +1,5 @@
-// surfaces/ui/ui.js
-// force redeploy 1
+// surfaces/ui/ui_live.js
 // Surface controller — the ONLY bridge between UI and system.
-// Clean, reversible, non-fused. Surfaces → system receiver → workflow.
 
 import { uiState } from "./state/ui_state.js";
 import { eventBus } from "./state/event_bus.js";
@@ -29,7 +27,7 @@ import { ChatInput } from "./components/chat_input.js";
 import { Menu } from "./components/menu.js";
 
 // -----------------------------
-// UI Actions (your files)
+// UI Actions
 // -----------------------------
 import { actionResetUserId } from "./actions/reset_user_id.js";
 import { actionNewConversationId } from "./actions/new_conversation.js";
@@ -94,21 +92,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ------------------------------------------------------------
-// USER SUBMISSION HANDLER (async + error separation)
+// USER SUBMISSION HANDLER
 // ------------------------------------------------------------
 async function onUserSubmit(text) {
 
-  // 1. Surfaces: add user bubble
   addMessage({ type: "user", text });
   ChatWindow.render();
 
-  // 2. System UI: reset workflow + carrier
   uiState.workflowSteps = [];
   uiState.carrier = null;
   WorkflowPanel.render();
   CarrierPanel.render();
 
-  // 3. Build envelope
   const envelope = {
     message: text,
     tag: {
@@ -119,14 +114,11 @@ async function onUserSubmit(text) {
   };
 
   try {
-    // 4. Await system output
     const systemText = await sendToSystem(envelope);
 
-    // 5. Surfaces: add system bubble
     addMessage({ type: "system", text: systemText });
     ChatWindow.render();
 
-    // 6. System UI: update output panel
     uiState.finalOutput = systemText;
     OutputPanel.render();
 
@@ -169,17 +161,15 @@ function wireEventBus() {
   });
 }
 
+
+// ------------------------------------------------------------
+// MERGED UI LOGIC
+// ------------------------------------------------------------
 function mergedUIInit() {
 
-  // -------------------------------
-  // Local UI state
-  // -------------------------------
   let conversations = [];
   let activeConversationId = null;
 
-  // -------------------------------
-  // Helpers
-  // -------------------------------
   function updateSettingsUserIdDisplay() {
     const el = document.getElementById("settings-user-id");
     if (el) el.textContent = getUserId();
@@ -188,12 +178,9 @@ function mergedUIInit() {
   function newConversation() {
     const id = "conv-" + Math.random().toString(36).slice(2, 10);
 
-    conversations.push({
-      id,
-      messages: []
-    });
-
+    conversations.push({ id, messages: [] });
     activeConversationId = id;
+
     renderConversationList();
     renderMessages();
   }
@@ -217,7 +204,7 @@ function mergedUIInit() {
       item.className = "sidebar-item" + (conv.id === activeConversationId ? " selected" : "");
       item.dataset.label = "Conversation";
       item.innerHTML = `
-        <span class="icon">💬</span>
+        <span class="sidebar-icon">💬</span>
         <span>${conv.id}</span>
       `;
 
@@ -266,21 +253,21 @@ function mergedUIInit() {
   }
 
   // -------------------------------
-  // Wire UI buttons (with actions)
+  // Wire UI buttons
   // -------------------------------
   document.querySelector(".sidebar-new-convo").addEventListener("click", () => {
-    actionNewConversationId(); // system-level
-    newConversation();         // UI-level
+    actionNewConversationId();
+    newConversation();
   });
 
   document.getElementById("settings-reset-user").addEventListener("click", () => {
-    actionResetUserId();          // system-level
-    updateSettingsUserIdDisplay(); // UI-level
+    actionResetUserId();
+    updateSettingsUserIdDisplay();
   });
 
   document.getElementById("settings-clear-history").addEventListener("click", () => {
-    actionClearHistory(); // system-level
-    clearHistoryUI();     // UI-level
+    actionClearHistory();
+    clearHistoryUI();
     ChatWindow.render();
   });
 
@@ -297,24 +284,26 @@ function mergedUIInit() {
   }
 
   // -------------------------------
-  // Settings drawer wiring
+  // Settings drawer wiring (deferred)
   // -------------------------------
-  const settingsDrawer = document.getElementById("settings-drawer");
-  const settingsOpenBtn = document.getElementById("open-settings");
-  const settingsCloseBtn = document.getElementById("settings-close");
+  setTimeout(() => {
+    const settingsDrawer = document.getElementById("settings-drawer");
+    const settingsOpenBtn = document.getElementById("open-settings");
+    const settingsCloseBtn = document.getElementById("settings-close");
 
-  if (settingsOpenBtn && settingsDrawer) {
-    settingsOpenBtn.addEventListener("click", () => {
-      settingsDrawer.classList.add("open");
-      updateSettingsUserIdDisplay();
-    });
-  }
+    if (settingsOpenBtn && settingsDrawer) {
+      settingsOpenBtn.addEventListener("click", () => {
+        settingsDrawer.classList.add("open");
+        updateSettingsUserIdDisplay();
+      });
+    }
 
-  if (settingsCloseBtn && settingsDrawer) {
-    settingsCloseBtn.addEventListener("click", () => {
-      settingsDrawer.classList.remove("open");
-    });
-  }
+    if (settingsCloseBtn && settingsDrawer) {
+      settingsCloseBtn.addEventListener("click", () => {
+        settingsDrawer.classList.remove("open");
+      });
+    }
+  }, 0);
 
   // -------------------------------
   // Thinking + Diagnostics toggles
@@ -362,4 +351,3 @@ function mergedUIInit() {
   updateSettingsUserIdDisplay();
   newConversation();
 }
-
