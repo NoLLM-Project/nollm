@@ -33,6 +33,11 @@ import { actionResetUserId } from "./actions/reset_user_id.js";
 import { actionNewConversationId } from "./actions/new_conversation.js";
 import { actionDeleteHistory as actionClearHistory } from "./actions/delete_history.js";
 
+// -----------------------------
+// Chat pipeline (your request)
+// -----------------------------
+import { sendMessage } from "./pipeline/send_message.js";
+
 
 // ------------------------------------------------------------
 // Minimal async bridge to system
@@ -286,8 +291,6 @@ function mergedUIInit() {
   // -------------------------------
   // Settings drawer wiring
   // -------------------------------
-
-  // Settings drawer wiring (after Surfaces UI mounts)
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const settingsDrawer = document.getElementById("settings-drawer");
@@ -328,7 +331,7 @@ function mergedUIInit() {
   }
 
   // -------------------------------
-  // Chat input wiring
+  // Chat input wiring (your change)
   // -------------------------------
   document.getElementById("chat-send").addEventListener("click", () => {
     const input = document.getElementById("chat-input");
@@ -336,7 +339,7 @@ function mergedUIInit() {
     if (!text) return;
     input.value = "";
     sendLocalUserMessage(text);
-    onUserSubmit(text);
+    sendMessage(text);   // ← your requested change
   });
 
   document.getElementById("chat-input").addEventListener("keydown", e => {
@@ -345,7 +348,7 @@ function mergedUIInit() {
       if (!text) return;
       e.target.value = "";
       sendLocalUserMessage(text);
-      onUserSubmit(text);
+      sendMessage(text);   // ← your requested change
     }
   });
 
