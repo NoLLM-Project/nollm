@@ -27,13 +27,6 @@ import { ChatWindow } from "../components/chat_window.js";
 import { ChatInput } from "../components/chat_input.js";
 import { Menu } from "../components/menu.js";
 
-
-// ------------------------------------------------------------
-// REMOVE THIS (illegal import)
-// ------------------------------------------------------------
-// import { runner } from "../../system/runner_adapter.js";
-
-
 // ------------------------------------------------------------
 // Minimal async bridge to system
 // ------------------------------------------------------------
