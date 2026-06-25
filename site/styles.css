@@ -400,7 +400,7 @@ body {
 .settings-drawer {
   position: fixed;
   top: 0;
-  right: -360px;
+  right: -400px;
   width: 360px;
   height: 100%;
 
