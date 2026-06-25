@@ -5,9 +5,18 @@ export const conversationIdState = {
   value: null
 };
 
-// Simple UUIDv4 generator (UI-local, non-semantic)
+// Safe UUID generator with fallback
 function generateUUID() {
-  return crypto.randomUUID();
+  if (window.crypto && window.crypto.randomUUID) {
+    return window.crypto.randomUUID();
+  }
+
+  // Fallback: RFC4122-ish UUID v4
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0;
+    const v = c === "x" ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
 }
 
 export function initConversationId() {
