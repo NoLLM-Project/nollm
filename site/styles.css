@@ -451,6 +451,7 @@ body {
   gap: 24px;
   transition: right 0.3s ease;
   z-index: 2000;
+  overflow: hidden;
 }
 
 .settings-drawer.open {
