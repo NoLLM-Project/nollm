@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   Menu.init();
 
   // --- System UI ---
-  InputPanel.init(onUserSubmit);
+  // InputPanel.init(onUserSubmit);
   WorkflowPanel.init();
   CarrierPanel.init();
   OutputPanel.init();
