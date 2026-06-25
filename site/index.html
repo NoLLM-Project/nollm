@@ -9,11 +9,63 @@
 </head>
 
 <body>
+
+  <!-- ⭐ SETTINGS DRAWER MOVED HERE ⭐ -->
+  <div id="settings-drawer" class="settings-drawer">
+
+    <div class="settings-header">
+      <span>Settings</span>
+      <button id="settings-close" class="settings-close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">User</div>
+
+      <div class="settings-row">
+        <label>User ID</label>
+        <div id="settings-user-id" class="settings-value"></div>
+      </div>
+
+      <button id="settings-reset-user" class="settings-btn">Reset User ID</button>
+      <button id="settings-clear-history" class="settings-btn">Clear History</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">System</div>
+
+      <label class="settings-toggle">
+        <input type="checkbox" id="toggle-thinking" />
+        <span>Show System Thinking</span>
+      </label>
+
+      <label class="settings-toggle">
+        <input type="checkbox" id="toggle-diagnostics" />
+        <span>Show Diagnostics</span>
+      </label>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">App</div>
+      <div class="settings-row">
+        <label>Version</label>
+        <div class="settings-value">0.1.0</div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ⭐ END SETTINGS DRAWER ⭐ -->
+
+
+  <!-- MAIN APP -->
   <div id="app">
 
-    <!-- ------------------------------------------------------------
-         SURFACES UI (sidebar + chat window + input bar + menu)
-         ------------------------------------------------------------ -->
+    <!-- SURFACES UI -->
     <div id="surfaces-ui">
 
       <!-- MENU -->
@@ -23,13 +75,13 @@
         <button id="menu-clear-history" class="menu-btn">Clear History</button>
       </div>
 
-      <!-- MAIN SURFACES LAYOUT -->
+      <!-- MAIN LAYOUT -->
       <div style="display: flex; gap: 12px;">
 
         <!-- SIDEBAR -->
         <div class="sidebar">
 
-          <!-- Collapse / Expand Toggle -->
+          <!-- Collapse Toggle -->
           <button id="sidebar-toggle" class="sidebar-toggle">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                  stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -37,12 +89,10 @@
             </svg>
           </button>
 
-          <!-- Sidebar Header Bar -->
-          <div class="sidebar-header">
-            Conversations
-          </div>
+          <!-- Sidebar Header -->
+          <div class="sidebar-header">Conversations</div>
 
-          <!-- New Conversation Button -->
+          <!-- New Conversation -->
           <button class="sidebar-new-convo" data-label="New Conversation">
             <span class="sidebar-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -155,58 +205,10 @@
     <div id="carrier-panel"></div>
     <div id="output-panel"></div>
 
-  </div>
+  </div> <!-- END #app -->
 
-  <!-- SETTINGS DRAWER -->
-  <div id="settings-drawer" class="settings-drawer">
 
-    <div class="settings-header">
-      <span>Settings</span>
-      <button id="settings-close" class="settings-close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-             stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-
-    <div class="settings-section">
-      <div class="settings-title">User</div>
-
-      <div class="settings-row">
-        <label>User ID</label>
-        <div id="settings-user-id" class="settings-value"></div>
-      </div>
-
-      <button id="settings-reset-user" class="settings-btn">Reset User ID</button>
-      <button id="settings-clear-history" class="settings-btn">Clear History</button>
-    </div>
-
-    <div class="settings-section">
-      <div class="settings-title">System</div>
-
-      <label class="settings-toggle">
-        <input type="checkbox" id="toggle-thinking" />
-        <span>Show System Thinking</span>
-      </label>
-
-      <label class="settings-toggle">
-        <input type="checkbox" id="toggle-diagnostics" />
-        <span>Show Diagnostics</span>
-      </label>
-    </div>
-
-    <div class="settings-section">
-      <div class="settings-title">App</div>
-      <div class="settings-row">
-        <label>Version</label>
-        <div class="settings-value">0.1.0</div>
-      </div>
-    </div>
-
-  </div>
-
+  <!-- UI SCRIPT -->
   <script type="module" src="/surfaces/ui/ui.js"></script>
 
   <!-- Sidebar + Settings Drawer Logic -->
@@ -218,7 +220,7 @@
     // Sidebar collapse toggle
     document.getElementById("sidebar-toggle").addEventListener("click", () => {
       sidebar.classList.toggle("collapsed");
-      settingsDrawer.classList.remove("open"); // close drawer when collapsing
+      settingsDrawer.classList.remove("open");
     });
 
     // New Conversation forwards to menu button
@@ -226,7 +228,7 @@
       document.getElementById("menu-new-conversation").click();
     });
 
-    // Settings toggle (open/close)
+    // Settings toggle
     settingsButton.addEventListener("click", () => {
       settingsDrawer.classList.toggle("open");
 
@@ -236,7 +238,7 @@
       }
     });
 
-    // Close drawer via X button
+    // Close drawer
     document.getElementById("settings-close").addEventListener("click", () => {
       settingsDrawer.classList.remove("open");
     });
