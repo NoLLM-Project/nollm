@@ -268,7 +268,7 @@ function mergedUIInit() {
 
   // -------------------------------
   // Wire UI buttons (with actions)
-// -------------------------------
+  // -------------------------------
   document.querySelector(".sidebar-new-convo").addEventListener("click", () => {
     actionNewConversationId(); // system-level
     newConversation();         // UI-level
@@ -288,6 +288,26 @@ function mergedUIInit() {
   document.getElementById("sidebar-toggle").addEventListener("click", () => {
     document.getElementById("sidebar").classList.toggle("collapsed");
   });
+
+  // -------------------------------
+  // Settings drawer wiring
+  // -------------------------------
+  const settingsDrawer = document.getElementById("settings-drawer");
+  const settingsOpenBtn = document.getElementById("open-settings");
+  const settingsCloseBtn = document.getElementById("settings-close");
+
+  if (settingsOpenBtn && settingsDrawer) {
+    settingsOpenBtn.addEventListener("click", () => {
+      settingsDrawer.classList.add("open");
+      updateSettingsUserIdDisplay();
+    });
+  }
+
+  if (settingsCloseBtn && settingsDrawer) {
+    settingsCloseBtn.addEventListener("click", () => {
+      settingsDrawer.classList.remove("open");
+    });
+  }
 
   // -------------------------------
   // Chat input wiring
