@@ -16,9 +16,9 @@ import { OutputPanel } from "./components/OutputPanel.js";
 // -----------------------------
 // Surfaces state
 // -----------------------------
-import { initUserId, getUserId } from "../state/user_id.js";
-import { initConversationId, getConversationId } from "../state/conversation_id.js";
-import { loadHistory, addMessage } from "../state/history.js";
+import { initUserId, getUserId } from "./state/user_id.js";
+import { initConversationId, getConversationId } from "./state/conversation_id.js";
+import { loadHistory, addMessage } from "./state/history.js";
 
 // -----------------------------
 // Surfaces components
