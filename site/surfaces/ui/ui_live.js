@@ -32,7 +32,7 @@ import { Menu } from "./components/menu.js";
 // UI Actions (your files)
 // -----------------------------
 import { actionResetUserId } from "./actions/reset_user_id.js";
-import { newConversationId as actionNewConversationId } from "./actions/new_conversation.js";
+import { actionNewConversationId } from "./actions/new_conversation.js";
 import { actionDeleteHistory as actionClearHistory } from "./actions/delete_history.js";
 
 
