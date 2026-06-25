@@ -9,12 +9,16 @@ body {
   background: #f5f5f5;
 }
 
-/* Root app container: single column */
 #app {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 20px;
+
+  /* FIX: allow the settings drawer (position: fixed) to escape the grid */
+  overflow: visible !important;
+  position: static !important;
 }
+
 
 
 
