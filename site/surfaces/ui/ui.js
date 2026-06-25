@@ -1,4 +1,5 @@
 // surfaces/ui/ui.js
+// force redeploy 1
 // Surface controller — the ONLY bridge between UI and system.
 // Clean, reversible, non-fused. Surfaces → system receiver → workflow.
 
