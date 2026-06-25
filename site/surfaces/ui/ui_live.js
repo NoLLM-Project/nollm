@@ -296,7 +296,7 @@ function mergedUIInit() {
 
       if (settingsOpenBtn && settingsDrawer) {
         settingsOpenBtn.addEventListener("click", () => {
-          settingsDrawer.classList.add("open");
+          settingsDrawer.classList.toggle("open");
           updateSettingsUserIdDisplay();
         });
       }
