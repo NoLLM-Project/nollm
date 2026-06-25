@@ -284,26 +284,30 @@ function mergedUIInit() {
   }
 
   // -------------------------------
-  // Settings drawer wiring (deferred)
+  // Settings drawer wiring
   // -------------------------------
-  setTimeout(() => {
-    const settingsDrawer = document.getElementById("settings-drawer");
-    const settingsOpenBtn = document.getElementById("open-settings");
-    const settingsCloseBtn = document.getElementById("settings-close");
 
-    if (settingsOpenBtn && settingsDrawer) {
-      settingsOpenBtn.addEventListener("click", () => {
-        settingsDrawer.classList.add("open");
-        updateSettingsUserIdDisplay();
-      });
-    }
+  // Settings drawer wiring (after Surfaces UI mounts)
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const settingsDrawer = document.getElementById("settings-drawer");
+      const settingsOpenBtn = document.getElementById("open-settings");
+      const settingsCloseBtn = document.getElementById("settings-close");
 
-    if (settingsCloseBtn && settingsDrawer) {
-      settingsCloseBtn.addEventListener("click", () => {
-        settingsDrawer.classList.remove("open");
-      });
-    }
-  }, 0);
+      if (settingsOpenBtn && settingsDrawer) {
+        settingsOpenBtn.addEventListener("click", () => {
+          settingsDrawer.classList.add("open");
+          updateSettingsUserIdDisplay();
+        });
+      }
+
+      if (settingsCloseBtn && settingsDrawer) {
+        settingsCloseBtn.addEventListener("click", () => {
+          settingsDrawer.classList.remove("open");
+        });
+      }
+    });
+  });
 
   // -------------------------------
   // Thinking + Diagnostics toggles
