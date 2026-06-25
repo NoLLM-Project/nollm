@@ -215,9 +215,9 @@ body {
 
 /* Hide labels */
 .sidebar.collapsed .sidebar-header,
-.sidebar.collapsed .sidebar-item span:not(.icon),
-.sidebar.collapsed .sidebar-setting-item span:not(.icon),
-.sidebar.collapsed .sidebar-footer span:not(.icon) {
+.sidebar.collapsed .sidebar-item span:not(sidebar-icon),
+.sidebar.collapsed .sidebar-setting-item span:not(sidebar-icon),
+.sidebar.collapsed .sidebar-footer span:not(sidebar-icon) {
   display: none;
 }
 
