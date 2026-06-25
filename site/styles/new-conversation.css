@@ -1,0 +1,23 @@
+.sidebar-new-convo {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #e8f2ff;
+  border: 1px solid #c5daf5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.sidebar-new-convo:hover {
+  background: #d9eaff;
+  border-color: #a8c8e8;
+}
+
+.sidebar-new-convo:hover .sidebar-icon svg {
+  stroke: #0078d4;
+}
+
+.sidebar.collapsed .sidebar-new-convo span:not(.sidebar-icon) {
+  display: none;
+}
