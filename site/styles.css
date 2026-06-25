@@ -97,7 +97,12 @@ body {
   padding: 12px;
   background: #fafafa;
   border-bottom: 1px solid #ddd;
+
+  /* FIX: allow the fixed-position drawer to escape this container */
+  overflow: visible !important;
+  position: static !important;
 }
+
 
 
 
