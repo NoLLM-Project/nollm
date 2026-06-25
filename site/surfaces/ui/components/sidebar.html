@@ -1,0 +1,37 @@
+<div class="sidebar">
+
+  <button id="sidebar-toggle" class="sidebar-toggle">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+         stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <div class="sidebar-header">Conversations</div>
+
+  <button class="sidebar-new-convo" data-label="New Conversation">
+    <span class="sidebar-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </span>
+    New Conversation
+  </button>
+
+  <div id="sidebar-items-container"></div>
+  <div id="sidebar-footer-container"></div>
+
+</div>
+
+<script>
+  // Load subcomponents
+  fetch("/surfaces/ui/components/sidebar-items.html")
+    .then(r => r.text())
+    .then(html => document.getElementById("sidebar-items-container").innerHTML = html);
+
+  fetch("/surfaces/ui/components/sidebar-footer.html")
+    .then(r => r.text())
+    .then(html => document.getElementById("sidebar-footer-container").innerHTML = html);
+</script>

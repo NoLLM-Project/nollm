@@ -1,0 +1,48 @@
+<div id="settings-drawer" class="settings-drawer">
+
+  <div class="settings-header">
+    <span>Settings</span>
+    <button id="settings-close" class="settings-close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-title">User</div>
+
+    <div class="settings-row">
+      <label>User ID</label>
+      <div id="settings-user-id" class="settings-value"></div>
+    </div>
+
+    <button id="settings-reset-user" class="settings-btn">Reset User ID</button>
+    <button id="settings-clear-history" class="settings-btn">Clear History</button>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-title">System</div>
+
+    <label class="settings-toggle">
+      <input type="checkbox" id="toggle-thinking" />
+      <span>Show System Thinking</span>
+    </label>
+
+    <label class="settings-toggle">
+      <input type="checkbox" id="toggle-diagnostics" />
+      <span>Show Diagnostics</span>
+    </label>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-title">App</div>
+    <div class="settings-row">
+      <label>Version</label>
+      <div class="settings-value">0.1.0</div>
+    </div>
+  </div>
+
+</div>
