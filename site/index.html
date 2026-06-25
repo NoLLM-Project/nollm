@@ -5,45 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NoLLM UI</title>
 
-  <!-- Master stylesheet that imports all split CSS files -->
-  <link rel="stylesheet" href="/styles.css?v=1" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
-
-<div id="menu-container"></div>
-
-<div id="surfaces-ui">
-  <div style="display: flex; gap: 12px;">
-    <div id="sidebar-container"></div>
-    <div id="chat-container" style="flex: 1;"></div>
-  </div>
-</div>
-
-<div id="system-panels-container"></div>
-
-<div id="drawer-container"></div>
 
 <body>
   <div id="app">
 
     <!-- ------------------------------------------------------------
-         SURFACES UI (menu + sidebar + chat)
-    ------------------------------------------------------------ -->
+         SURFACES UI (sidebar + chat window + input bar + menu)
+         ------------------------------------------------------------ -->
     <div id="surfaces-ui">
 
-      <!-- MENU BAR -->
-      <div class="menu-bar" style="display:none;">
+      <!-- MENU -->
+      <div id="menu" class="menu-bar">
         <button id="menu-reset-user" class="menu-btn">Reset User</button>
         <button id="menu-new-conversation" class="menu-btn">New Conversation</button>
         <button id="menu-clear-history" class="menu-btn">Clear History</button>
       </div>
 
-      <!-- MAIN LAYOUT -->
+      <!-- MAIN SURFACES LAYOUT -->
       <div style="display: flex; gap: 12px;">
 
         <!-- SIDEBAR -->
-        <div class="sidebar" style="display:none;">
+        <div class="sidebar">
 
-          <!-- Collapse Toggle -->
+          <!-- Collapse / Expand Toggle -->
           <button id="sidebar-toggle" class="sidebar-toggle">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                  stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -51,10 +37,12 @@
             </svg>
           </button>
 
-          <!-- Header -->
-          <div class="sidebar-header">Conversations</div>
+          <!-- Sidebar Header Bar -->
+          <div class="sidebar-header">
+            Conversations
+          </div>
 
-          <!-- New Conversation -->
+          <!-- New Conversation Button -->
           <button class="sidebar-new-convo" data-label="New Conversation">
             <span class="sidebar-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -68,6 +56,7 @@
 
           <!-- Conversation List -->
           <div class="sidebar-list">
+
             <div class="sidebar-item selected" data-label="Conversation 1">
               <span class="sidebar-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -97,6 +86,7 @@
               </span>
               Conversation 3
             </div>
+
           </div>
 
           <!-- Settings -->
@@ -127,7 +117,7 @@
 
           </div>
 
-          <!-- Footer -->
+          <!-- Sidebar Footer -->
           <div class="sidebar-footer" data-label="Footer">
             <span class="sidebar-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -143,9 +133,9 @@
         <!-- CHAT COLUMN -->
         <div style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
 
-          <div id="chat-window" style="display:none;">
+          <div id="chat-window" class="chat-window"></div>
 
-          <div class="chat-input-bar">
+          <div id="chat-input-bar" class="chat-input-bar">
             <input id="chat-input" class="chat-input" type="text"
                    placeholder="Type a message..." autocomplete="off" />
             <button id="chat-send" class="chat-send">Send</button>
@@ -156,8 +146,10 @@
       </div>
     </div>
 
-    <!-- SYSTEM PANELS -->
+    <!-- SYSTEM ERROR PANEL -->
     <div id="system-error-panel" style="color: red; padding: 10px;"></div>
+
+    <!-- SYSTEM PANELS -->
     <div id="input-panel"></div>
     <div id="workflow-panel"></div>
     <div id="carrier-panel"></div>
@@ -215,29 +207,26 @@
 
   </div>
 
-  <!-- JS -->
   <script type="module" src="/surfaces/ui/ui.js"></script>
-  <script src="/surfaces/ui/load-components.js"></script>
 
-
-  <!-- Sidebar + Drawer Logic -->
+  <!-- Sidebar + Settings Drawer Logic -->
   <script>
     const sidebar = document.querySelector(".sidebar");
     const settingsDrawer = document.getElementById("settings-drawer");
     const settingsButton = document.querySelector(".sidebar-setting-item[data-label='Settings']");
 
-    // Sidebar collapse
+    // Sidebar collapse toggle
     document.getElementById("sidebar-toggle").addEventListener("click", () => {
       sidebar.classList.toggle("collapsed");
-      settingsDrawer.classList.remove("open");
+      settingsDrawer.classList.remove("open"); // close drawer when collapsing
     });
 
-    // New conversation
+    // New Conversation forwards to menu button
     document.querySelector(".sidebar-new-convo").addEventListener("click", () => {
       document.getElementById("menu-new-conversation").click();
     });
 
-    // Settings toggle
+    // Settings toggle (open/close)
     settingsButton.addEventListener("click", () => {
       settingsDrawer.classList.toggle("open");
 
@@ -247,27 +236,27 @@
       }
     });
 
-    // Close drawer
+    // Close drawer via X button
     document.getElementById("settings-close").addEventListener("click", () => {
       settingsDrawer.classList.remove("open");
     });
 
-    // Reset user
+    // Reset User ID
     document.getElementById("settings-reset-user").addEventListener("click", () => {
       document.getElementById("menu-reset-user").click();
     });
 
-    // Clear history
+    // Clear History
     document.getElementById("settings-clear-history").addEventListener("click", () => {
       document.getElementById("menu-clear-history").click();
     });
 
-    // Thinking toggle
+    // Thinking Toggle
     document.getElementById("toggle-thinking").addEventListener("change", (e) => {
       window.dispatchEvent(new CustomEvent("toggleThinking", { detail: e.target.checked }));
     });
 
-    // Diagnostics toggle
+    // Diagnostics Toggle
     document.getElementById("toggle-diagnostics").addEventListener("change", (e) => {
       window.dispatchEvent(new CustomEvent("toggleDiagnostics", { detail: e.target.checked }));
     });
