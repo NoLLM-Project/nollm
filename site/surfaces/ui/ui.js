@@ -2,37 +2,37 @@
 // Surface controller — the ONLY bridge between UI and system.
 // Clean, reversible, non-fused. Surfaces → system receiver → workflow.
 
-import { uiState } from "./ui/state/ui_state.js";
-import { eventBus } from "./ui/state/event_bus.js";
+import { uiState } from "./state/ui_state.js";
+import { eventBus } from "./state/event_bus.js";
 
 // -----------------------------
 // System UI panels
 // -----------------------------
-import { InputPanel } from "./ui/components/InputPanel.js";
-import { WorkflowPanel } from "./ui/components/WorkflowPanel.js";
-import { CarrierPanel } from "./ui/components/CarrierPanel.js";
-import { OutputPanel } from "./ui/components/OutputPanel.js";
+import { InputPanel } from "./components/InputPanel.js";
+import { WorkflowPanel } from "./components/WorkflowPanel.js";
+import { CarrierPanel } from "./components/CarrierPanel.js";
+import { OutputPanel } from "./components/OutputPanel.js";
 
 // -----------------------------
 // Surfaces state
 // -----------------------------
-import { initUserId, getUserId } from "./ui/state/user_id.js";
-import { initConversationId, getConversationId } from "./ui/state/conversation_id.js";
-import { loadHistory, addMessage } from "./ui/state/history.js";
+import { initUserId, getUserId } from "./state/user_id.js";
+import { initConversationId, getConversationId } from "./state/conversation_id.js";
+import { loadHistory, addMessage } from "./state/history.js";
 
 // -----------------------------
 // Surfaces components
 // -----------------------------
-import { ChatWindow } from "./ui/components/chat_window.js";
-import { ChatInput } from "./ui/components/chat_input.js";
-import { Menu } from "./ui/components/menu.js";
+import { ChatWindow } from "./components/chat_window.js";
+import { ChatInput } from "./components/chat_input.js";
+import { Menu } from "./components/menu.js";
 
 // -----------------------------
 // UI Actions (your files)
 // -----------------------------
-import { actionResetUserId } from "./ui/actions/reset_user_id.js";
-import { newConversationId as actionNewConversationId } from "./ui/actions/new_conversation.js";
-import { clearHistory as actionClearHistory } from "./ui/actions/delete_history.js";
+import { actionResetUserId } from "./actions/reset_user_id.js";
+import { newConversationId as actionNewConversationId } from "./actions/new_conversation.js";
+import { clearHistory as actionClearHistory } from "./actions/delete_history.js";
 
 
 // ------------------------------------------------------------
