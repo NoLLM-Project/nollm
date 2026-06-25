@@ -1,4 +1,0 @@
-this.clearHistoryBtn.addEventListener("click", () => {
-  clearHistory();
-  ChatWindow.render();
-});
