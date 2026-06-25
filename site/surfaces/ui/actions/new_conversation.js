@@ -1,7 +1,7 @@
 // surfaces/ui/actions/new_conversation.js
 
-import { newConversationId as generateNewConversationId } from "../state/conversation_id.js";
+import { newConversationId as stateNewConversationId } from "../state/conversation_id.js";
 
-export function actionNewConversation() {
-  newConversationId();
+export function actionNewConversationId() {
+  stateNewConversationId();
 }
