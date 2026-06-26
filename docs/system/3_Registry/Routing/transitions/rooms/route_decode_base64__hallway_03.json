@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_decode_base64_to_hallway_03",
+    "source": "decode_base64",
+    "target": "hallway_03",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hallway_03_to_decode_base64",
+    "source": "hallway_03",
+    "target": "decode_base64",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "standard",
+    "invariants": []
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_symbolic_evaluate_to_hallway_03",
+    "source": "symbolic_evaluate",
+    "target": "hallway_03",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hallway_03_to_symbolic_evaluate",
+    "source": "hallway_03",
+    "target": "symbolic_evaluate",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "standard",
+    "invariants": []
+  }
+]

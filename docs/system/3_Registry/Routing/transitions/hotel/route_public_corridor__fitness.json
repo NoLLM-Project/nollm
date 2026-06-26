@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_public_corridor_to_fitness",
+    "source": "public_corridor",
+    "target": "fitness",
+    "conditions": ["navigation"],
+    "transitions": ["enter_fitness"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_fitness_to_public_corridor",
+    "source": "fitness",
+    "target": "public_corridor",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

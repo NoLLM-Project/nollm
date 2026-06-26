@@ -1,8 +1,0 @@
-{
-  "sku": "string",		// unique SKU
-  "object_id": "string",	// canonical name ID
-  "coordinates": "string",	// coordinate ID
-  "metadata": "string",		// metadata ID
-  "category": "string",		// room, module, surface, etc.
-  "version": "string",		// versioning anchor
-}

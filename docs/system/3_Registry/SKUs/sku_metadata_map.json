@@ -1,0 +1,121 @@
+{
+  "container": {
+    "required": ["meta_world_root", "meta_hotel_root", "meta_floor_01", "meta_floor_02", "meta_floor_03"],
+    "optional": []
+  },
+  "floor": {
+    "required": ["meta_floor_01", "meta_floor_02", "meta_floor_03", "meta_service_floor", "meta_public_floor"],
+    "optional": []
+  },
+  "room": {
+    "required": ["meta_guest_room_f01", "meta_guest_room_f02", "meta_guest_room_f03",
+                 "meta_llm_room_f01", "meta_bridge_room_f02", "meta_nollm_room_f03"],
+    "optional": []
+  },
+  "circulation": {
+    "required": ["meta_hallway_floor_01", "meta_hallway_floor_02", "meta_hallway_floor_03",
+                 "meta_stairwell_01_02", "meta_stairwell_02_03",
+                 "meta_elevator_core", "meta_elevator_core_02", "meta_elevator_core_03"],
+    "optional": []
+  },
+  "module": {
+    "required": ["meta_module_echo", "meta_module_validate", "meta_module_null",
+                 "meta_module_passthrough", "meta_module_identity", "meta_module_route-test"],
+    "optional": []
+  },
+  "validator": {
+    "required": ["meta_validator_schema", "meta_validator_invariants"],
+    "optional": []
+  },
+  "routing": {
+    "required": ["meta_routing_node"],
+    "optional": []
+  },
+  "surface": {
+    "required": ["meta_surface_architecture", "meta_surface_invariants", "meta_surface_mapping",
+                 "meta_surface_implementation", "meta_surface_district", "meta_surface_hotel",
+                 "meta_surface_routing", "meta_surface_operational"],
+    "optional": []
+  },
+  "ui": {
+    "required": ["meta_ui_space", "meta_ui_panel", "meta_ui_section", "meta_ui_element",
+                 "meta_ui_button", "meta_ui_input", "meta_ui_output", "meta_ui_map_node",
+                 "meta_ui_map_edge"],
+    "optional": []
+  },
+  "ui_edge": {
+    "required": ["meta_ui_edge_adjacency", "meta_ui_edge_containment",
+                 "meta_ui_edge_routing", "meta_ui_edge_transition",
+                 "meta_ui_edge_service", "meta_ui_edge_world"],
+    "optional": []
+  },
+  "ui_layer": {
+    "required": ["meta_map_layer_base", "meta_map_layer_structure",
+                 "meta_map_layer_interaction", "meta_map_layer_marker",
+                 "meta_map_layer_error"],
+    "optional": []
+  },
+  "ui_style": {
+    "required": ["meta_map_style_colors", "meta_map_style_shapes", "meta_map_style_strokes",
+                 "meta_map_style_glow", "meta_map_style_marker",
+                 "meta_map_style_error_colors", "meta_map_style_error_outline",
+                 "meta_map_style_error_pulse"],
+    "optional": []
+  },
+  "ui_animation": {
+    "required": ["meta_map_anim_fade_in", "meta_map_anim_fade_out",
+                 "meta_map_anim_highlight_pulse"],
+    "optional": []
+  },
+  "ui_error": {
+    "required": ["meta_error_invalid_node", "meta_error_missing_scene",
+                 "meta_error_forbidden_navigation"],
+    "optional": []
+  },
+  "ui_accessibility": {
+    "required": ["meta_map_error_accessibility"],
+    "optional": []
+  },
+  "ui_interaction": {
+    "required": ["meta_error_interaction_rules", "meta_hotel_district_door_interaction"],
+    "optional": []
+  },
+  "ui_state_machine": {
+    "required": ["meta_map_error_state_machine", "meta_hotel_district_door_state_machine"],
+    "optional": []
+  },
+  "ui_scene": {
+    "required": ["meta_scene_hotel_district_door", "meta_scene_district_entry"],
+    "optional": []
+  },
+  "ui_transition": {
+    "required": ["meta_transition_map_to_district_door_scene",
+                 "meta_transition_door_scene_to_district"],
+    "optional": []
+  },
+  "service": {
+    "required": ["meta_lobby", "meta_front_desk", "meta_directory",
+                 "meta_vending_machine", "meta_bulletin_board",
+                 "meta_district_door", "meta_map_sign"],
+    "optional": []
+  },
+  "service_behavior": {
+    "required": ["meta_concierge_behavior_navigate", "meta_concierge_behavior_explain",
+                 "meta_concierge_behavior_stance", "meta_concierge_behavior_continuity",
+                 "meta_concierge_behavior_map", "meta_directory_behavior_lookup",
+                 "meta_directory_behavior_list", "meta_vending_behavior_dispense",
+                 "meta_vending_behavior_status", "meta_bulletin_behavior_read",
+                 "meta_bulletin_behavior_post"],
+    "optional": []
+  },
+  "anchor": {
+    "required": ["meta_anchor_reflective_mode", "meta_anchor_architectural_altitude",
+                 "meta_anchor_avoid_drift", "meta_anchor_stay_literal",
+                 "meta_anchor_steady_stance"],
+    "optional": []
+  },
+  "notepad": {
+    "required": ["meta_coat_room_notepad"],
+    "optional": []
+  }
+}

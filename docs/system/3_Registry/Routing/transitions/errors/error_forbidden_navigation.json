@@ -1,0 +1,11 @@
+[
+  {
+    "id": "route_error_accessibility_forbidden_navigation",
+    "source": "error_forbidden_navigation",
+    "target": "map_error_accessibility",
+    "conditions": ["display_error_highlight"],
+    "transitions": ["announce_forbidden_navigation", "apply_error_focus_ring"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

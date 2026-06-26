@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_bulletin_read",
+    "source": "bulletin_board",
+    "target": "bulletin_behavior_read",
+    "conditions": ["user_request: read"],
+    "transitions": ["read_notices"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_bulletin_post",
+    "source": "bulletin_board",
+    "target": "bulletin_behavior_post",
+    "conditions": ["user_request: post"],
+    "transitions": ["add_notice"],
+    "profile": "service",
+    "invariants": []
+  }
+]

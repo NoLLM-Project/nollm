@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_elevator_b1_to_service_corridor",
+    "source": "service_elevator_b1",
+    "target": "service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_elevator"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_service_corridor_to_service_elevator_b1",
+    "source": "service_corridor",
+    "target": "service_elevator_b1",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

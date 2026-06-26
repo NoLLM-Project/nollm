@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_corridor_to_parse_ini",
+    "source": "coord_service_corridor",
+    "target": "coord_parse_ini",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_parse_ini_to_service_corridor",
+    "source": "coord_parse_ini",
+    "target": "coord_service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]

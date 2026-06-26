@@ -1,0 +1,107 @@
+{
+  "canonical_names": {
+    "exactly_one_canonical_name": true,
+    "canonical_names_unique": true,
+    "canonical_names_stable": true,
+    "canonical_reflect_true_identity": true
+  },
+
+  "sovereign_prefixes": {
+    "prefixes_are_structural_not_temporal": true,
+    "prefixes_not_versioning_or_eras": true,
+    "prefixes_not_deprecated_or_outdated": true,
+    "prefixes_define_container_class": true,
+    "prefix_map": {
+      "A_": "world_plane_container",
+      "B_": "district_plane_container",
+      "C_": "hotel_plane_container",
+      "D_": "tower_plane_container"
+    }
+  },
+
+  "aliases": {
+    "alias_resolves_to_single_canonical_id": true,
+    "alias_not_collide_with_canonical": true,
+    "alias_not_collide_with_alias": true,
+    "alias_not_imply_wrong_type_or_layer": true,
+    "alias_no_ambiguity": true
+  },
+
+  "types": {
+    "type_must_match_true_identity": true,
+    "allowed_types": [
+      "container",
+      "structure",
+      "module",
+      "validator",
+      "routing",
+      "surface",
+      "ui",
+      "ui_edge",
+      "ui_layer",
+      "ui_style",
+      "ui_animation",
+      "ui_error",
+      "ui_scene",
+      "ui_transition",
+      "service",
+      "service_behavior",
+      "anchor",
+      "stance",
+      "notepad",
+
+      "public_room",
+      "service_room",
+      "elevator",
+      "stairs",
+      "circulation",
+      "room",
+      "primitive"
+    ],
+    "types_must_not_drift": true
+  },
+
+  "layers": {
+    "layer_must_reflect_true_architectural_layer": true,
+    "allowed_layers": [
+      "container",
+      "function",
+      "ui",
+      "anchor",
+      "stance",
+
+      "world",
+      "hotel",
+      "circulation",
+      "service",
+      "public",
+      "runtime",
+      "primitive"
+    ],
+    "layers_must_not_be_repurposed": true
+  },
+
+  "descriptions": {
+    "descriptions_literal": true,
+    "descriptions_non_metaphorical": true,
+    "descriptions_non_narrative": true,
+    "descriptions_stable": true,
+    "descriptions_accurate": true,
+    "descriptions_must_not_encode_behavior": true
+  },
+
+  "registry_integrity": {
+    "canonical_id_in_exactly_one_registry": true,
+    "aliases_in_alias_json": true,
+    "alias_must_reference_existing_canonical_id": true,
+    "no_orphan_canonical_ids": true
+  },
+
+  "enforcement": {
+    "validate_on_startup": true,
+    "validate_on_registry_updates": true,
+    "validate_on_world_updates": true,
+    "validate_on_module_loading": true,
+    "reject_on_violation": true
+  }
+}

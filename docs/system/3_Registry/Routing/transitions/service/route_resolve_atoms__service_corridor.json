@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_corridor_to_resolve_atoms",
+    "source": "coord_service_corridor",
+    "target": "coord_resolve_atoms",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_resolve_atoms_to_service_corridor",
+    "source": "coord_resolve_atoms",
+    "target": "coord_service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  }
+]

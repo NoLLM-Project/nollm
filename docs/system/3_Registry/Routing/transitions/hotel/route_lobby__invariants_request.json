@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_lobby_to_invariants_request",
+    "source": "lobby",
+    "target": "invariants_request",
+    "conditions": ["navigation"],
+    "transitions": ["open_invariants_request"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_invariants_request_to_lobby",
+    "source": "invariants_request",
+    "target": "lobby",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

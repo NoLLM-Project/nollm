@@ -1,0 +1,173 @@
+{
+  "WORLD-0001": "world_root",
+  "WORLD-DISTRICTS-0001": "districts",
+  "WORLD-TOWER-0001": "tower",
+  "WORLD-FIELD-0001": "field",
+  "WORLD-COLLAPSE-0001": "collapse",
+  "WORLD-ADJACENCY-0001": "adjacency",
+  "WORLD-INVARIANTS-0001": "world_invariants",
+
+  "HOTEL-0001": "hotel_root",
+  "HOTEL-SHELL-0001": "hotel_shell",
+
+  "HOTEL-FLOOR-0001": "floor_01",
+  "HOTEL-FLOOR-0002": "floor_02",
+  "HOTEL-FLOOR-0003": "floor_03",
+
+  "CIRC-HALLWAY-F01": "hallway_01",
+  "CIRC-HALLWAY-F02": "hallway_02",
+  "CIRC-HALLWAY-F03": "hallway_03",
+
+  "CIRC-CORRIDOR-S01": "service_corridor",
+  "CIRC-CORRIDOR-P01": "public_corridor",
+
+  "CIRC-STAIR-01-02": "coord_stairwell_01_02",
+  "CIRC-STAIR-02-03": "coord_stairwell_02_03",
+
+  "CIRC-ELEV-GUEST-L01": "guest_elevator",
+  "CIRC-ELEV-GUEST-01": "guest_elevator",
+  "CIRC-ELEV-GUEST-03": "guest_elevator",
+
+  "CIRC-ELEV-SERV-01": "service_elevator",
+  "CIRC-ELEV-SERV-00": "service_elevator",
+  "CIRC-ELEV-SERV-B1": "service_elevator",
+
+  "CIRC-ELEV-PUBLIC-01": "public_elevator",
+  "CIRC-ELEV-PUBLIC-02": "public_elevator"
+
+  "HOTEL-LOBBY-0001": "lobby",
+
+  "HOTEL-FRONT-DESK-0001": "front_desk",
+  "HOTEL-DIRECTORY-0001": "directory",
+  "HOTEL-VENDING-MACHINE-0001": "vending_machine",
+  "HOTEL-BULLETIN-BOARD-0001": "bulletin_board",
+  "HOTEL-DISTRICT-DOOR-0001": "district_door",
+  "HOTEL-MAP-SIGN-0001": "map_sign",
+  "HOTEL-COAT-ROOM-0001": "coat_room",
+
+  "HOTEL-PUBLIC-LOUNGE-0001": "public_lounge",
+  "HOTEL-PUBLIC-FITNESS-0001": "public_fitness",
+  "HOTEL-PUBLIC-DINING-0001": "public_dining",
+
+  "SRV-MAINTENANCE-0001": "maintenance",
+  "SRV-HOUSEKEEPING-0001": "housekeeping",
+  "SRV-PREPROCESS-0001": "preprocess_service",
+  "SRV-POSTPROCESS-0001": "postprocess_service",
+
+  "SRV-EXTRACT-KEYWORDS-0001": "extract_keywords",
+  "SRV-EXTRACT-EMAILS-0001": "extract_emails",
+  "SRV-EXTRACT-PHONE-0001": "extract_phone_numbers",
+  "SRV-EXTRACT-URLS-0001": "extract_urls",
+  "SRV-EXTRACT-DATES-0001": "extract_dates",
+  "SRV-EXTRACT-NUMBERS-0001": "extract_numbers",
+  "SRV-EXTRACT-HASHTAGS-0001": "extract_hashtags",
+  "SRV-EXTRACT-MENTIONS-0001": "extract_mentions",
+  "SRV-EXTRACT-CODEBLOCKS-0001": "extract_code_blocks",
+  "SRV-EXTRACT-QUOTES-0001": "extract_quotes",
+  "SRV-EXTRACT-SENTENCES-0001": "extract_sentences",
+  "SRV-EXTRACT-PARAGRAPHS-0001": "extract_paragraphs",
+
+  "SRV-PARSE-JSON-0001": "parse_json",
+  "SRV-PARSE-YAML-0001": "parse_yaml",
+  "SRV-PARSE-XML-0001": "parse_xml",
+  "SRV-PARSE-CSV-0001": "parse_csv",
+  "SRV-PARSE-INI-0001": "parse_ini",
+  "SRV-PARSE-TOML-0001": "parse_toml",
+  "SRV-PARSE-QUERYSTRING-0001": "parse_query_string",
+ 
+  "SRV-CLEAN-TEXT-0001": "clean_text",
+  "SRV-NORMALIZE-WHITESPACE-0001": "normalize_whitespace",
+  "SRV-STRIP-WHITESPACE-0001": "strip_whitespace",
+
+  "SRV-LOWERCASE-0001": "lowercase_text",
+  "SRV-UPPERCASE-0001": "uppercase_text",
+  "SRV-TITLECASE-0001": "titlecase_text",
+
+  "SRV-SLUGIFY-0001": "slugify_text",
+
+  "SRV-TOKENIZE-0001": "tokenize_text",
+  "SRV-DETOKENIZE-0001": "detokenize_text",
+
+  "SRV-SORT-LINES-0001": "sort_lines",
+  "SRV-DEDUPE-LINES-0001": "dedupe_lines",
+
+  "SRV-GEN-TEXTLITERAL-0001": "generate_text_literal",
+  "SRV-GEN-TITLE-0001": "generate_title",
+  "SRV-GEN-LIST-0001": "generate_list",
+  "SRV-GEN-BULLETS-0001": "generate_bullets",
+  "SRV-GEN-OUTLINE-0001": "generate_outline",
+  "SRV-GEN-PARAGRAPH-0001": "generate_paragraph",
+  "SRV-GEN-DESCRIPTION-0001": "generate_description",
+
+  "SRV-REWRITE-TEXTLITERAL-0001": "rewrite_text_literal",
+  "SRV-REWRITE-TONE-0001": "rewrite_tone",
+  "SRV-REWRITE-STRUCTURE-0001": "rewrite_structure",
+  "SRV-REWRITE-SUMMARY-0001": "rewrite_summary",
+  "SRV-REWRITE-CLARITY-0001": "rewrite_clarity",
+  "SRV-REWRITE-PROFESSIONALISM-0001": "rewrite_professionalism",
+
+  "HOTEL-LLM-GENERATE-TEXT-0001": "llm_generate_text",
+  "HOTEL-LLM-ANSWER-QUESTION-0001": "llm_answer_question",
+  "HOTEL-LLM-REWRITE-TEXT-0001": "llm_rewrite_text",
+  "HOTEL-LLM-EXPAND-TEXT-0001": "llm_expand_text",
+  "HOTEL-LLM-SUMMARIZE-TEXT-0001": "llm_summarize_text",
+
+  "HOTEL-SEARCH-WEB-TEXT-0001": "search_web_text",
+  "HOTEL-SEARCH-WEB-IMAGES-0001": "search_web_images",
+  "HOTEL-SEARCH-WEB-VIDEOS-0001": "search_web_videos",
+  "HOTEL-SEARCH-WEB-NEWS-0001": "search_web_news",
+  "HOTEL-SEARCH-WEB-DEFINITIONS-0001": "search_web_definitions",
+  "HOTEL-SEARCH-WEB-REFERENCE-0001": "search_web_reference",
+
+  "HOTEL-TRANSLATE-TEXT-0001": "translate_text",
+
+  "HOTEL-HTTP-GET-0001": "http_get",
+  "HOTEL-HTTP-POST-0001": "http_post",
+  "HOTEL-HTTP-PUT-0001": "http_put",
+  "HOTEL-HTTP-DELETE-0001": "http_delete",
+  "HOTEL-HTTP-HEAD-0001": "http_head",
+  "HOTEL-HTTP-PATCH-0001": "http_patch",
+  "HOTEL-HTTP-OPTIONS-0001": "http_options",
+
+  "HOTEL-ENCODE-BASE64-0001": "encode_base64",
+  "HOTEL-DECODE-BASE64-0001": "decode_base64",
+
+  "HOTEL-ENCODE-URL-0001": "encode_url",
+  "HOTEL-DECODE-URL-0001": "decode_url",
+
+  "HOTEL-ENCODE-HTML-ENTITIES-0001": "encode_html_entities",
+  "HOTEL-DECODE-HTML-ENTITIES-0001": "decode_html_entities",
+
+  "HOTEL-COMPUTE-MATH-0001": "compute_math",
+
+  "HOTEL-SYMBOLIC-SIMPLIFY-0001": "symbolic_simplify",
+  "HOTEL-SYMBOLIC-EXPAND-0001": "symbolic_expand",
+  "HOTEL-SYMBOLIC-FACTOR-0001": "symbolic_factor",
+  "HOTEL-SYMBOLIC-SUBSTITUTE-0001": "symbolic_substitute",
+  "HOTEL-SYMBOLIC-DIFFERENTIATE-0001": "symbolic_differentiate",
+  "HOTEL-SYMBOLIC-INTEGRATE-0001": "symbolic_integrate",
+  "HOTEL-SYMBOLIC-EVALUATE-0001": "symbolic_evaluate",
+  "HOTEL-SYMBOLIC-NORMALIZE-0001": "symbolic_normalize",
+
+  "HOTEL-CONVERT-MARKDOWN-TO-HTML-0001": "convert_markdown_to_html",
+  "HOTEL-CONVERT-HTML-TO-TEXT-0001": "convert_html_to_text",
+
+  "HOTEL-CONVERT-JSON-TO-YAML-0001": "convert_json_to_yaml",
+  "HOTEL-CONVERT-YAML-TO-JSON-0001": "convert_yaml_to_json",
+  "HOTEL-CONVERT-CSV-TO-JSON-0001": "convert_csv_to_json",
+
+  "HOTEL-CONVERT-TEXT-TO-UPPERCASE-0001": "convert_text_to_uppercase",
+  "HOTEL-CONVERT-TEXT-TO-LOWERCASE-0001": "convert_text_to_lowercase",
+  "HOTEL-CONVERT-TEXT-TO-TITLECASE-0001": "convert_text_to_titlecase", 
+
+  "HOTEL-OBJECT-RENAME-KEYS-0001": "object_rename_keys",
+  "HOTEL-OBJECT-REMOVE-KEYS-0001": "object_remove_keys",
+  "HOTEL-OBJECT-PICK-KEYS-0001": "object_pick_keys",
+  "HOTEL-OBJECT-MERGE-0001": "object_merge",
+  "HOTEL-OBJECT-FLATTEN-0001": "object_flatten",
+  "HOTEL-OBJECT-NEST-0001": "object_nest",
+  "HOTEL-OBJECT-MAP-VALUES-0001": "object_map_values",
+  "HOTEL-OBJECT-SORT-KEYS-0001": "object_sort_keys",
+
+  "HOTEL-SUMMARIZE-TEXT-0001": "summarize_text"
+}

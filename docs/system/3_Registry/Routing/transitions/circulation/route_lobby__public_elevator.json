@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_lobby_to_public_elevator",
+    "source": "lobby",
+    "target": "public_elevator",
+    "conditions": ["navigation"],
+    "transitions": ["approach_public_elevator"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_public_elevator_to_lobby",
+    "source": "public_elevator",
+    "target": "lobby",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

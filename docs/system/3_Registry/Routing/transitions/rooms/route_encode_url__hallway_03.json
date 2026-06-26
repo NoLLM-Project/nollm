@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_encode_url_to_hallway_03",
+    "source": "encode_url",
+    "target": "hallway_03",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hallway_03_to_encode_url",
+    "source": "hallway_03",
+    "target": "encode_url",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "standard",
+    "invariants": []
+  }
+]

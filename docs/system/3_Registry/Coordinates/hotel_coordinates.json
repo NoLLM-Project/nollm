@@ -1,0 +1,181 @@
+[
+  {
+    "id": "coord_hotel_shell",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "parent": "coord_world_root",
+    "children": ["coord_hotel_root"],
+    "adjacent": [],
+    "tags": ["shell", "boundary"]
+  },
+  {
+    "id": "coord_hotel_root",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "parent": "coord_hotel_shell",
+    "children": ["coord_floor_01", "coord_floor_02", "coord_floor_03"],
+    "adjacent": [],
+    "tags": ["hotel"]
+  },
+  {
+    "id": "coord_lobby",
+    "x": 0,
+    "y": -2,
+    "z": 1,
+    "parent": "coord_hotel_root",
+    "children": [
+      "coord_front_desk",
+      "coord_directory",
+      "coord_vending_machine",
+      "coord_bulletin_board",
+      "coord_district_door",
+      "coord_map_sign",
+      "coord_invariants_request",
+      "coord_runtime_request"
+    ],
+    "adjacent": [
+      "coord_public_elevator_01",
+      "coord_service_elevator_01",
+      "coord_guest_elevator_01_lobby"
+    ],
+    "tags": ["lobby", "public"]
+  },
+  {
+    "id": "coord_front_desk",
+    "x": -1,
+    "y": -2,
+    "z": 1,
+    "parent": "coord_lobby",
+    "children": [],
+    "adjacent": [],
+    "tags": ["front_desk", "service"]
+  },
+  {
+    "id": "coord_directory",
+    "x": 1,
+    "y": -2,
+    "z": 1,
+    "parent": "coord_lobby",
+    "children": [],
+    "adjacent": [],
+    "tags": ["directory", "service"]
+  },
+  {
+    "id": "coord_vending_machine",
+    "x": 2,
+    "y": -2,
+    "z": 1,
+    "parent": "coord_lobby",
+    "children": [],
+    "adjacent": [],
+    "tags": ["vending_machine", "service"]
+  },
+  {
+    "id": "coord_bulletin_board",
+    "x": -2,
+    "y": -2,
+    "z": 1,
+    "parent": "coord_lobby",
+    "children": [],
+    "adjacent": [],
+    "tags": ["bulletin_board", "service"]
+  },
+  {
+    "id": "coord_district_door",
+    "x": 0,
+    "y": -3,
+    "z": 1,
+    "parent": "coord_lobby",
+    "children": [],
+    "adjacent": ["coord_districts"],
+    "tags": ["district_door", "service"]
+  },
+  {
+    "id": "coord_map_sign",
+    "x": 0,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_lobby",
+    "children": [],
+    "adjacent": [],
+    "tags": ["map_sign", "service"]
+  },
+  {
+    "id": "coord_coat_room",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_lobby",
+    "children": [
+      "coord_anchor_reflective_mode",
+      "coord_anchor_architectural_altitude",
+      "coord_anchor_avoid_drift",
+      "coord_anchor_stay_literal",
+      "coord_anchor_steady_stance"
+    ],
+    "adjacent": [],
+    "tags": ["coat_room", "service"]
+  },
+  {
+    "id": "coord_anchor_reflective_mode",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_coat_room",
+    "children": [],
+    "adjacent": [],
+    "tags": ["anchor"]
+  },
+  {
+    "id": "coord_anchor_architectural_altitude",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_coat_room",
+    "children": [],
+    "adjacent": [],
+    "tags": ["anchor"]
+  },
+  {
+    "id": "coord_anchor_avoid_drift",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_coat_room",
+    "children": [],
+    "adjacent": [],
+    "tags": ["anchor"]
+  },
+  {
+    "id": "coord_anchor_stay_literal",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_coat_room",
+    "children": [],
+    "adjacent": [],
+    "tags": ["anchor"]
+  },
+  {
+    "id": "coord_anchor_steady_stance",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_coat_room",
+    "children": [],
+    "adjacent": [],
+    "tags": ["anchor"]
+  },
+  {
+    "id": "coord_coat_room_notepad",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "parent": "coord_coat_room",
+    "children": [],
+    "adjacent": [],
+    "tags": ["notepad", "continuity"]
+  }
+]

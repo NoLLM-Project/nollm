@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_normalize_whitespace_to_service_corridor",
+    "source": "normalize_whitespace",
+    "target": "service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_service_corridor_to_normalize_whitespace",
+    "source": "service_corridor",
+    "target": "normalize_whitespace",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]

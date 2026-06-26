@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_hotel_root_to_lobby",
+    "source": "hotel_root",
+    "target": "lobby",
+    "conditions": ["navigation"],
+    "transitions": ["enter_lobby"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_lobby_to_hotel_root",
+    "source": "lobby",
+    "target": "hotel_root",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

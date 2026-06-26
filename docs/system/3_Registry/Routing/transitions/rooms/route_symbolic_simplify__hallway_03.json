@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_symbolic_simplify_to_hallway_03",
+    "source": "symbolic_simplify",
+    "target": "hallway_03",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hallway_03_to_symbolic_simplify",
+    "source": "hallway_03",
+    "target": "symbolic_simplify",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "standard",
+    "invariants": []
+  }
+]

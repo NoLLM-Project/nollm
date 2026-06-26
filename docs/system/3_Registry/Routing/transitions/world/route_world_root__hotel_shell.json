@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_world_root_to_hotel_shell",
+    "source": "world_root",
+    "target": "hotel_shell",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_hotel_shell_to_world_root",
+    "source": "hotel_shell",
+    "target": "world_root",
+    "conditions": [],
+    "transitions": [],
+    "profile": "standard",
+    "invariants": []
+  }
+]

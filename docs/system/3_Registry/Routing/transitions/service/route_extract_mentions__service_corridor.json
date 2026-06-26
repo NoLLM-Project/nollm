@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_corridor_to_extract_mentions",
+    "source": "coord_service_corridor",
+    "target": "coord_extract_mentions",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_extract_mentions_to_service_corridor",
+    "source": "coord_extract_mentions",
+    "target": "coord_service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoLLM UI</title>
+
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+
+  <!-- ⭐ SETTINGS DRAWER MOVED HERE ⭐ -->
+  <div id="settings-drawer" class="settings-drawer">
+
+    <div class="settings-header">
+      <span>Settings</span>
+      <button id="settings-close" class="settings-close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">User</div>
+
+      <div class="settings-row">
+        <label>User ID</label>
+        <div id="settings-user-id" class="settings-value"></div>
+      </div>
+
+      <button id="settings-reset-user" class="settings-btn">Reset User ID</button>
+      <button id="settings-clear-history" class="settings-btn">Clear History</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">System</div>
+
+      <label class="settings-toggle">
+        <input type="checkbox" id="toggle-thinking" />
+        <span>Show System Thinking</span>
+      </label>
+
+      <label class="settings-toggle">
+        <input type="checkbox" id="toggle-diagnostics" />
+        <span>Show Diagnostics</span>
+      </label>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">App</div>
+      <div class="settings-row">
+        <label>Version</label>
+        <div class="settings-value">0.1.0</div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ⭐ END SETTINGS DRAWER ⭐ -->
+
+
+  <!-- MAIN APP -->
+  <div id="app">
+
+    <!-- SURFACES UI -->
+    <div id="surfaces-ui">
+
+      <!-- MAIN LAYOUT -->
+      <div style="display: flex; gap: 12px;">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+
+          <!-- Collapse Toggle -->
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Sidebar Header -->
+          <div class="sidebar-header">Conversations</div>
+
+          <!-- New Conversation -->
+          <button class="sidebar-new-convo" data-label="New Conversation">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </span>
+            New Conversation
+          </button>
+
+          <!-- Conversation List -->
+          <div class="sidebar-list" id="conversation-list">
+
+            <div class="sidebar-item selected" data-label="Conversation 1">
+              <span class="sidebar-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </span>
+              Conversation 1
+            </div>
+
+            <div class="sidebar-item" data-label="Conversation 2">
+              <span class="sidebar-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </span>
+              Conversation 2
+            </div>
+
+            <div class="sidebar-item" data-label="Conversation 3">
+              <span class="sidebar-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </span>
+              Conversation 3
+            </div>
+
+          </div>
+
+          <!-- Settings -->
+          <div class="sidebar-settings">
+
+            <div class="sidebar-setting-item" id="open-settings" data-label="Settings">
+              <span class="sidebar-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </span>
+              Settings
+            </div>
+
+            <div class="sidebar-setting-item" data-label="About">
+              <span class="sidebar-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="16" x2="12" y2="12"/>
+                  <line x1="12" y1="8" x2="12" y2="8"/>
+                </svg>
+              </span>
+              About
+            </div>
+
+          </div>
+
+          <!-- Sidebar Footer -->
+          <div class="sidebar-footer" data-label="Footer">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+            </span>
+            Footer
+          </div>
+
+        </div>
+
+        <!-- CHAT COLUMN -->
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
+
+          <div id="chat-window" class="chat-window"></div>
+
+          <div id="chat-input-bar" class="chat-input-bar">
+            <input id="chat-input" class="chat-input" type="text"
+                   placeholder="Type a message..." autocomplete="off" />
+            <button id="chat-send" class="chat-send">Send</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SYSTEM ERROR PANEL -->
+    <div id="system-error-panel" style="color: red; padding: 10px;"></div>
+
+    <!-- SYSTEM PANELS -->
+    <div id="workflow-panel"></div>
+    <div id="carrier-panel"></div>
+    <div id="output-panel"></div>
+
+  </div> <!-- END #app -->
+
+<script type="module" src="/surfaces/ui/ui_live.js"></script>
+
+</body>
+</html>
+

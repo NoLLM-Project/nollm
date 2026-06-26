@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_corridor_to_parse_json",
+    "source": "coord_service_corridor",
+    "target": "coord_parse_json",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_parse_json_to_service_corridor",
+    "source": "coord_parse_json",
+    "target": "coord_service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  },
+]
