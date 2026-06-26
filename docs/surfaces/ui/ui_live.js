@@ -11,6 +11,7 @@ import { InputPanel } from "./components/InputPanel.js";
 import { WorkflowPanel } from "./components/WorkflowPanel.js";
 import { CarrierPanel } from "./components/CarrierPanel.js";
 import { OutputPanel } from "./components/OutputPanel.js";
+import "../../system/runner_adapter.js";
 
 // -----------------------------
 // Surfaces state
@@ -37,7 +38,6 @@ import { actionDeleteHistory as actionClearHistory } from "./actions/delete_hist
 // Chat pipeline (your request)
 // -----------------------------
 import { sendMessage } from "./pipeline/send_message.js";
-
 
 // ------------------------------------------------------------
 // Minimal async bridge to system
