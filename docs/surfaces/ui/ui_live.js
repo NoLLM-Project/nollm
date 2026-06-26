@@ -38,7 +38,6 @@ import { actionDeleteHistory as actionClearHistory } from "./actions/delete_hist
 // -----------------------------
 import { sendMessage } from "./pipeline/send_message.js";
 
-
 // ------------------------------------------------------------
 // Minimal async bridge to system
 // ------------------------------------------------------------
