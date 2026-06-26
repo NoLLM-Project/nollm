@@ -11,6 +11,7 @@ import { InputPanel } from "./components/InputPanel.js";
 import { WorkflowPanel } from "./components/WorkflowPanel.js";
 import { CarrierPanel } from "./components/CarrierPanel.js";
 import { OutputPanel } from "./components/OutputPanel.js";
+import "../adapter/surfaces_adapter.js";
 
 // -----------------------------
 // Surfaces state
