@@ -12,6 +12,27 @@ import { validateProfiles } from "./validate_profiles.js";
 
 export function runAllInvariants(graph, workflowContext) {
 
+    // ⭐ GUARD — prevents JS choke when graph or workflowContext is missing
+    if (!graph || typeof graph !== "object" ||
+        !workflowContext || typeof workflowContext !== "object" ||
+        !workflowContext.sku_metadata_map ||
+        !workflowContext.profile_constraints) {
+
+        const report = {
+            identity:   { ok: false, errors: ["graph or workflowContext missing or invalid"] },
+            hierarchy:  { ok: true, errors: [] },
+            spatial:    { ok: true, errors: [] },
+            adjacency:  { ok: true, errors: [] },
+            abstract:   { ok: true, errors: [] },
+            routing:    { ok: true, errors: [] },
+            integrity:  { ok: true, errors: [] },
+            metadata:   { ok: true, errors: [] },
+            profile:    { ok: true, errors: [] },
+            overall_ok: false
+        };
+        return report;
+    }
+
     const spec = loadCoordinateInvariants();
 
     const report = {

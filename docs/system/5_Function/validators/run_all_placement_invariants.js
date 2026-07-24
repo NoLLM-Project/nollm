@@ -9,6 +9,19 @@ import { validatePlacementIntegrity } from "./validate_placement_integrity.js";
 
 export function runAllPlacementInvariants(placementRegistry, coordinateRegistry) {
 
+    // ⭐ GUARD — prevents JS crash when registry is missing
+    if (!placementRegistry || typeof placementRegistry !== "object") {
+        const report = {
+            identity: { ok: false, errors: ["Placement registry missing or invalid"] },
+            structural: { ok: true, errors: [] },
+            constraints: { ok: true, errors: [] },
+            invariants: { ok: true, errors: [] },
+            integrity: { ok: true, errors: [] },
+            overall_ok: false
+        };
+        return report;
+    }
+
     // Load the JSON spec (match other validators)
     const spec = loadPlacementInvariants();
 

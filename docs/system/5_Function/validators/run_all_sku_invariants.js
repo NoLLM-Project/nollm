@@ -11,6 +11,21 @@ import { validateSKUIntegrity } from "./validate_sku_integrity.js";
 
 export function runAllSKUInvariants(skuRegistry, coordinateRegistry, metadataRegistry) {
 
+    // ⭐ GUARD — prevents JS choke when registry is missing
+    if (!skuRegistry || typeof skuRegistry !== "object") {
+        const report = {
+            identity: { ok: false, errors: ["SKU registry missing or invalid"] },
+            object_mapping: { ok: true, errors: [] },
+            category: { ok: true, errors: [] },
+            coordinates: { ok: true, errors: [] },
+            metadata: { ok: true, errors: [] },
+            versioning: { ok: true, errors: [] },
+            integrity: { ok: true, errors: [] },
+            overall_ok: false
+        };
+        return report;
+    }
+
     const spec = loadSKUInvariants();
 
     const report = {

@@ -2,10 +2,27 @@
 
 export function runAllPostprocessInvariants(carrier, postprocessPlan) {
 
+    // ⭐ GUARD — prevents JS choke when carrier or plan is missing
+    if (!carrier || typeof carrier !== "object" ||
+        !postprocessPlan || typeof postprocessPlan !== "object" ||
+        !postprocessPlan.outputField || typeof postprocessPlan.outputField !== "string") {
+
+        const report = {
+            structure:      { ok: false, errors: ["carrier or postprocessPlan missing or invalid"] },
+            representation: { ok: true, errors: [] },
+            semantics:      { ok: true, errors: [] },
+            determinism:    { ok: true, errors: [] },
+            safety:         { ok: true, errors: [] },
+            reversible:     { ok: true, errors: [] },
+            overall_ok:     false
+        };
+        return report;
+    }
+
     const {
         func,        // resolved function descriptor
         outputField  // the field postprocess is expected to populate
-    } = postprocessPlan || {};
+    } = postprocessPlan;
 
     const report = {
         structure:     { ok: true, errors: [] },
@@ -156,9 +173,6 @@ export function runAllPostprocessInvariants(carrier, postprocessPlan) {
     // 5. SAFETY INVARIANTS
     // ------------------------------------------------------------
 
-    // Postprocess must not mutate anything except its own output field.
-    // We cannot detect mutation here, but we can detect forbidden declarations.
-
     if (func && func.allow_side_effects === true) {
         report.safety.ok = false;
         report.safety.errors.push(
@@ -169,9 +183,6 @@ export function runAllPostprocessInvariants(carrier, postprocessPlan) {
     // ------------------------------------------------------------
     // 6. REVERSIBILITY INVARIANTS
     // ------------------------------------------------------------
-
-    // Postprocess must not destroy runtime output.
-    // We enforce this by requiring runtime_output to still exist.
 
     if (func && typeof func === "object") {
         const runtimeField = func.runtime_output_field;

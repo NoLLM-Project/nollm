@@ -2,10 +2,30 @@
 
 export function runAllRuntimeInvariants(carrier, runtimePlan) {
 
+    // ⭐ GUARD — prevents JS choke when carrier or runtimePlan is missing
+    if (!carrier || typeof carrier !== "object" ||
+        !runtimePlan || typeof runtimePlan !== "object" ||
+        !runtimePlan.func || typeof runtimePlan.func !== "object" ||
+        !runtimePlan.route || !Array.isArray(runtimePlan.route)) {
+
+        const report = {
+            function:      { ok: false, errors: ["carrier or runtimePlan missing or invalid"] },
+            representation:{ ok: true, errors: [] },
+            carrier:       { ok: true, errors: [] },
+            route:         { ok: true, errors: [] },
+            rooms:         { ok: true, errors: [] },
+            mutations:     { ok: true, errors: [] },
+            determinism:   { ok: true, errors: [] },
+            safety:        { ok: true, errors: [] },
+            overall_ok:    false
+        };
+        return report;
+    }
+
     const {
         func,   // resolved function descriptor for the coord
         route   // execution route (rooms in order)
-    } = runtimePlan || {};
+    } = runtimePlan;
 
     const report = {
         function:    { ok: true, errors: [] },

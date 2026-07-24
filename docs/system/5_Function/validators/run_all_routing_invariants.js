@@ -12,6 +12,22 @@ import { validateRoutingIntegrity } from "./validate_routing_integrity.js";
 
 export function runAllRoutingInvariants(routes, canonicalRegistry, coordinateRegistry) {
 
+    // ⭐ GUARD — prevents JS choke when registry is missing
+    if (!routes || typeof routes !== "object") {
+        const report = {
+            identity: { ok: false, errors: ["Routing registry missing or invalid"] },
+            structure: { ok: true, errors: [] },
+            spatial_routing: { ok: true, errors: [] },
+            ui_routing: { ok: true, errors: [] },
+            service_routing: { ok: true, errors: [] },
+            profiles: { ok: true, errors: [] },
+            transitions: { ok: true, errors: [] },
+            integrity: { ok: true, errors: [] },
+            overall_ok: false
+        };
+        return report;
+    }
+
     const spec = loadRoutingInvariants();
 
     const report = {

@@ -12,6 +12,21 @@ import { validateCoordinateIntegrity } from "./validate_coordinate_integrity.js"
 
 export async function runAllCoordinateInvariants(coordinateRegistry) {
 
+    // ⭐ GUARD — prevents JS choke when registry is missing
+    if (!coordinateRegistry || typeof coordinateRegistry !== "object") {
+        const report = {
+            identity: { ok: false, errors: ["Coordinate registry missing or invalid"] },
+            structure: { ok: true, errors: [] },
+            spatial: { ok: true, errors: [] },
+            adjacency: { ok: true, errors: [] },
+            abstract: { ok: true, errors: [] },
+            routing: { ok: true, errors: [] },
+            integrity: { ok: true, errors: [] },
+            overall_ok: false
+        };
+        return report;
+    }
+
     // Load the JSON spec (async)
     const spec = await loadCoordinateInvariants();
 
