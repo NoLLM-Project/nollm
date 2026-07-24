@@ -273,7 +273,15 @@
       "coord_rewrite_summary",
       "coord_rewrite_clarity",
       "coord_rewrite_professionalism",
-      "coord_service_elevator_b1"
+      "coord_service_elevator_b1",
+      "coord_tokenize_for_atoms",
+      "coord_resolve_atoms",
+      "coord_match_phrases",
+      "coord_match_chunks",
+      "coord_normalize_chunks",
+      "coord_segment_clauses",
+      "coord_normalize_clauses",
+      "coord_assemble_sentence"
     ],
     "tags": ["hallway", "horizontal", "service"]
   }

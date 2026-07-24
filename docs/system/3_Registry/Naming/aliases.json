@@ -22,6 +22,6 @@
   "give me the gist": "summarize_text",
   "key points": "summarize_text",
   "main points": "summarize_text",
-  "extract main points": "summarize_text",
+  "extract main points": "summarize_text"
 
 }

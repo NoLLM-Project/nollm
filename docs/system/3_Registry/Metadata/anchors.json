@@ -117,5 +117,12 @@
     "high",
     "medium",
     "low"
+  ],
+
+  "allowed": [
+    "very_high",
+    "high",
+    "medium",
+    "low"
   ]
 }

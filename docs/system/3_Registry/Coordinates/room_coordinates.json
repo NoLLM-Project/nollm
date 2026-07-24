@@ -590,6 +590,46 @@
     "tags": ["room", "service", "atomize"]
   },
   {
+    "id": "coord_postprocess_aggregate",
+    "x": -72,
+    "y": -4,
+    "z": -1,
+    "parent": "coord_service_floor",
+    "children": [],
+    "adjacent": ["service_corridor"],
+    "tags": ["room", "service", "postprocess"]
+  },
+  {
+    "id": "coord_collapse_phrases",
+    "x": -73,
+    "y": -4,
+    "z": -1,
+    "parent": "coord_service_floor",
+    "children": [],
+    "adjacent": ["service_corridor"],
+    "tags": ["room", "service", "atomize"]
+  },
+  {
+    "id": "coord_chunk_builder",
+    "x": -74,
+    "y": -4,
+    "z": -1,
+    "parent": "coord_service_floor",
+    "children": [],
+    "adjacent": ["service_corridor"],
+    "tags": ["room", "service", "atomize"]
+  },
+  {
+    "id": "coord_clause_builder",
+    "x": -75,
+    "y": -4,
+    "z": -1,
+    "parent": "coord_service_floor",
+    "children": [],
+    "adjacent": ["service_corridor"],
+    "tags": ["room", "service", "atomize"]
+  },
+  {
     "id": "coord_llm_generate_text",
     "x": -3,
     "y": 4,

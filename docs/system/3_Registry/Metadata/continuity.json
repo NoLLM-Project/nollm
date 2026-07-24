@@ -39,5 +39,15 @@
     "description": "Object exists only during error or transient states.",
     "allowed_operations": ["read"],
     "forbidden_operations": ["persist"]
-  }
+  },
+
+  "allowed": [
+    "stable",
+    "volatile",
+    "fixed",
+    "template",
+    "omnipresent",
+    "user_authored",
+    "ephemeral"
+  ]
 }

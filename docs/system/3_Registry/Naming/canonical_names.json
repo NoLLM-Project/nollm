@@ -448,6 +448,14 @@
     "description": "Rewrite text to sound more formal and professional."
   },
   {
+    "id": "postprocess_aggregate",
+    "canonical_name": "Postprocess_Aggregate",
+    "aliases": [],
+    "type": "container",
+    "layer": "hotel",
+    "description": "Aggregate postprocess fragments into a final output."
+  },
+  {
     "id": "parse_json",
     "canonical_name": "Parse_JSON",
     "aliases": [],
@@ -1120,7 +1128,15 @@
     "layer": "hotel",
     "description": "Decode HTML entities deterministically."
   },
-{
+  {
+    "id": "atomize_service",
+    "canonical_name": "Atomize_Service",
+    "aliases": ["coord_atomize_service"],
+    "type": "service",
+    "layer": "hotel",
+    "description": "Checkpoint service room that validates atomization output—tokens, atoms, chunks, clauses, and assembled sentence—without  modifying the payload, then returns control to the front desk for routing."
+  },
+  {
     "id": "tokenize_for_atoms",
     "canonical_name": "Tokenize_For_Atoms",
     "aliases": [],
@@ -1185,12 +1201,28 @@
     "description": "Assemble tokens, atoms, chunks, and clauses into a complete deterministic sentence structure."
   },
   {
-    "id": "atomize_service",
-    "canonical_name": "Atomize_Service",
-    "aliases": ["coord_atomize_service"],
+    "id": "collapse_phrases",
+    "canonical_name": "Collapse_Phrases",
+    "aliases": [],
     "type": "service",
     "layer": "hotel",
-    "description": "Checkpoint service room that validates atomization output—tokens, atoms, chunks, clauses, and assembled sentence—without  modifying the payload, then returns control to the front desk for routing."
+    "description": "Collapse multi-token phrase matches into single P atoms using phrase registry."
+  },
+  {
+    "id": "chunk_builder",
+    "canonical_name": "Chunk_Builder",
+    "aliases": ["build_chunks"],
+    "type": "service",
+    "layer": "hotel",
+    "description": "Construct CHUNK objects from ATOM objects using deterministic structural rules."
+  },
+  {
+    "id": "clause_builder",
+    "canonical_name": "Clause_Builder",
+    "aliases": ["build_clauses"],
+    "type": "service",
+    "layer": "hotel",
+    "description": "Construct CLAUSE objects from CHUNK objects using punctuation and connective boundaries."
   }
 ]
 

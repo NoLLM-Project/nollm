@@ -110,7 +110,7 @@
       "stability": "very_high"
     },
     "properties": {
-      "contains": ["hotel"]
+      "contains": ["hotel"],
       "role": "outer_boundary"
     }
   },
@@ -1171,6 +1171,20 @@
     "properties": {}
   },
   {
+    "id": "meta_postprocess_aggregate",
+    "name": "Postprocess_Aggregate",
+    "sku": "SRV-POSTPROCESS-AGGREGATE-0001",
+    "coordinates": "coord_postprocess_aggregate",
+    "type": "container",
+    "category": "container",
+    "anchors": {
+      "identity": "postprocess_aggregate",
+      "continuity": "stable",
+      "stability": "medium"
+    },
+    "properties": {}
+  },
+  {
     "id": "meta_tokenize_for_atoms",
     "name": "Tokenize_For_Atoms",
     "sku": "SRV-TOKENIZE-FOR-ATOMS-0001",
@@ -1277,6 +1291,48 @@
     "category": "container",
     "anchors": {
       "identity": "assemble_sentence",
+      "continuity": "stable",
+      "stability": "medium"
+    },
+    "properties": {}
+  },
+  {
+    "id": "meta_collapse_phrases",
+    "name": "Collapse_Phrases",
+    "sku": "SRV-COLLAPSE-PHRASES-0001",
+    "coordinates": "coord_collapse_phrases",
+    "type": "service",
+    "category": "service",
+    "anchors": {
+      "identity": "collapse_phrases",
+      "continuity": "stable",
+      "stability": "medium"
+    },
+    "properties": {}
+  },
+  {
+    "id": "meta_chunk_builder",
+    "name": "Chunk_Builder",
+    "sku": "SRV-CHUNK-BUILDER-0001",
+    "coordinates": "coord_chunk_builder",
+    "type": "service",
+    "category": "service",
+    "anchors": {
+      "identity": "chunk_builder",
+      "continuity": "stable",
+      "stability": "medium"
+    },
+    "properties": {}
+  },
+  {
+    "id": "meta_clause_builder",
+    "name": "Clause_Builder",
+    "sku": "SRV-CLAUSE-BUILDER-0001",
+    "coordinates": "coord_clause_builder",
+    "type": "service",
+    "category": "service",
+    "anchors": {
+      "identity": "clause_builder",
       "continuity": "stable",
       "stability": "medium"
     },
