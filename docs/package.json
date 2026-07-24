@@ -1,0 +1,13 @@
+{
+  "name": "nollm-system-plane",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@iarna/toml": "^2.2.5",
+    "csv-parse": "^7.0.0",
+    "express": "^4.22.2",
+    "fast-xml-parser": "^5.9.3",
+    "ini": "^7.0.0",
+    "js-yaml": "^5.2.0"
+  }
+}
