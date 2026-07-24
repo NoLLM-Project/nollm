@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_render_nodes_on_scene_load",
+    "source": "ui",
+    "target": "map_render_nodes",
+    "conditions": ["scene_load"],
+    "transitions": ["render_nodes"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_render_edges_on_scene_load",
+    "source": "ui",
+    "target": "map_render_edges",
+    "conditions": ["scene_load"],
+    "transitions": ["render_edges"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

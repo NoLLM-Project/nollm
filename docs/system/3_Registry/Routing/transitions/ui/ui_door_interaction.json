@@ -1,0 +1,29 @@
+[
+  {
+    "id": "route_door_hover",
+    "source": "ui",
+    "target": "hotel_district_door_interaction",
+    "conditions": ["ui_hover_district_door"],
+    "transitions": ["highlight_temp"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_door_click_lit",
+    "source": "ui",
+    "target": "hotel_district_door_interaction",
+    "conditions": ["ui_click_district_door_lit"],
+    "transitions": ["select_and_request_open"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_door_click_forbidden",
+    "source": "ui",
+    "target": "hotel_district_door_interaction",
+    "conditions": ["ui_click_district_door_dim", "ui_click_district_door_glowing"],
+    "transitions": ["error_forbidden_navigation"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "route_scene_marker_update",
+    "source": "scene_hotel_district_door",
+    "target": "map_marker_layer",
+    "conditions": ["scene_entered"],
+    "transitions": ["update_marker_to_door"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_scene_fade_in",
+    "source": "scene_hotel_district_door",
+    "target": "transition_map_to_district_door_scene",
+    "conditions": ["scene_loaded"],
+    "transitions": ["fade_in_scene"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_marker_update_after_scene_load",
+    "source": "scene_hotel_district_door",
+    "target": "map_marker_layer",
+    "conditions": ["scene_loaded"],
+    "transitions": ["update_marker_to_door"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_map_sign_update_after_scene_load",
+    "source": "scene_hotel_district_door",
+    "target": "map_sign_layer",
+    "conditions": ["scene_loaded"],
+    "transitions": ["update_map_sign"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

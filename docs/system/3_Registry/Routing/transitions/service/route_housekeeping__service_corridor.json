@@ -16,5 +16,5 @@
     "transitions": ["enter_room"],
     "profile": "service",
     "invariants": []
-  },
+  }
 ]

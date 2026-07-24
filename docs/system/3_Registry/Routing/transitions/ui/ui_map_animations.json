@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_fade_in_on_node_render",
+    "source": "map_render_nodes",
+    "target": "map_anim_fade_in",
+    "conditions": ["render_nodes"],
+    "transitions": ["apply_fade_in"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_fade_out_on_scene_change",
+    "source": "ui",
+    "target": "map_anim_fade_out",
+    "conditions": ["scene_change"],
+    "transitions": ["apply_fade_out"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "route_error_click_to_dismiss",
+    "source": "ui",
+    "target": "error_interaction_rules",
+    "conditions": ["ui_click_error"],
+    "transitions": ["dismiss_error"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_error_hover_to_outline",
+    "source": "ui",
+    "target": "error_interaction_rules",
+    "conditions": ["ui_hover_error"],
+    "transitions": ["error_outline_temp"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_error_keyboard_to_dismiss",
+    "source": "ui",
+    "target": "error_interaction_rules",
+    "conditions": ["keyboard_escape", "keyboard_enter"],
+    "transitions": ["dismiss_error"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

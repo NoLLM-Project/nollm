@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_error_detected",
+    "source": "ui",
+    "target": "map_error_state_machine",
+    "conditions": ["error_detected"],
+    "transitions": ["error_detected"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_dismiss_error",
+    "source": "ui",
+    "target": "map_error_state_machine",
+    "conditions": ["dismiss_error"],
+    "transitions": ["dismiss_error"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

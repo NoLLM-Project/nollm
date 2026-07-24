@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_map_click_to_concierge_request",
+    "source": "ui",
+    "target": "concierge",
+    "conditions": ["ui_click_district_door_lit"],
+    "transitions": ["concierge_request_open_door"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_portal_activation_to_concierge",
+    "source": "ui",
+    "target": "concierge",
+    "conditions": ["ui_activate_district_portal"],
+    "transitions": ["concierge_request_enter_district"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

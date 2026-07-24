@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_map_sign_update_on_user_tap",
+    "source": "ui_map_node",
+    "target": "map_sign_logic",
+    "conditions": ["ui_select"],
+    "transitions": ["update_you_are_here"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_pulse_on_selection",
+    "source": "ui_map_node",
+    "target": "map_anim_highlight_pulse",
+    "conditions": ["ui_select"],
+    "transitions": ["apply_pulse"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

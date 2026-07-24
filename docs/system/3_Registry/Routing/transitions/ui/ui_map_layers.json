@@ -1,0 +1,38 @@
+[
+  {
+    "id": "route_render_nodes_to_structure_layer",
+    "source": "map_render_nodes",
+    "target": "map_layer_structure",
+    "conditions": ["render_doors"],
+    "transitions": ["draw_nodes"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_render_edges_to_interaction_layer",
+    "source": "map_render_edges",
+    "target": "map_layer_interaction",
+    "conditions": ["render_edges"],
+    "transitions": ["draw_edges"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_render_you_are_here_to_marker_layer",
+    "source": "map_render_you_are_here",
+    "target": "map_layer_marker",
+    "conditions": ["render_you_are_here"],
+    "transitions": ["draw_marker"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_render_door_states_to_interaction_layer",
+    "source": "map_render_door_states",
+    "target": "map_layer_interaction",
+    "conditions": ["render_door_states"],
+    "transitions": ["draw_door_states"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

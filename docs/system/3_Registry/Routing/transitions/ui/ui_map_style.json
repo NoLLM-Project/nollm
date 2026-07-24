@@ -1,0 +1,47 @@
+[
+  {
+    "id": "route_apply_colors",
+    "source": "map_render_nodes",
+    "target": "map_style_colors",
+    "conditions": ["render_nodes"],
+    "transitions": ["apply_colors"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_apply_shapes",
+    "source": "map_render_nodes",
+    "target": "map_style_shapes",
+    "conditions": ["render_nodes"],
+    "transitions": ["apply_shapes"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_apply_icons",
+    "source": "map_render_nodes",
+    "target": "map_style_icons",
+    "conditions": ["render_nodes"],
+    "transitions": ["apply_icons"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_apply_glow",
+    "source": "map_render_nodes",
+    "target": "map_style_glow",
+    "conditions": ["render_nodes"],
+    "transitions": ["apply_glow"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_apply_marker_style",
+    "source": "map_render_you_are_here",
+    "target": "map_style_marker",
+    "conditions": ["render_you_are_here"],
+    "transitions": ["apply_marker_style"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

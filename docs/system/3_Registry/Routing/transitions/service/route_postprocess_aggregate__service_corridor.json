@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_service_corridor_to_postprocess_aggregate",
+    "source": "coord_service_corridor",
+    "target": "coord_postprocess_aggregate",
+    "conditions": ["navigation"],
+    "transitions": ["enter_room"],
+    "profile": "service",
+    "invariants": []
+  },
+  {
+    "id": "route_postprocess_aggregate_to_service_corridor",
+    "source": "coord_postprocess_aggregate",
+    "target": "coord_service_corridor",
+    "conditions": ["navigation"],
+    "transitions": ["exit_room"],
+    "profile": "service",
+    "invariants": []
+  }
+]

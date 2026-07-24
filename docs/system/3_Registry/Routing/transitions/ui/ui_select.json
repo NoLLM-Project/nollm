@@ -1,0 +1,38 @@
+[
+  {
+    "id": "route_select_surface_architecture",
+    "source": "ui",
+    "target": "surface_architecture",
+    "conditions": ["ui_select"],
+    "transitions": ["render_surface"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_select_ui_panel",
+    "source": "ui",
+    "target": "ui_panel",
+    "conditions": ["ui_select"],
+    "transitions": ["render_panel"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_select_ui_map_node",
+    "source": "ui",
+    "target": "ui_map_node",
+    "conditions": ["ui_select"],
+    "transitions": ["highlight_node"],
+    "profile": "standard",
+    "invariants": []
+  },
+  {
+    "id": "route_select_ui_edge",
+    "source": "ui",
+    "target": "ui_edge_adjacency",
+    "conditions": ["ui_select"],
+    "transitions": ["highlight_edge"],
+    "profile": "standard",
+    "invariants": []
+  }
+]

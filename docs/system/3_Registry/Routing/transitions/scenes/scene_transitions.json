@@ -1,0 +1,29 @@
+[
+  {
+    "id": "route_clear_hotel_marker",
+    "source": "transition_door_scene_to_district",
+    "target": "map_marker_layer",
+    "conditions": ["district_scene_loaded"],
+    "transitions": ["clear_hotel_marker"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_clear_hotel_map_sign",
+    "source": "transition_door_scene_to_district",
+    "target": "map_sign_layer",
+    "conditions": ["district_scene_loaded"],
+    "transitions": ["clear_hotel_map_sign"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_reset_hotel_error_state_machine",
+    "source": "transition_door_scene_to_district",
+    "target": "map_error_state_machine",
+    "conditions": ["district_scene_loaded"],
+    "transitions": ["reset_hotel_error_state_machine"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

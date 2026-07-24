@@ -1,0 +1,11 @@
+[
+  {
+    "id": "route_render_door_states_on_update",
+    "source": "hotel_root",
+    "target": "map_render_door_states",
+    "conditions": ["door_state_change"],
+    "transitions": ["render_door_states"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_scene_return_to_map",
+    "source": "ui",
+    "target": "scene_hotel_map",
+    "conditions": ["ui_click_return_button"],
+    "transitions": ["render_scene"],
+    "profile": "ui",
+    "invariants": []
+  },
+  {
+    "id": "route_district_scene_return_to_door_scene",
+    "source": "ui",
+    "target": "scene_hotel_district_door",
+    "conditions": ["ui_click_return_button"],
+    "transitions": ["render_scene"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

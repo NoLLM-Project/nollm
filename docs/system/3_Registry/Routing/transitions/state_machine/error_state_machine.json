@@ -1,0 +1,11 @@
+[
+  {
+    "id": "route_render_error",
+    "source": "map_error_state_machine",
+    "target": "map_layer_error",
+    "conditions": ["render_error"],
+    "transitions": ["draw_error_highlight"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

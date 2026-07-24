@@ -1,0 +1,18 @@
+{
+  "id": "route_service_corridor_to_clause_builder",
+  "source": "coord_service_corridor",
+  "target": "coord_clause_builder",
+  "conditions": ["navigation"],
+  "transitions": ["enter_room"],
+  "profile": "service",
+  "invariants": []
+},
+{
+  "id": "route_clause_builder_to_service_corridor",
+  "source": "coord_clause_builder",
+  "target": "coord_service_corridor",
+  "conditions": ["navigation"],
+  "transitions": ["exit_room"],
+  "profile": "service",
+  "invariants": []
+}

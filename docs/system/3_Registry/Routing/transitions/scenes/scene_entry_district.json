@@ -1,0 +1,11 @@
+[
+  {
+    "id": "route_district_scene_marker_reset",
+    "source": "scene_district_entry",
+    "target": "map_marker_layer",
+    "conditions": ["scene_loaded"],
+    "transitions": ["clear_hotel_marker"],
+    "profile": "ui",
+    "invariants": []
+  }
+]

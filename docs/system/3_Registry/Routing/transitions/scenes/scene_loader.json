@@ -1,0 +1,11 @@
+[
+  {
+    "id": "route_fade_in_door_scene",
+    "source": "world_scene_loader",
+    "target": "transition_door_scene_to_district",
+    "conditions": ["district_scene_loaded"],
+    "transitions": ["fade_in_district_scene"],
+    "profile": "ui",
+    "invariants": []
+  }
+]
