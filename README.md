@@ -1,6 +1,3 @@
-# nollm
-A deterministic, rule-based interaction engine. No machine learning. No prediction. No hidden layers.
-
 # NoLLM Engine
 
 A deterministic, rule‑based interaction engine.  
@@ -13,9 +10,6 @@ All behavior is explicit, inspectable, and deterministic.
 
 
 ---
-
-## Live Demo
-//https://nollm.pages.dev//
 
 ## Source Code
 This repository contains the core engine (“Hotel”) and the ecosystem scaffolding (“District”).
@@ -52,7 +46,6 @@ If you want to support the work, you may do so here:
 https://ko-fi.com/nollm_project
 
 ---
-
 ## License
 Copyright (c) 2026 NoLLM Project
 
