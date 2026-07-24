@@ -1,17 +1,29 @@
-import { loadJson } from "../../../utils/load_json.js"; // or correct absolute path
+// system/3_Registry/Routing/loader.js
+// Browser‑safe routing loader. No Node, no fs, no directory scanning.
+
+async function loadJSON(path) {
+  const res = await fetch(path);
+  if (!res.ok) {
+    throw new Error(`Failed to load JSON: ${path}`);
+  }
+  return res.json();
+}
 
 export async function loadRoutingRegistry() {
-  const basePath = "/3_Registry/Routing/transitions";
+  // Load the routing schema (single JSON file)
+  const routingSchema = await loadJSON("./routing_schema.json");
 
-  // Load schema via fetch, not import
-  const routingSchema = await loadJson("/3_Registry/Routing/routing_schema.json");
+  // Load transitions (single JSON file or a known list)
+  // Browser cannot scan directories, so transitions must be explicit.
+  const transitions = await loadJSON("./transitions.json");
 
-  const allTransitions = readJsonFilesRecursively(basePath);
-  const transitions = allTransitions.flat();
-
+  // Validate each transition against the schema
   for (const entry of transitions) {
     validateRoutingEntry(entry, routingSchema);
   }
 
-  // duplicate ID check...
+  return {
+    schema: routingSchema,
+    transitions
+  };
 }

@@ -1,0 +1,2 @@
+const old = loadRoutingRegistry(); // before the split
+fs.writeFileSync("old_routing.json", JSON.stingify(old.transitions, null, 2));
