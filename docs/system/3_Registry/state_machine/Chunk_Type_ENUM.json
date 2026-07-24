@@ -1,0 +1,9 @@
+ChunkType = {
+    PREP,        // prepositional chunk
+    CONN,        // connective chunk
+    NOUN,        // noun chunk
+    ADV,         // adverb chunk
+    VERB,        // verb chunk (future)
+    P_PHRASE,    // P-phrase chunk
+    UNKNOWN      // unknown chunk
+}

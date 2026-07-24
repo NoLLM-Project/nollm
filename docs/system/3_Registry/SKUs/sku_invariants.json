@@ -52,9 +52,9 @@
   },
 
   "versioning": {
-    "pattern": "v<number>",
-    "monotonic": true,
-    "no_reuse": true
+    "version_pattern": "v<number>",
+    "version_must_increment_monotonically": true,
+    "version_numbers_may_not_be_reused": true
   },
 
   "integrity": {

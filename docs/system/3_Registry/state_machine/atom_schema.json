@@ -1,0 +1,31 @@
+{
+  "$id": "https://nollm/schema/atom.json",
+  "type": "object",
+  "required": ["id", "type", "subtype", "surface", "span"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Lexicon ID or 'UNKNOWN'"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["N", "F", "D", "J", "P", "UNKNOWN"],
+      "description": "Atom category"
+    },
+    "subtype": {
+      "type": "string",
+      "description": "Lexicon subtype (e.g., NOUN_VERBAL_GERUND)"
+    },
+    "surface": {
+      "type": "string",
+      "description": "Exact token text"
+    },
+    "span": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Token index range [start, end]"
+    }
+  }
+}

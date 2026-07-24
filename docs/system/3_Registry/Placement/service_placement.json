@@ -58,12 +58,16 @@
       "rewrite_summary",
       "rewrite_clarity",
       "rewrite_professionalism",
+      "postprocess_aggregate",
 
       "tokenize_for_atoms",
       "resolve_atoms",
+      "collapse_phrases",
       "match_phrases",
+      "chunk_builder",
       "match_chunks",
       "normalize_chunks",
+      "clause_builder",
       "segment_clauses",
       "normalize_clauses",
       "assemble_sentence"
@@ -603,6 +607,17 @@
     "invariants": []
   },
   {
+    "id": "place_postprocess_aggregate",
+    "object_id": "postprocess_aggregate",
+    "allowed_parents": ["service_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["service_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
     "id": "place_tokenize_for_atoms",
     "object_id": "tokenize_for_atoms",
     "allowed_parents": ["service_floor"],
@@ -693,6 +708,50 @@
   {
     "id": "place_atomize_service",
     "object_id": "atomize_service",
+    "allowed_parents": ["service_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["service_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_collapse_phrases",
+    "object_id": "collapse_phrases",
+    "allowed_parents": ["service_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["service_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_segment_clauses",
+    "object_id": "segment_clauses",
+    "allowed_parents": ["service_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["service_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_chunk_builder",
+    "object_id": "chunk_builder",
+    "allowed_parents": ["service_floor"],
+    "allowed_children": [],
+    "constraints": {
+      "must_be_inside": ["service_floor"],
+      "cannot_be_inside": []
+    },
+    "invariants": []
+  },
+  {
+    "id": "place_clause_builder",
+    "object_id": "clause_builder",
     "allowed_parents": ["service_floor"],
     "allowed_children": [],
     "constraints": {

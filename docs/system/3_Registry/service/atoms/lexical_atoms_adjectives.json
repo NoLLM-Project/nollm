@@ -1,0 +1,91 @@
+{
+  "ADJ_SIMPLE": {
+    "id": "L00000300",
+    "patterns": [
+      { "id": "W00003001", "text": "simple" },
+      { "id": "W00003002", "text": "basic" },
+      { "id": "W00003003", "text": "straightforward" }
+    ]
+  },
+
+  "ADJ_COMPLEX": {
+    "id": "L00000301",
+    "patterns": [
+      { "id": "W00003004", "text": "complex" },
+      { "id": "W00003005", "text": "complicated" },
+      { "id": "W00003006", "text": "advanced" }
+    ]
+  },
+
+  "ADJ_DETAILED": {
+    "id": "L00000302",
+    "patterns": [
+      { "id": "W00003007", "text": "detailed" },
+      { "id": "W00003008", "text": "thorough" },
+      { "id": "W00003009", "text": "comprehensive" }
+    ]
+  },
+
+  "ADJ_CONCISE": {
+    "id": "L00000303",
+    "patterns": [
+      { "id": "W00003010", "text": "concise" },
+      { "id": "W00003011", "text": "brief" },
+      { "id": "W00003012", "text": "short" }
+    ]
+  },
+
+  "ADJ_VISUAL": {
+    "id": "L00000304",
+    "patterns": [
+      { "id": "W00003013", "text": "visual" },
+      { "id": "W00003014", "text": "graphical" },
+      { "id": "W00003015", "text": "pictorial" }
+    ]
+  },
+
+  "ADJ_TEXTUAL": {
+    "id": "L00000305",
+    "patterns": [
+      { "id": "W00003016", "text": "textual" },
+      { "id": "W00003017", "text": "written" },
+      { "id": "W00003018", "text": "verbal" }
+    ]
+  },
+
+  "ADJ_CORRECT": {
+    "id": "L00000306",
+    "patterns": [
+      { "id": "W00003019", "text": "correct" },
+      { "id": "W00003020", "text": "accurate" },
+      { "id": "W00003021", "text": "right" }
+    ]
+  },
+
+  "ADJ_INCORRECT": {
+    "id": "L00000307",
+    "patterns": [
+      { "id": "W00003022", "text": "incorrect" },
+      { "id": "W00003023", "text": "wrong" },
+      { "id": "W00003024", "text": "inaccurate" }
+    ]
+  },
+
+  "ADJ_FAST": {
+    "id": "L00000308",
+    "patterns": [
+      { "id": "W00003025", "text": "fast" },
+      { "id": "W00003026", "text": "quick" },
+      { "id": "W00003027", "text": "rapid" }
+    ]
+  },
+
+  "ADJ_SLOW": {
+    "id": "L00000309",
+    "patterns": [
+      { "id": "W00003028", "text": "slow" },
+      { "id": "W00003029", "text": "gradual" },
+      { "id": "W00003030", "text": "deliberate" }
+    ]
+  }
+}

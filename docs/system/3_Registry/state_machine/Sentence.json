@@ -1,0 +1,7 @@
+SENTENCE {
+    id: string,            // e.g., "S00000001"
+    tokens: string[],      // raw tokens
+    atoms: ATOM[],         // atom list aligned to tokens
+    chunks: CHUNK[],       // chunk list
+    clauses: CLAUSE[],     // clause list
+}

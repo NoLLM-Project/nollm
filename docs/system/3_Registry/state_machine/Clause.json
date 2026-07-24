@@ -1,0 +1,5 @@
+CLAUSE {
+    id: string,           // e.g., "CL00000001"
+    chunks: CHUNK[],      // ordered list of chunks
+    span: [start, end]    // token indices covered by this clause
+}

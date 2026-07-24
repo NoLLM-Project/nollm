@@ -1,0 +1,8 @@
+AtomType = {
+    N,        // noun
+    F,        // functional word
+    D,        // adverb
+    J,        // adjective
+    P,        // multi-word phrase atom
+    UNKNOWN   // not in lexicon
+}

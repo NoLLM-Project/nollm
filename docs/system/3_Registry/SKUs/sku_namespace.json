@@ -672,6 +672,22 @@
     "version": "v1"
   },
   {
+    "sku": "SRV-REWRITE-PROFESSIONALISM-0001",
+    "object_id": "rewrite_professionalism",
+    "coordinates": "coord_rewrite_professionalism",
+    "metadata": "meta_rewrite_professionalism",
+    "category": "container",
+    "version": "v1"
+  },
+  {
+    "sku": "SRV-POSTPROCESS-AGGREGATE-0001",
+    "object_id": "postprocess_aggregate",
+    "coordinates": "coord_postprocess_aggregate",
+    "metadata": "meta_postprocess_aggregate",
+    "category": "container",
+    "version": "v1"
+  },
+  {
     "sku": "SRV-TOKENIZE-FOR-ATOMS-0001",
     "object_id": "tokenize_for_atoms",
     "coordinates": "coord_tokenize_for_atoms",

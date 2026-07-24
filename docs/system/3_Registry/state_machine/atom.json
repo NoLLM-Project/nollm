@@ -1,0 +1,7 @@
+ATOM {
+    id: string,          // e.g., "N00001601", "F00000175", "UNKNOWN"
+    type: AtomType,      // ENUM: N, F, D, J, P, UNKNOWN
+    subtype: string,     // e.g., "NOUN_VERBAL_GERUND", "FUNCTION_PREPOSITION"
+    surface: string,     // the exact token text
+    span: [start, end]   // token indices (inclusive)
+}

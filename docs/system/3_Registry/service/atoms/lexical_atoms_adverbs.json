@@ -1,0 +1,91 @@
+{
+  "ADV_QUICKLY": {
+    "id": "L00000400",
+    "patterns": [
+      { "id": "W00004001", "text": "quickly" },
+      { "id": "W00004002", "text": "fast" },
+      { "id": "W00004003", "text": "rapidly" }
+    ]
+  },
+
+  "ADV_SLOWLY": {
+    "id": "L00000401",
+    "patterns": [
+      { "id": "W00004004", "text": "slowly" },
+      { "id": "W00004005", "text": "gradually" },
+      { "id": "W00004006", "text": "deliberately" }
+    ]
+  },
+
+  "ADV_BRIEFLY": {
+    "id": "L00000402",
+    "patterns": [
+      { "id": "W00004007", "text": "briefly" },
+      { "id": "W00004008", "text": "shortly" },
+      { "id": "W00004009", "text": "concisely" }
+    ]
+  },
+
+  "ADV_DEEPLY": {
+    "id": "L00000403",
+    "patterns": [
+      { "id": "W00004010", "text": "deeply" },
+      { "id": "W00004011", "text": "thoroughly" },
+      { "id": "W00004012", "text": "extensively" }
+    ]
+  },
+
+  "ADV_VISUALLY": {
+    "id": "L00000404",
+    "patterns": [
+      { "id": "W00004013", "text": "visually" },
+      { "id": "W00004014", "text": "graphically" },
+      { "id": "W00004015", "text": "pictorially" }
+    ]
+  },
+
+  "ADV_TEXTUALLY": {
+    "id": "L00000405",
+    "patterns": [
+      { "id": "W00004016", "text": "textually" },
+      { "id": "W00004017", "text": "verbally" },
+      { "id": "W00004018", "text": "in writing" }
+    ]
+  },
+
+  "ADV_LITERALLY": {
+    "id": "L00000406",
+    "patterns": [
+      { "id": "W00004019", "text": "literally" },
+      { "id": "W00004020", "text": "exactly" },
+      { "id": "W00004021", "text": "precisely" }
+    ]
+  },
+
+  "ADV_APPROXIMATELY": {
+    "id": "L00000407",
+    "patterns": [
+      { "id": "W00004022", "text": "approximately" },
+      { "id": "W00004023", "text": "roughly" },
+      { "id": "W00004024", "text": "about" }
+    ]
+  },
+
+  "ADV_OFTEN": {
+    "id": "L00000408",
+    "patterns": [
+      { "id": "W00004025", "text": "often" },
+      { "id": "W00004026", "text": "frequently" },
+      { "id": "W00004027", "text": "regularly" }
+    ]
+  },
+
+  "ADV_RARELY": {
+    "id": "L00000409",
+    "patterns": [
+      { "id": "W00004028", "text": "rarely" },
+      { "id": "W00004029", "text": "seldom" },
+      { "id": "W00004030", "text": "infrequently" }
+    ]
+  }
+}

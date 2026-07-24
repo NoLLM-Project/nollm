@@ -1,0 +1,31 @@
+{
+  "$id": "https://nollm/schema/sentence.json",
+  "type": "object",
+  "required": ["id", "tokens", "atoms", "chunks", "clauses"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique sentence ID"
+    },
+    "tokens": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Raw token list"
+    },
+    "atoms": {
+      "type": "array",
+      "items": { "$ref": "atom.json" },
+      "description": "Atom list aligned to tokens"
+    },
+    "chunks": {
+      "type": "array",
+      "items": { "$ref": "chunk.json" },
+      "description": "All chunks in sentence order"
+    },
+    "clauses": {
+      "type": "array",
+      "items": { "$ref": "clause.json" },
+      "description": "Clause list"
+    }
+  }
+}

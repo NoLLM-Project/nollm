@@ -1,0 +1,96 @@
+{
+  "NOUN_WORKFLOW": {
+    "id": "L00000200",
+    "patterns": [
+      { "id": "W00002001", "text": "workflow" },
+      { "id": "W00002002", "text": "process" },
+      { "id": "W00002003", "text": "pipeline" },
+      { "id": "W00002004", "text": "steps" }
+    ]
+  },
+
+  "NOUN_TABLE": {
+    "id": "L00000201",
+    "patterns": [
+      { "id": "W00002005", "text": "table" },
+      { "id": "W00002006", "text": "index" },
+      { "id": "W00002007", "text": "mapping" },
+      { "id": "W00002008", "text": "schema" }
+    ]
+  },
+
+  "NOUN_ARCHITECTURE": {
+    "id": "L00000202",
+    "patterns": [
+      { "id": "W00002009", "text": "architecture" },
+      { "id": "W00002010", "text": "system" },
+      { "id": "W00002011", "text": "design" },
+      { "id": "W00002012", "text": "structure" }
+    ]
+  },
+
+  "NOUN_CODE": {
+    "id": "L00000203",
+    "patterns": [
+      { "id": "W00002013", "text": "code" },
+      { "id": "W00002014", "text": "function" },
+      { "id": "W00002015", "text": "method" },
+      { "id": "W00002016", "text": "snippet" }
+    ]
+  },
+
+  "NOUN_OUTPUT": {
+    "id": "L00000204",
+    "patterns": [
+      { "id": "W00002017", "text": "output" },
+      { "id": "W00002018", "text": "result" },
+      { "id": "W00002019", "text": "response" }
+    ]
+  },
+
+  "NOUN_INPUT": {
+    "id": "L00000205",
+    "patterns": [
+      { "id": "W00002020", "text": "input" },
+      { "id": "W00002021", "text": "request" },
+      { "id": "W00002022", "text": "query" }
+    ]
+  },
+
+  "NOUN_ERROR": {
+    "id": "L00000206",
+    "patterns": [
+      { "id": "W00002023", "text": "error" },
+      { "id": "W00002024", "text": "issue" },
+      { "id": "W00002025", "text": "problem" },
+      { "id": "W00002026", "text": "bug" }
+    ]
+  },
+
+  "NOUN_FILE": {
+    "id": "L00000207",
+    "patterns": [
+      { "id": "W00002027", "text": "file" },
+      { "id": "W00002028", "text": "document" },
+      { "id": "W00002029", "text": "folder" }
+    ]
+  },
+
+  "NOUN_MODEL": {
+    "id": "L00000208",
+    "patterns": [
+      { "id": "W00002030", "text": "model" },
+      { "id": "W00002031", "text": "engine" },
+      { "id": "W00002032", "text": "module" }
+    ]
+  },
+
+  "NOUN_DATA": {
+    "id": "L00000209",
+    "patterns": [
+      { "id": "W00002033", "text": "data" },
+      { "id": "W00002034", "text": "dataset" },
+      { "id": "W00002035", "text": "information" }
+    ]
+  }
+}

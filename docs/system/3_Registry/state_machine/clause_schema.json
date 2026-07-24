@@ -1,0 +1,24 @@
+{
+  "$id": "https://nollm/schema/clause.json",
+  "type": "object",
+  "required": ["id", "chunks", "span"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique clause ID"
+    },
+    "chunks": {
+      "type": "array",
+      "items": { "$ref": "chunk.json" },
+      "minItems": 1,
+      "description": "Ordered list of chunks in this clause"
+    },
+    "span": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Token index range [start, end]"
+    }
+  }
+}

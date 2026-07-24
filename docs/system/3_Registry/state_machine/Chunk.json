@@ -1,0 +1,6 @@
+CHUNK {
+    id: string,            // unique chunk ID, e.g., "C00001234"
+    type: ChunkType,       // ENUM: PREP, CONN, NOUN, ADV, VERB, P_PHRASE, UNKNOWN
+    atoms: ATOM[],         // ordered list of atoms in this chunk
+    span: [start, end]     // token indices covered by this chunk
+}

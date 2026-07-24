@@ -1,0 +1,37 @@
+{
+  "$id": "https://nollm/schema/chunk.json",
+  "type": "object",
+  "required": ["id", "type", "atoms", "span"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique chunk ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "PREP",
+        "CONN",
+        "NOUN",
+        "ADV",
+        "VERB",
+        "P_PHRASE",
+        "UNKNOWN"
+      ],
+      "description": "Chunk category"
+    },
+    "atoms": {
+      "type": "array",
+      "items": { "$ref": "atom.json" },
+      "minItems": 1,
+      "description": "Ordered list of atoms in this chunk"
+    },
+    "span": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Token index range [start, end]"
+    }
+  }
+}

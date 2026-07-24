@@ -1,0 +1,143 @@
+{
+  "VERB_SHOW": {
+    "id": "L00000100",
+    "patterns": [
+      { "id": "W00001001", "text": "show" },
+      { "id": "W00001002", "text": "display" },
+      { "id": "W00001003", "text": "reveal" },
+      { "id": "W00001004", "text": "present" }
+    ]
+  },
+
+  "VERB_EXPLAIN": {
+    "id": "L00000101",
+    "patterns": [
+      { "id": "W00001005", "text": "explain" },
+      { "id": "W00001006", "text": "clarify" },
+      { "id": "W00001007", "text": "describe" },
+      { "id": "W00001008", "text": "elaborate" }
+    ]
+  },
+
+  "VERB_DEFINE": {
+    "id": "L00000102",
+    "patterns": [
+      { "id": "W00001009", "text": "define" },
+      { "id": "W00001010", "text": "mean" },
+      { "id": "W00001011", "text": "stand for" }
+    ]
+  },
+
+  "VERB_LIST": {
+    "id": "L00000103",
+    "patterns": [
+      { "id": "W00001012", "text": "list" },
+      { "id": "W00001013", "text": "enumerate" },
+      { "id": "W00001014", "text": "outline" }
+    ]
+  },
+
+  "VERB_COMPARE": {
+    "id": "L00000104",
+    "patterns": [
+      { "id": "W00001015", "text": "compare" },
+      { "id": "W00001016", "text": "contrast" },
+      { "id": "W00001017", "text": "difference between" }
+    ]
+  },
+
+  "VERB_CREATE": {
+    "id": "L00000105",
+    "patterns": [
+      { "id": "W00001018", "text": "create" },
+      { "id": "W00001019", "text": "generate" },
+      { "id": "W00001020", "text": "produce" },
+      { "id": "W00001021", "text": "make" }
+    ]
+  },
+
+  "VERB_REWRITE": {
+    "id": "L00000106",
+    "patterns": [
+      { "id": "W00001022", "text": "rewrite" },
+      { "id": "W00001023", "text": "rephrase" },
+      { "id": "W00001024", "text": "reword" },
+      { "id": "W00001025", "text": "put this as" }
+    ]
+  },
+
+  "VERB_SUMMARIZE": {
+    "id": "L00000107",
+    "patterns": [
+      { "id": "W00001026", "text": "summarize" },
+      { "id": "W00001027", "text": "condense" },
+      { "id": "W00001028", "text": "give summary" }
+    ]
+  },
+
+  "VERB_HELP": {
+    "id": "L00000108",
+    "patterns": [
+      { "id": "W00001029", "text": "help" },
+      { "id": "W00001030", "text": "assist" },
+      { "id": "W00001031", "text": "guide" },
+      { "id": "W00001032", "text": "walk me through" }
+    ]
+  },
+
+  "VERB_EXAMPLE": {
+    "id": "L00000109",
+    "patterns": [
+      { "id": "W00001033", "text": "example" },
+      { "id": "W00001034", "text": "illustrate" },
+      { "id": "W00001035", "text": "show example" },
+      { "id": "W00001036", "text": "demonstrate" }
+    ]
+  },
+
+  "VERB_ANALYZE": {
+    "id": "L00000110",
+    "patterns": [
+      { "id": "W00001037", "text": "analyze" },
+      { "id": "W00001038", "text": "break down" },
+      { "id": "W00001039", "text": "examine" }
+    ]
+  },
+
+  "VERB_CONVERT": {
+    "id": "L00000111",
+    "patterns": [
+      { "id": "W00001040", "text": "convert" },
+      { "id": "W00001041", "text": "turn into" },
+      { "id": "W00001042", "text": "transform" }
+    ]
+  },
+
+  "VERB_CORRECT": {
+    "id": "L00000112",
+    "patterns": [
+      { "id": "W00001043", "text": "fix" },
+      { "id": "W00001044", "text": "correct" },
+      { "id": "W00001045", "text": "repair" },
+      { "id": "W00001046", "text": "resolve" }
+    ]
+  },
+
+  "VERB_EXPAND": {
+    "id": "L00000113",
+    "patterns": [
+      { "id": "W00001047", "text": "expand" },
+      { "id": "W00001048", "text": "extend" },
+      { "id": "W00001049", "text": "add more" }
+    ]
+  },
+
+  "VERB_REDUCE": {
+    "id": "L00000114",
+    "patterns": [
+      { "id": "W00001050", "text": "shorten" },
+      { "id": "W00001051", "text": "reduce" },
+      { "id": "W00001052", "text": "cut down" }
+    ]
+  }
+}

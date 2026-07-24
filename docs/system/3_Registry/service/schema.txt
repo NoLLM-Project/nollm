@@ -1,0 +1,7 @@
+SHAPE := {
+    speech_act: ATOM | NULL,
+    subject: ATOM | NULL,
+    modifiers: LIST<ATOM>,
+    qualifiers: LIST<ATOM>,
+    raw_content: STRING | NULL
+}
