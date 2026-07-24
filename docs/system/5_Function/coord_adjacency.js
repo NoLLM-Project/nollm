@@ -1,8 +1,10 @@
 // system/5_Function/coord_adjacency.js
 
-import { loadJson } from "../../utils/load_json.js";
+import { loadJson } from "../utils/load_json.js";
 
 export async function coord_adjacency({ xyz, workflowContext }) {
+
+    console.log("ADJACENCY RAN");
 
     // ------------------------------------------------------------
     // REQUIREMENT: Field Pass 2 must have run
@@ -24,19 +26,26 @@ export async function coord_adjacency({ xyz, workflowContext }) {
     const objectId = fieldResult.object_id;
 
     // ------------------------------------------------------------
-    // LOAD ALL PLACEMENT REGISTRIES (Cloudflare-safe)
+    // LOAD ALL PLACEMENT REGISTRIES
     // ------------------------------------------------------------
-    const worldPlacement = await loadJson("../../3_Registry/Placement/world_placement.json");
-    const hotelPlacement = await loadJson("../../3_Registry/Placement/hotel_placement.json");
 
-    const floor01Placement = await loadJson("../../3_Registry/Placement/floor_01_placement.json");
-    const floor02Placement = await loadJson("../../3_Registry/Placement/floor_02_placement.json");
-    const floor03Placement = await loadJson("../../3_Registry/Placement/floor_03_placement.json");
+    async function safeLoad(path) {
+        try {
+            return await loadJson(path);
+        } catch (err) {
+            if (err.code === "ENOENT") return [];   // Missing file → empty array
+            throw err;                               // Real error → crash
+        }
+    }
 
-    const servicePlacement = await loadJson("../../3_Registry/Placement/service_placement.json");
-    const operationalPlacement = await loadJson("../../3_Registry/Placement/operational_placement.json");
+    const worldPlacement = await loadJson("../3_Registry/Placement/world_placement.json");
+    const hotelPlacement = await loadJson("../3_Registry/Placement/hotel_placement.json");
 
-    const uiPlacement = await loadJson("../../3_Registry/Placement/ui_placement.json");
+    const floor01Placement = await loadJson("../3_Registry/Placement/floor_01_placement.json");
+    const floor02Placement = await loadJson("../3_Registry/Placement/floor_02_placement.json");
+    const floor03Placement = await loadJson("../3_Registry/Placement/floor_03_placement.json");
+
+    const servicePlacement = await loadJson("../3_Registry/Placement/service_placement.json");
 
     // ------------------------------------------------------------
     // MERGE ALL PLACEMENT REGISTRIES
@@ -48,8 +57,7 @@ export async function coord_adjacency({ xyz, workflowContext }) {
         ...floor02Placement,
         ...floor03Placement,
         ...servicePlacement,
-        ...operationalPlacement,
-        ...uiPlacement
+
     ];
 
     // ------------------------------------------------------------

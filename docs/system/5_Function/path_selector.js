@@ -40,7 +40,7 @@ export function selectNextPath({ workflowContext }) {
     }
 
     if (!preprocessDone) {
-        return "preprocess_service_room";
+        return "preprocess_service";
     }
 
     if (!invariantsRequested) {
