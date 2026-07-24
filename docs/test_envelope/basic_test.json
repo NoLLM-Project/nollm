@@ -1,0 +1,11 @@
+{
+  "tag": {
+    "user_id": "offline_test_user"
+  },
+  "payload": {
+    "raw": "Hello world",
+    "text": "Hello world",
+    "parsed": null,
+    "extracted": {}
+  }
+}
