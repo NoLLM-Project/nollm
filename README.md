@@ -15,7 +15,7 @@ All behavior is explicit, inspectable, and deterministic.
 ---
 
 ## Live Demo
-https://nollm.pages.dev
+//https://nollm.pages.dev//
 
 ## Source Code
 This repository contains the core engine (“Hotel”) and the ecosystem scaffolding (“District”).
