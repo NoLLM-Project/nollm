@@ -1,7 +1,7 @@
-// system/5_Function/validators/load_placement_invariants.js
-
-import { loadJson } from "../../../utils/load_json.js";
+import { loadJson } from "../../utils/load_json.js";
+import path from "path";
 
 export async function loadPlacementInvariants() {
-    return await loadJson("../../3_Registry/Placement/placement_invariants.json");
+    const filePath = path.join(process.cwd(), "system/3_Registry/Placement/placement_invariants.json");
+    return await loadJson(filePath);
 }

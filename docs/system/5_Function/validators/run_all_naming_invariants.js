@@ -9,9 +9,23 @@ import { validateNamingLayers } from "./validate_naming_layers.js";
 import { validateNamingDescriptions } from "./validate_naming_descriptions.js";
 import { validateNamingIntegrity } from "./validate_naming_integrity.js";
 
-export function runAllNamingInvariants(canonicalRegistry, aliasRegistry) {
+export async function runAllNamingInvariants(canonicalRegistry, aliasRegistry) {
 
-    const spec = loadNamingInvariants();
+    if (!canonicalRegistry || typeof canonicalRegistry !== "object") {
+        return {
+            canonical_names: { ok: false, errors: ["Canonical registry missing or invalid"] },
+            sovereign_prefixes: { ok: true, errors: [] },
+            aliases: { ok: true, errors: [] },
+            types: { ok: true, errors: [] },
+            layers: { ok: true, errors: [] },
+            descriptions: { ok: true, errors: [] },
+            registry_integrity: { ok: true, errors: [] },
+            overall_ok: false
+        };
+    }
+
+    // ⭐ FIX: await the async loader
+    const spec = await loadNamingInvariants();
 
     const report = {
         canonical_names: { ok: true, errors: [] },

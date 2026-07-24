@@ -7,7 +7,7 @@ export function validateMetadataIdentity(metadataRegistry, spec, report) {
     for (const meta of Object.values(metadataRegistry)) {
 
         // Unique ID
-        if (spec.identity.unique_ids) {
+        if (spec.metadata_identity.unique_ids) {
             if (ids.has(meta.id)) {
                 report.identity.ok = false;
                 report.identity.errors.push(`Duplicate metadata id: ${meta.id}`);
@@ -16,7 +16,7 @@ export function validateMetadataIdentity(metadataRegistry, spec, report) {
         }
 
         // Name matches canonical
-        if (spec.identity.name_matches_canonical) {
+        if (spec.metadata_identity.name_matches_canonical) {
             if (meta.name !== meta.canonical_name) {
                 report.identity.ok = false;
                 report.identity.errors.push(
@@ -26,7 +26,7 @@ export function validateMetadataIdentity(metadataRegistry, spec, report) {
         }
 
         // Valid SKU reference
-        if (spec.identity.require_valid_sku) {
+        if (spec.metadata_identity.require_valid_sku) {
             if (!meta.sku || typeof meta.sku !== "string") {
                 report.identity.ok = false;
                 report.identity.errors.push(`${meta.id} missing valid SKU reference`);
@@ -34,7 +34,7 @@ export function validateMetadataIdentity(metadataRegistry, spec, report) {
         }
 
         // Valid coordinate reference
-        if (spec.identity.require_valid_coordinate) {
+        if (spec.metadata_identity.require_valid_coordinate) {
             if (!meta.coordinate_id || typeof meta.coordinate_id !== "string") {
                 report.identity.ok = false;
                 report.identity.errors.push(`${meta.id} missing valid coordinate reference`);

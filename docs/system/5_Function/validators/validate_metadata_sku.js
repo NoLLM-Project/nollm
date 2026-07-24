@@ -1,5 +1,6 @@
 // system/5_Function/validators/validate_metadata_sku.js
 
+
 export function validateMetadataSKU(metadataRegistry, skuRegistry, spec, report) {
 
     for (const meta of Object.values(metadataRegistry)) {
@@ -7,7 +8,7 @@ export function validateMetadataSKU(metadataRegistry, skuRegistry, spec, report)
         const sku = skuRegistry[meta.sku];
 
         // SKU must map back to same object
-        if (spec.sku.sku_must_map_back_to_same_object) {
+        if (spec.metadata_sku.sku_must_map_back_to_same_object) {
             if (!sku || sku.metadata_id !== meta.id) {
                 report.sku.ok = false;
                 report.sku.errors.push(
@@ -17,7 +18,7 @@ export function validateMetadataSKU(metadataRegistry, skuRegistry, spec, report)
         }
 
         // SKU category must match metadata category
-        if (spec.sku.sku_category_must_match_metadata_category) {
+        if (spec.metadata_sku.sku_category_must_match_metadata_category) {
             if (sku && sku.category !== meta.category) {
                 report.sku.ok = false;
                 report.sku.errors.push(

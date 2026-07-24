@@ -1,5 +1,6 @@
 // system/5_Function/validators/validate_metadata_integrity.js
 
+
 export function validateMetadataIntegrity(metadataRegistry, spec, report) {
 
     const ids = new Set();
@@ -7,7 +8,7 @@ export function validateMetadataIntegrity(metadataRegistry, spec, report) {
     for (const meta of Object.values(metadataRegistry)) {
 
         // No orphan metadata
-        if (spec.integrity.no_orphan_metadata) {
+        if (spec.metadata_integrity.no_orphan_metadata) {
             if (!meta.sku || !meta.coordinate_id) {
                 report.integrity.ok = false;
                 report.integrity.errors.push(`${meta.id} is orphaned`);
@@ -15,7 +16,7 @@ export function validateMetadataIntegrity(metadataRegistry, spec, report) {
         }
 
         // No contradictions
-        if (spec.integrity.no_contradictions_with_naming_coordinates_skus) {
+        if (spec.metadata_integrity.no_contradictions_with_naming_coordinates_skus) {
             if (meta.name !== meta.canonical_name) {
                 report.integrity.ok = false;
                 report.integrity.errors.push(`${meta.id} naming contradiction`);
@@ -23,7 +24,7 @@ export function validateMetadataIntegrity(metadataRegistry, spec, report) {
         }
 
         // No duplicates
-        if (spec.integrity.no_duplicate_metadata_objects) {
+        if (spec.metadata_integrity.no_duplicate_metadata_objects) {
             const key = `${meta.name}:${meta.category}:${meta.sku}`;
             if (ids.has(key)) {
                 report.integrity.ok = false;

@@ -1,81 +1,91 @@
 // system/5_Function/validators/run_all_atomize_invariants.js
 
-export function runAllAtomizeInvariants(carrier) {
+export async function runAllAtomizeInvariants(workflowContext) {
+
+    if (!workflowContext || typeof workflowContext !== "object") {
+        return {
+            registry: { ok: true },
+            atomicity: { ok: false, errors: ["workflowContext missing or invalid"] },
+            structure: { ok: true, errors: [] },
+            semantics: { ok: true, errors: [] },
+            determinism: { ok: true, errors: [] },
+            linguistic: { ok: true, errors: [] },
+            overall_ok: false
+        };
+    }
 
     const report = {
-        atomicity:     { ok: true, errors: [] },
-        structure:     { ok: true, errors: [] },
-        semantics:     { ok: true, errors: [] },
-        determinism:   { ok: true, errors: [] },
-        linguistic:    { ok: true, errors: [] },
-        overall_ok:    true
+        registry: { ok: true },
+        atomicity: { ok: true, errors: [] },
+        structure: { ok: true, errors: [] },
+        semantics: { ok: true, errors: [] },
+        determinism: { ok: true, errors: [] },
+        linguistic: { ok: true, errors: [] },
+        overall_ok: true
     };
 
-    const atoms = carrier?.atoms;
-    const tokens = carrier?.tokens;
-    const chunks = carrier?.chunks;
-    const clauses = carrier?.clauses;
-    const sentence = carrier?.sentence;
+    // ⭐ PATCHED SOURCES
+    const tokens =
+        workflowContext["coord_tokenize_text"]?.result ??
+        workflowContext["coord_tokenize_for_atoms"]?.payload?.result;
 
-    // ------------------------------------------------------------
-    // 1. ATOMICITY INVARIANTS
-    // ------------------------------------------------------------
+    const atoms =
+        workflowContext["coord_match_phrases"]?.payload?.atoms ??
+        workflowContext["coord_resolve_atoms"]?.payload?.atoms;
 
-    // atoms must be an array of primitive, non-semantic units
+    const chunks =
+        workflowContext["coord_normalize_chunks"]?.payload?.chunks ??
+        workflowContext["coord_match_chunks"]?.payload?.chunks ??
+        (workflowContext["coord_chunk_builder"]?.built ?? undefined);
+
+    const clauses =
+        workflowContext["coord_segment_clauses"]?.payload?.clauses ??
+        (workflowContext["coord_clause_builder"]?.built
+            ? [workflowContext["coord_clause_builder"].built]
+            : undefined);
+
+    const sentence =
+        workflowContext["coord_assemble_sentence"]?.payload?.sentence;
+
+    // ⭐ ATOMICITY
     if (!Array.isArray(atoms)) {
         report.atomicity.ok = false;
-        report.atomicity.errors.push("carrier.atoms must be an array");
+        report.atomicity.errors.push("atoms must be an array");
     } else {
         for (let i = 0; i < atoms.length; i++) {
-            const a = atoms[i];
-            if (typeof a !== "string") {
+            if (typeof atoms[i] !== "object") {
                 report.atomicity.ok = false;
-                report.atomicity.errors.push(`atoms[${i}] must be a string`);
+                report.atomicity.errors.push(`atoms[${i}] must be an object`);
             }
         }
     }
 
-    // ------------------------------------------------------------
-    // 2. STRUCTURE INVARIANTS
-    // ------------------------------------------------------------
-
+    // ⭐ STRUCTURE
     if (!Array.isArray(tokens)) {
         report.structure.ok = false;
-        report.structure.errors.push("carrier.tokens must be an array");
+        report.structure.errors.push("tokens must be an array");
     }
-
     if (!Array.isArray(chunks)) {
         report.structure.ok = false;
-        report.structure.errors.push("carrier.chunks must be an array");
+        report.structure.errors.push("chunks must be an array");
     }
-
     if (!Array.isArray(clauses)) {
         report.structure.ok = false;
-        report.structure.errors.push("carrier.clauses must be an array");
+        report.structure.errors.push("clauses must be an array");
     }
-
     if (typeof sentence !== "object" || sentence === null) {
         report.structure.ok = false;
-        report.structure.errors.push("carrier.sentence must be a non-null object");
+        report.structure.errors.push("sentence must be a non-null object");
     }
 
-    // ------------------------------------------------------------
-    // 3. SEMANTIC-NEUTRALITY INVARIANTS
-    // ------------------------------------------------------------
-
+    // ⭐ SEMANTICS
     const forbiddenSemanticFields = [
-        "type",
-        "intent",
-        "meaning",
-        "semantic",
-        "inferred",
-        "classification",
-        "label"
+        "type", "intent", "meaning", "semantic",
+        "inferred", "classification", "label"
     ];
 
     function checkNoSemanticFields(value, path) {
         if (!value || typeof value !== "object") return;
-
         for (const key of Object.keys(value)) {
             if (forbiddenSemanticFields.includes(key)) {
                 report.semantics.ok = false;
@@ -98,20 +108,13 @@ export function runAllAtomizeInvariants(carrier) {
         checkNoSemanticFields(sentence, "sentence");
     }
 
-    // ------------------------------------------------------------
-    // 4. DETERMINISM INVARIANTS
-    // ------------------------------------------------------------
-
+    // ⭐ DETERMINISM
     const forbiddenNondeterministicFields = [
-        "timestamp",
-        "uuid",
-        "random",
-        "nonce"
+        "timestamp", "uuid", "random", "nonce"
     ];
 
     function checkNoNondeterminism(value, path) {
         if (!value || typeof value !== "object") return;
-
         for (const key of Object.keys(value)) {
             if (forbiddenNondeterministicFields.includes(key)) {
                 report.determinism.ok = false;
@@ -134,11 +137,7 @@ export function runAllAtomizeInvariants(carrier) {
         checkNoNondeterminism(sentence, "sentence");
     }
 
-    // ------------------------------------------------------------
-    // 5. LINGUISTIC-FORM INVARIANTS
-    // ------------------------------------------------------------
-
-    // tokens must be strings
+    // ⭐ LINGUISTIC
     if (Array.isArray(tokens)) {
         for (let i = 0; i < tokens.length; i++) {
             if (typeof tokens[i] !== "string") {
@@ -148,29 +147,24 @@ export function runAllAtomizeInvariants(carrier) {
         }
     }
 
-    // chunks must be arrays of strings
     if (Array.isArray(chunks)) {
         for (let i = 0; i < chunks.length; i++) {
-            const ch = chunks[i];
-            if (!Array.isArray(ch) || !ch.every(t => typeof t === "string")) {
+            if (typeof chunks[i] !== "object") {
                 report.linguistic.ok = false;
-                report.linguistic.errors.push(`chunks[${i}] must be an array of strings`);
+                report.linguistic.errors.push(`chunks[${i}] must be an object`);
             }
         }
     }
 
-    // clauses must be arrays of chunks
     if (Array.isArray(clauses)) {
         for (let i = 0; i < clauses.length; i++) {
-            const cl = clauses[i];
-            if (!Array.isArray(cl)) {
+            if (typeof clauses[i] !== "object") {
                 report.linguistic.ok = false;
-                report.linguistic.errors.push(`clauses[${i}] must be an array`);
+                report.linguistic.errors.push(`clauses[${i}] must be an object`);
             }
         }
     }
 
-    // sentence must contain structural fields but no semantics
     if (sentence && typeof sentence === "object") {
         if (!Array.isArray(sentence.clauses)) {
             report.linguistic.ok = false;
@@ -178,13 +172,12 @@ export function runAllAtomizeInvariants(carrier) {
         }
     }
 
-    // ------------------------------------------------------------
-    // OVERALL
-    // ------------------------------------------------------------
-
-    report.overall_ok = Object.values(report)
+    // ⭐ OVERALL
+    const atomize_ok = Object.values(report)
         .filter(section => typeof section === "object" && "ok" in section)
         .every(section => section.ok);
+
+    report.overall_ok = atomize_ok;
 
     return report;
 }

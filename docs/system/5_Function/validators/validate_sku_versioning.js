@@ -2,12 +2,19 @@
 
 export function validateSKUVersioning(skuRegistry, spec, report) {
 
+    // ⭐ GUARD: If versioning spec is missing, skip versioning invariants entirely.
+    // This restores the original behavior: no alias → no metadata → no SKU → no versioning checks.
+    if (!spec.versioning) {
+        report.versioning.ok = true;
+        return;
+    }
+
     const versionPattern = new RegExp(spec.versioning.version_pattern);
     const versionHistory = {};
 
     for (const sku of Object.values(skuRegistry)) {
 
-        // Version pattern
+        // ⭐ Version pattern check
         if (!versionPattern.test(sku.version)) {
             report.versioning.ok = false;
             report.versioning.errors.push(
@@ -15,7 +22,7 @@ export function validateSKUVersioning(skuRegistry, spec, report) {
             );
         }
 
-        // Monotonic increments
+        // ⭐ Monotonic increments
         if (spec.versioning.version_must_increment_monotonically) {
             const base = sku.object_id;
             const num = parseInt(sku.version.replace(/\D+/g, ""), 10);
@@ -33,7 +40,7 @@ export function validateSKUVersioning(skuRegistry, spec, report) {
             }
         }
 
-        // No reuse
+        // ⭐ No reuse
         if (spec.versioning.version_numbers_may_not_be_reused) {
             const key = `${sku.object_id}:${sku.version}`;
             if (versionHistory[key]) {

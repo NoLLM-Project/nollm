@@ -1,23 +1,58 @@
 // system/5_Function/validators/validate_metadata_anchors.js
 
-import { loadJson } from "../../../utils/load_json.js";
+import { readFile } from "fs/promises";
+import { dirname, resolve, isAbsolute } from "path";
+import { fileURLToPath } from "url";
 
-// Loader: async, uses the single JSON primitive
+console.log("ANCHORS FILE LOADED FROM:", import.meta.url);
+
+// ------------------------------------------------------------
+// JSON Loader (module-relative)
+// ------------------------------------------------------------
+export async function loadJson(pathInput) {
+  const here = dirname(fileURLToPath(import.meta.url));
+
+  const absolutePath = isAbsolute(pathInput)
+    ? pathInput
+    : resolve(here, pathInput);
+
+  const data = await readFile(absolutePath, "utf8");
+  return JSON.parse(data);
+}
+
+// ------------------------------------------------------------
+// ⭐ Metadata Anchors Loader (continuity + stability)
+// ------------------------------------------------------------
 export async function loadMetadataAnchors() {
     const continuity = await loadJson("../../3_Registry/Metadata/continuity.json");
-    const stability = await loadJson("../../3_Registry/Metadata/anchors.json");
+    const stability  = await loadJson("../../3_Registry/Metadata/anchors.json");
     return { continuity, stability };
 }
 
-// Validator: pure, synchronous, receives continuity + stability from the loader
+// ------------------------------------------------------------
+// Metadata Anchors Validator
+// ------------------------------------------------------------
 export function validateMetadataAnchors(metadataRegistry, spec, report, continuity, stability) {
+
+    // Allow both array-style and object-style registry files
+    const continuityAllowed = Array.isArray(continuity)
+        ? continuity
+        : Array.isArray(continuity?.allowed)
+            ? continuity.allowed
+            : [];
+
+    const stabilityAllowed = Array.isArray(stability)
+        ? stability
+        : Array.isArray(stability?.allowed)
+            ? stability.allowed
+            : [];
 
     for (const meta of Object.values(metadataRegistry)) {
 
         const anchors = meta.anchors || {};
 
         // Identity anchor matches canonical
-        if (spec.anchors.identity_matches_canonical) {
+        if (spec.metadata_anchors.identity_matches_canonical) {
             if (anchors.identity && anchors.identity !== meta.canonical_name) {
                 report.anchors.ok = false;
                 report.anchors.errors.push(
@@ -27,8 +62,8 @@ export function validateMetadataAnchors(metadataRegistry, spec, report, continui
         }
 
         // Continuity allowed values
-        if (spec.anchors.continuity_allowed_values_file) {
-            if (anchors.continuity && !continuity.allowed.includes(anchors.continuity)) {
+        if (spec.metadata_anchors.continuity_allowed_values_file) {
+            if (anchors.continuity && !continuityAllowed.includes(anchors.continuity)) {
                 report.anchors.ok = false;
                 report.anchors.errors.push(
                     `${meta.id} anchor.continuity '${anchors.continuity}' not in allowed continuity states`
@@ -37,8 +72,8 @@ export function validateMetadataAnchors(metadataRegistry, spec, report, continui
         }
 
         // Stability allowed values
-        if (spec.anchors.stability_allowed_values_file) {
-            if (anchors.stability && !stability.allowed.includes(anchors.stability)) {
+        if (spec.metadata_anchors.stability_allowed_values_file) {
+            if (anchors.stability && !stabilityAllowed.includes(anchors.stability)) {
                 report.anchors.ok = false;
                 report.anchors.errors.push(
                     `${meta.id} anchor.stability '${anchors.stability}' not in allowed stability states`
@@ -47,7 +82,7 @@ export function validateMetadataAnchors(metadataRegistry, spec, report, continui
         }
 
         // Anchors must not contradict each other
-        if (spec.anchors.anchors_must_not_contradict) {
+        if (spec.metadata_anchors.anchors_must_not_contradict) {
             if (
                 anchors.identity &&
                 anchors.stability &&

@@ -7,7 +7,7 @@ export function validateMetadataProperties(metadataRegistry, spec, report) {
         const props = meta.properties || {};
 
         // Literal-only properties
-        if (spec.properties.properties_literal_only) {
+        if (spec.metadata_properties.properties_literal_only) {
             for (const [key, value] of Object.entries(props)) {
                 if (typeof value === "object") {
                     report.properties.ok = false;
@@ -28,7 +28,7 @@ export function validateMetadataProperties(metadataRegistry, spec, report) {
         ];
 
         for (const [flag, key] of forbidden) {
-            if (spec.properties[flag] && props[key] !== undefined) {
+            if (spec.metadata_properties[flag] && props[key] !== undefined) {
                 report.properties.ok = false;
                 report.properties.errors.push(
                     `${meta.id} property '${key}' is forbidden by metadata invariants`
@@ -37,7 +37,7 @@ export function validateMetadataProperties(metadataRegistry, spec, report) {
         }
 
         // Structural-only properties
-        if (spec.properties.properties_must_be_structural) {
+        if (spec.metadata_properties.properties_must_be_structural) {
             if (props.behavior || props.intent || props.meaning) {
                 report.properties.ok = false;
                 report.properties.errors.push(
