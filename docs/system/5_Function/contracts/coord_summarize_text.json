@@ -1,0 +1,43 @@
+{
+  "id": "summarize_text",
+  "version": "v1",
+  "input_schema": {
+    "type": "object",
+    "required": ["text"],
+    "properties": {
+      "text": {
+        "type": "string",
+        "description": "The text to be summarized."
+      },
+      "max_length": {
+        "type": "integer",
+        "description": "Optional maximum length of the summary.",
+        "default": 200
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string",
+        "description": "The summarized text."
+      }
+    }
+  },
+  "behavior": {
+    "description": "Reduces the input text to a concise summary while preserving core meaning.",
+    "steps": [
+      "Receive payload containing 'text' and optional 'max_length'.",
+      "Strip whitespace and normalize input.",
+      "Identify key sentences and main ideas.",
+      "Condense content to target length.",
+      "Return summary in output schema."
+    ]
+  },
+  "constraints": {
+    "max_input_size": "10kb",
+    "allowed_operations": ["read", "compress", "summarize"],
+    "forbidden_operations": ["expand", "rewrite_in_style", "hallucinate"]
+  }
+}
