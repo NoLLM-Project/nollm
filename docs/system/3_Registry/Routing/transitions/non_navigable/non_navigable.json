@@ -1,0 +1,20 @@
+[
+  {
+    "id": "route_floor_skeleton_none",
+    "source": "floor_skeleton",
+    "target": null,
+    "conditions": ["navigation"],
+    "transitions": [],
+    "profile": "none",
+    "invariants": ["skeletons_are_not_navigable"]
+  },
+  {
+    "id": "route_room_skeleton_none",
+    "source": "room_skeleton",
+    "target": null,
+    "conditions": ["navigation"],
+    "transitions": [],
+    "profile": "none",
+    "invariants": ["skeletons_are_not_navigable"]
+  }
+]
