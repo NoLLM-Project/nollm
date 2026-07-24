@@ -3,19 +3,23 @@
 
 export const PATH_FORWARD = [
     "coord_tower",
-    "coord_world_root",
     "coord_field",
-    "coord_world_root",
     "coord_tower",
-    "coord_world_root",
     "coord_field",
-    "coord_world_root",
     "coord_adjacency",
-    "coord_world_root",
     "coord_hotel_shell",
     "coord_hotel_root",
     "coord_lobby",
     "coord_front_desk"
+];
+
+export const PATH_HOTEL_PLANE = [
+    "coord_coat_room",
+    "coord_preprocess_service",
+    "coord_atomize_service",
+    "coord_invariants_request",
+    "coord_runtime_request",
+    "coord_postprocess_service"
 ];
 
 export const PATH_REVERSE = [
@@ -23,7 +27,6 @@ export const PATH_REVERSE = [
     "coord_lobby",
     "coord_hotel_root",
     "coord_hotel_shell",
-    "coord_world_root",
     "coord_tower"
 ];
 
@@ -60,8 +63,8 @@ export const PATH_PREPROCESS = [
     "coord_parse_ini",
     "coord_parse_toml",
     "coord_parse_query_string",
-
-    // ⭐ TERMINAL INSTRUCTION (NOT A ROOM)
+    
+    { flag: "__from_front_desk", value: false },
     { end: "coord_preprocess_service" }
 ];
 
@@ -81,7 +84,10 @@ export const PATH_POSTPROCESS = [
     "coord_rewrite_clarity",
     "coord_rewrite_professionalism",
 
-    "coord_postprocess_service" // checkpoint
+    "coord_postprocess_aggregate",
+
+    { flag: "__from_front_desk", value: false },
+    { end: "coord_postprocess_service" }
 ];
 
 export const PATH_ATOMIZE = [
@@ -89,12 +95,14 @@ export const PATH_ATOMIZE = [
     "coord_resolve_atoms",
     "coord_match_phrases",
     "coord_match_chunks",
+    "coord_chunk_builder",
     "coord_normalize_chunks",
     "coord_segment_clauses",
+    "coord_clause_builder",
     "coord_normalize_clauses",
     "coord_assemble_sentence",
 
-    // ⭐ TERMINAL INSTRUCTION (NOT A ROOM)
+    { flag: "__from_front_desk", value: false },
     { end: "coord_atomize_service" }
 ];
 
