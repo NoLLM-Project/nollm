@@ -1,28 +1,34 @@
 // system/5_Function/coord_field.js
 
-import canonicalRegistry from "../../3_Registry/Naming/canonical_names.json";
+import { loadJson } from "../utils/load_json.js";
 
-export function coord_field({ payload, xyz, workflowContext }) {
+export async function coord_field({ payload, xyz, workflowContext }) {
 
-    // ------------------------------------------------------------
-    // PASS 1: SEMANTIC CLEANING
-    // ------------------------------------------------------------
-    // Tower has run once, so workflowContext["coord_tower"] exists.
-    // Field receives aliases and returns:
-    //   canonical_name
-    //   type
-    //   layer
-    //   description
-    //
-    // Field does NOT return object_id or canonical_id yet.
-    // ------------------------------------------------------------
+    console.log("FIELD RAN", { payload });
+
+    let canonicalNames = [];
+
+    try {
+        canonicalNames = await loadJson("../3_Registry/Naming/canonical_names.json");
+    } catch (err) {
+        if (err.code === "ENOENT") {
+            canonicalNames = [];   // Missing file → empty registry
+        } else {
+            throw err;
+        }
+    }
+
+    // PASS 1
     if (!workflowContext["coord_tower"]?.phase ||
         workflowContext["coord_tower"].phase === "tower_pass_1") {
 
         const aliases = workflowContext["coord_tower"]?.aliases || [];
 
-        // Find the first matching canonical entry
-        const match = resolveCanonical(aliases, canonicalRegistry);
+        console.log("FIELD PASS 1 RECEIVED ALIASES:", aliases);
+
+        const match = resolveCanonical(aliases, canonicalNames);
+
+        console.log("FIELD PASS 1 CANONICAL MATCH:", match);
 
         if (!match) {
             return {
@@ -43,23 +49,15 @@ export function coord_field({ payload, xyz, workflowContext }) {
         };
     }
 
-
-    // ------------------------------------------------------------
-    // PASS 2: ID RESOLUTION
-    // ------------------------------------------------------------
-    // Tower has run twice, so workflowContext["coord_tower"].phase === "tower_pass_2".
-    // Field receives canonical_name and returns:
-    //   object_id
-    //   canonical_id
-    //   canonical_name
-    //
-    // Field does NOT interpret meaning.
-    // Field does NOT return type/layer/description again.
-    // ------------------------------------------------------------
+    // PASS 2
     const towerResult = workflowContext["coord_tower"];
-
     const canonicalName = towerResult.canonical_name;
-    const entry = canonicalRegistry.find(e => e.canonical_name === canonicalName);
+
+    // array search instead of dictionary lookup
+    const entry = canonicalNames.find(e =>
+        e.id === canonicalName ||
+        e.canonical_name === canonicalName
+    );
 
     if (!entry) {
         return {
@@ -74,17 +72,17 @@ export function coord_field({ payload, xyz, workflowContext }) {
         phase: "field_pass_2",
         canonical_name: entry.canonical_name,
         object_id: entry.id,
-        canonical_id: entry.id // same as id in your schema
+        canonical_id: entry.id
     };
 }
 
-
-// ------------------------------------------------------------
-// Helper: resolve canonical entry from alias list
-// ------------------------------------------------------------
+// Helper: array search instead of registry[canonical]
 function resolveCanonical(aliases, registry) {
     for (const { canonical } of aliases) {
-        const entry = registry.find(e => e.canonical_name === canonical);
+        const entry = registry.find(e =>
+            e.id === canonical ||
+            e.canonical_name === canonical
+        );
         if (entry) return entry;
     }
     return null;

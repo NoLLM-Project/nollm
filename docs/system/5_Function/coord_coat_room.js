@@ -1,6 +1,8 @@
 // system/5_Function/coord_coat_room.js
 
 export function coord_coat_room({ workflowContext, userToken }) {
+    
+    console.log("COAT ROOM RAN");
 
     const hotelRoot = workflowContext["coord_hotel_root"];
 
@@ -54,7 +56,10 @@ export function coord_coat_room({ workflowContext, userToken }) {
     // 4. APPLY ALL INTERNAL ACTIONS
     // ------------------------------------------------------------
 
-    let updatedToken = userToken || {};
+    let updatedToken =
+      typeof userToken === "string"
+        ? { userToken }
+        : userToken;
 
     updatedToken = applyReflectiveModeAnchor(updatedToken);
     updatedToken = applyArchitecturalAltitudeAnchor(updatedToken);

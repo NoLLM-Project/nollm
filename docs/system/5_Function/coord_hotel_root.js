@@ -1,10 +1,16 @@
 // system/5_Function/coord_hotel_root.js
 
-import metadataRegistry from "../../3_Registry/Metadata/metadata_objects.json";
+import { loadJson } from "../utils/load_json.js";
 
-export function coord_hotel_root({ workflowContext }) {
+export async function coord_hotel_root({ workflowContext }) {
+
+    console.log("HOTEL ROOT RAN");
+
+    const metadataRegistry = await loadJson("../3_Registry/Metadata/metadata_objects.json");
 
     const shell = workflowContext["coord_hotel_shell"];
+
+    console.log("SHELL:", shell);
 
     // ------------------------------------------------------------
     // REQUIREMENT: Hotel Shell must have run

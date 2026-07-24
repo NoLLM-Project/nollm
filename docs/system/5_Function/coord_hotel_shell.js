@@ -1,8 +1,12 @@
 // system/5_Function/coord_hotel_shell.js
 
-import metadataRegistry from "../../3_Registry/Metadata/metadata_objects.json";
+import { loadJson } from "../utils/load_json.js";
 
-export function coord_hotel_shell({ workflowContext }) {
+export async function coord_hotel_shell({ workflowContext }) {
+
+    console.log("HOTEL SHELL RAN");
+ 
+    const metadataRegistry = await loadJson("../3_Registry/Metadata/metadata_objects.json");
 
     const fieldResult = workflowContext["coord_field"];
     const adjacencyResult = workflowContext["coord_adjacency"];
@@ -13,13 +17,11 @@ export function coord_hotel_shell({ workflowContext }) {
     if (!fieldResult || fieldResult.phase !== "field_pass_2") {
         return {
             phase: "hotel_shell",
-            error: "Field Pass 2 has not run yet",
+            warning: "Field Pass 2 has not run yet",
             metadata_id: null
         };
     }
 
-    // We will strip these out:
-    // canonical_name, object_id, canonical_id
     const canonicalName = fieldResult.canonical_name;
 
     // ------------------------------------------------------------
@@ -29,21 +31,16 @@ export function coord_hotel_shell({ workflowContext }) {
     const metadataId = entry ? entry.id : null;
 
     // ------------------------------------------------------------
-    // RETURN:
-    //   - metadata_id
-    //   - adjacency info
-    //   - invariants
-    //   - constraints
-    //   - allowed parents/children
-    //   - (NO canonical_name, NO object_id, NO canonical_id)
+    // NON-BLOCKING RETURN
     // ------------------------------------------------------------
     return {
         phase: "hotel_shell",
 
-        // NEW: metadata ID
+        // metadata may be null — this is OK
         metadata_id: metadataId,
+        metadata: entry || null,
 
-        // KEEP: adjacency + structural context
+        // adjacency + structural context always returned
         allowed_parents: adjacencyResult?.allowed_parents || [],
         allowed_children: adjacencyResult?.allowed_children || [],
         constraints: adjacencyResult?.constraints || {},

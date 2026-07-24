@@ -2,11 +2,10 @@
 
 import { PATH_REVERSE } from "../1_Engine/paths.js";
 
-export function coord_front_desk({ workflowContext, carrier, userToken }) {
+export function coord_front_desk({ workflowContext, payload }) {
 
-    // ------------------------------------------------------------
-    // 1. REQUIRE: hotel_root must have run
-    // ------------------------------------------------------------
+    console.log("FRONT DESK RAN");
+
     const hotelRoot = workflowContext["coord_hotel_root"];
 
     if (!hotelRoot || hotelRoot.phase !== "hotel_root") {
@@ -14,80 +13,31 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
             phase: "front_desk",
             error: "Hotel Root has not run yet",
             metadata_id: null,
-            next_path: null
+            next_path: "coord_coat_room"
         };
     }
 
     const metadataId = hotelRoot.metadata_id;
-
-    // NEW: atomize ordering
     const atomizePosition = hotelRoot?.atomize_position || "before_runtime";
 
+    const invReport = workflowContext["coord_invariants"]?.invariants_report || null;
+    const hasInv = Boolean(invReport);
+    const invPass = invReport?.pass || null;
+    const invOK = invReport?.overall_ok;
+    const severity = invReport?.severity;
+    const routeBuilt = invReport?.route_built || false;
+    const invDomain = invReport?.domain || null;
 
-    // ------------------------------------------------------------
-    // 2. INVARIANTS REPORT HANDLING (same invariants_request, multiple passes)
-    // ------------------------------------------------------------
-    const invariantsRequest = workflowContext["coord_invariants_request"];
-
-    if (invariantsRequest && invariantsRequest.invariants_report) {
-
-        const report = invariantsRequest.invariants_report;
-
-        if (report.overall_ok === true) {
-            // PASS → fall through to next phase decision
-        } else {
-            const severity = report.severity;
-            const domain = report.domain;
-
-            if (severity === "hard") {
-                return {
-                    phase: "front_desk",
-                    status: "invariants_failed",
-                    metadata_id: metadataId,
-                    reason: report.reason,
-                    domain,
-                    next_path: "coord_tower"
-                };
-            }
-
-            if (severity === "soft") {
-                return {
-                    phase: "front_desk",
-                    status: "invariants_failed",
-                    metadata_id: metadataId,
-                    reason: report.reason,
-                    domain,
-                    next_path: "coord_coat_room"
-                };
-            }
-
-            return {
-                phase: "front_desk",
-                status: "invariants_failed",
-                metadata_id: metadataId,
-                reason: "Unknown invariants severity",
-                domain,
-                next_path: "coord_tower"
-            };
-        }
-    }
-
-
-    // ------------------------------------------------------------
-    // 3. READ PROGRESS FLAGS
-    // ------------------------------------------------------------
     const coatRoomDone = Boolean(workflowContext["coord_coat_room"]);
     const preprocessDone = Boolean(workflowContext["coord_preprocess_service"]);
-    const atomizeDone = Boolean(workflowContext["coord_atomize_service"]);
+    const atomizePhase = workflowContext["coord_atomize_service"]?.phase || null;
+    const atomizeDone = atomizePhase === "atomize_service_checkpoint";
+    const atomizeAlreadyTriggered = Boolean(atomizePhase);
     const runtimeRequestDone = Boolean(workflowContext["coord_runtime_request"]);
     const postprocessServiceDone = Boolean(workflowContext["coord_postprocess_service"]);
 
-    const lastInvReport = invariantsRequest?.invariants_report;
-    const lastInvDomain = lastInvReport?.domain;
-
-
     // ------------------------------------------------------------
-    // 4. PHASE A: PRE‑RUNTIME
+    // COAT ROOM MUST RUN FIRST
     // ------------------------------------------------------------
     if (!coatRoomDone) {
         return {
@@ -97,7 +47,11 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         };
     }
 
+    // ------------------------------------------------------------
+    // PREPROCESS SERVICE
+    // ------------------------------------------------------------
     if (!preprocessDone) {
+        workflowContext.__from_front_desk = true;
         return {
             phase: "front_desk",
             metadata_id: metadataId,
@@ -105,67 +59,163 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         };
     }
 
-    // PREPROCESS INVARIANTS
-    if (!lastInvReport) {
+    // ------------------------------------------------------------
+    // INVARIANTS AFTER PREPROCESS (PASS 1)
+    // ------------------------------------------------------------
+    if (!hasInv) {
+
+        // ⭐ Reset invariants before starting a new domain check
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "preprocess",
+            pass: 1
+        };
+
         return {
             phase: "front_desk_preprocess_invariants_request",
             metadata_id: metadataId,
             next_path: "coord_invariants_request",
-            carrier: {
-                payload: carrier?.payload,
-                domain: "preprocess"
-            }
+            carrier: { payload }
         };
     }
 
-
-    // ------------------------------------------------------------
-    // ATOMIZE BEFORE RUNTIME
-    // ------------------------------------------------------------
-    if (atomizePosition === "before_runtime") {
-
-        if (!atomizeDone) {
-            return {
-                phase: "front_desk_atomize",
-                metadata_id: metadataId,
-                next_path: "coord_atomize_service"
-            };
-        }
-
-        if (atomizeDone && lastInvDomain !== "atomize") {
-            return {
-                phase: "front_desk_atomize_invariants_request",
-                metadata_id: metadataId,
-                next_path: "coord_invariants_request",
-                carrier: {
-                    payload: carrier?.payload,
-                    domain: "atomize"
-                }
-            };
-        }
+    if (severity === "hard") {
+        return {
+            phase: "front_desk",
+            status: "invariants_failed",
+            metadata_id: metadataId,
+            reason: invReport.reason,
+            next_path: "coord_tower"
+        };
     }
 
+    // ------------------------------------------------------------
+    // PREPROCESS PASS 1 SOFT FAIL → ATOMIZE PASS 1 (NO ROUTE)
+    // ------------------------------------------------------------
+    if (
+        invDomain === "preprocess" &&
+        invPass === 1 &&
+        invOK === false &&
+        severity === "soft" &&
+        routeBuilt === false &&
+        !atomizeAlreadyTriggered
+    ) {
+
+        // ⭐ Reset invariants before switching to atomize
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext.__from_front_desk = true;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "atomize",
+            pass: 1
+        };
+
+        return {
+            phase: "front_desk_atomize_after_preprocess",
+            metadata_id: metadataId,
+            next_path: "coord_atomize_service",
+            carrier: { payload }
+        };
+    }
 
     // ------------------------------------------------------------
-    // ROUTE INVARIANTS (pass 1 + pass 2 handled inside invariants_request)
+    // PREPROCESS PASS 1 SUCCESS + ROUTE BUILT → PREPROCESS PASS 2
     // ------------------------------------------------------------
-    if (lastInvDomain !== "route") {
+    if (
+        invDomain === "preprocess" &&
+        invPass === 1 &&
+        invOK === true &&
+        routeBuilt === true
+    ) {
+
+        // ⭐ Reset invariants before preprocess pass 2
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "preprocess",
+            pass: 2
+        };
+
         return {
-            phase: "front_desk_route_invariants_request",
+            phase: "front_desk_preprocess_route_invariants_request",
+            metadata_id: metadataId,
+            next_path: "coord_invariants_request",
+            carrier: { payload }
+        };
+    }
+
+    // ------------------------------------------------------------
+    // PREPROCESS PASS 2 SOFT FAIL → ATOMIZE PASS 1
+    // ------------------------------------------------------------
+    if (
+        invDomain === "preprocess" &&
+        invPass === 2 &&
+        invOK === false &&
+        severity === "soft" &&
+        !atomizeAlreadyTriggered
+    ) {
+
+        // ⭐ Reset invariants before switching to atomize
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext.__from_front_desk = true;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "atomize",
+            pass: 1
+        };
+
+        return {
+            phase: "front_desk_atomize_after_preprocess_pass_2",
+            metadata_id: metadataId,
+            next_path: "coord_atomize_service",
+            carrier: { payload }
+        };
+    }
+
+    // ------------------------------------------------------------
+    // ATOMIZE → INVARIANTS (PASS 1 OR 2)
+    // ------------------------------------------------------------
+    if (
+        atomizeDone &&
+        (invDomain === "preprocess" || invDomain === null)
+    ) {
+        const pass = invPass === 2 ? 2 : 1;
+
+        // ⭐ Reset invariants before atomize invariants
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "atomize",
+            pass
+        };
+
+        return {
+            phase: "front_desk_atomize_invariants_request",
             metadata_id: metadataId,
             next_path: "coord_invariants_request",
             carrier: {
-                payload: carrier?.payload,
-                domain: "route"
+                payload: workflowContext["coord_atomize_service"]
             }
         };
     }
 
-
     // ------------------------------------------------------------
-    // 5. PHASE B: RUNTIME HANDOFF
+    // RUNTIME REQUEST (AFTER PREPROCESS PASS 2 OR ATOMIZE)
     // ------------------------------------------------------------
-    if (lastInvDomain === "route" && lastInvReport?.overall_ok === true && !runtimeRequestDone) {
+    if (!runtimeRequestDone && invDomain === "preprocess" && invPass === 2 && invOK === true) {
         return {
             phase: "front_desk_runtime_request",
             metadata_id: metadataId,
@@ -173,51 +223,82 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         };
     }
 
-    // RUNTIME INVARIANTS
-    if (runtimeRequestDone && lastInvDomain !== "runtime") {
+    // ------------------------------------------------------------
+    // RUNTIME INVARIANTS (PASS 1 OR 2)
+    // ------------------------------------------------------------
+    if (runtimeRequestDone && invDomain !== "runtime") {
+
+        const pass = invPass === 2 ? 2 : 1;
+
+        // ⭐ Reset invariants before runtime invariants
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "runtime",
+            pass
+        };
+
         return {
             phase: "front_desk_runtime_invariants_request",
             metadata_id: metadataId,
             next_path: "coord_invariants_request",
-            carrier: {
-                payload: carrier?.payload,
-                domain: "runtime"
-            }
+            carrier: { payload }
         };
     }
 
-
     // ------------------------------------------------------------
-    // ATOMIZE AFTER RUNTIME
+    // ATOMIZE AFTER RUNTIME (POSITION = AFTER_RUNTIME)
     // ------------------------------------------------------------
-    if (atomizePosition === "after_runtime") {
+    if (!severity && atomizePosition === "after_runtime" && runtimeRequestDone && !atomizeAlreadyTriggered) {
 
-        if (runtimeRequestDone && !atomizeDone) {
-            return {
-                phase: "front_desk_atomize_after_runtime",
-                metadata_id: metadataId,
-                next_path: "coord_atomize_service"
-            };
-        }
+        workflowContext.__from_front_desk = true;
 
-        if (runtimeRequestDone && atomizeDone && lastInvDomain !== "atomize") {
-            return {
-                phase: "front_desk_atomize_invariants_request_after_runtime",
-                metadata_id: metadataId,
-                next_path: "coord_invariants_request",
-                carrier: {
-                    payload: carrier?.payload,
-                    domain: "atomize"
-                }
-            };
-        }
+        // ⭐ Reset invariants before atomize pass 2
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "atomize",
+            pass: 2
+        };
+
+        return {
+            phase: "front_desk_atomize_after_runtime",
+            metadata_id: metadataId,
+            next_path: "coord_atomize_service"
+        };
     }
 
+    // ------------------------------------------------------------
+    // ATOMIZE → POSTPROCESS (NO DOMAIN CHECK)
+    // ------------------------------------------------------------
+    if (
+        atomizeDone &&
+        !postprocessServiceDone &&
+        (
+            (atomizePosition === "after_runtime" && runtimeRequestDone) ||
+            (atomizePosition === "before_runtime" && !routeBuilt) ||
+            (atomizePosition === "before_runtime" && runtimeRequestDone)
+        )
+    ) {
+        workflowContext.__from_front_desk = true;
+
+        return {
+            phase: "front_desk_atomize_to_postprocess",
+            metadata_id: metadataId,
+            next_path: "coord_postprocess_service"
+        };
+    }
 
     // ------------------------------------------------------------
-    // 6. PHASE C: POST‑RUNTIME
+    // POSTPROCESS SERVICE (AFTER RUNTIME)
     // ------------------------------------------------------------
     if (runtimeRequestDone && !postprocessServiceDone) {
+        workflowContext.__from_front_desk = true;
+
         return {
             phase: "front_desk_postruntime",
             metadata_id: metadataId,
@@ -225,36 +306,51 @@ export function coord_front_desk({ workflowContext, carrier, userToken }) {
         };
     }
 
-    // POSTPROCESS INVARIANTS
-    if (postprocessServiceDone && lastInvDomain !== "postprocess") {
+    // ------------------------------------------------------------
+    // POSTPROCESS INVARIANTS (PASS 1 OR 2)
+    // ------------------------------------------------------------
+    if (postprocessServiceDone && invDomain !== "postprocess") {
+
+        const pass = invPass === 2 ? 2 : 1;
+
+        // ⭐ Reset invariants before postprocess invariants
+        workflowContext["coord_invariants"] = null;
+        workflowContext["coord_invariants_request"] = null;
+        workflowContext["coord_invariants_pass_2"] = null;
+
+        workflowContext["coord_invariants_request"] = {
+            domain: "postprocess",
+            pass
+        };
+
         return {
             phase: "front_desk_post_invariants_request",
             metadata_id: metadataId,
             next_path: "coord_invariants_request",
             carrier: {
-                payload: carrier?.payload,
-                domain: "postprocess"
+                payload: workflowContext["coord_postprocess_service"]?.payload
             }
         };
     }
 
-    // FINAL CHECKPOINT (⭐ FIXED)
-    if (lastInvDomain === "postprocess" && lastInvReport?.overall_ok === true) {
+    // ------------------------------------------------------------
+    // FINAL PASS → REVERSE PATH
+    // ------------------------------------------------------------
+    if (invOK === true && invPass === 2) {
         return {
             phase: "front_desk_post_invariants_passed",
             metadata_id: metadataId,
-            next_path: "PATH_REVERSE"
+            next_path: PATH_REVERSE
         };
     }
 
-
     // ------------------------------------------------------------
-    // 8. FALLBACK
+    // FALLBACK: UNDEFINED STATE
     // ------------------------------------------------------------
     return {
         phase: "front_desk",
         metadata_id: metadataId,
         error: "Front desk reached an undefined state",
-        next_path: null
+        next_path: "coord_tower"
     };
 }

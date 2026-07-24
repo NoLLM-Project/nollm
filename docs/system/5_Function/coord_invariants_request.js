@@ -1,72 +1,59 @@
 // system/5_Function/coord_invariants_request.js
 
 export function coord_invariants_request({ workflowContext, carrier }) {
+    console.log("INVARIANTS REQUEST RAN");
 
     const hotelRoot = workflowContext["coord_hotel_root"];
-
-    // REQUIRE: hotel_root must have run
     if (!hotelRoot || hotelRoot.phase !== "hotel_root") {
         return {
-            phase: "invariants_request",
-            error: "Hotel Root has not run yet",
+            phase: "invariants_request_error",
+            metadata_id: null,
             invariants_report: null,
-            next_path: null
+            domain: null,
+            pass: null,
+            next_path: "coord_tower",
+            carrier
         };
     }
 
-    const hasPath = Boolean(carrier?.payload?.path);
-    const hasReport = Boolean(carrier?.invariants_report);
+    const metadataId = hotelRoot.metadata_id;
+
+    // The ONLY source of truth for domain + pass
+    const req = workflowContext["coord_invariants_request"] || null;
+    const domain = req?.domain || null;
+    const pass = req?.pass || null;
+
+    const lastInv = workflowContext["coord_invariants"] || null;
+    const lastReport = lastInv?.invariants_report || null;
+
+    console.log("INVARIANTS REQUEST RECEIVED (LAST INV):", lastInv);
 
     // ------------------------------------------------------------
-    // PASS 1: no path, no report → vestibule → send to coord_invariants (pass 1)
+    // If front_desk did NOT set a new invariants_request,
+    // do NOT call coord_invariants again. Hard-stop to tower.
     // ------------------------------------------------------------
-    if (!hasPath && !hasReport) {
+    if (!domain || !pass) {
         return {
-            phase: "invariants_request_pass_1",
-            invariants_report: null,
-            next_path: "coord_invariants"
+            phase: "invariants_request_idle",
+            metadata_id: metadataId,
+            invariants_report: lastReport,
+            domain: null,
+            pass: null,
+            next_path: "coord_tower",
+            carrier
         };
     }
 
     // ------------------------------------------------------------
-    // CHECKPOINT AFTER PASS 1: path built, report from pass 1 present
-    // → hand report to front_desk, which will decide to run pass 2
+    // ALWAYS honor front_desk request
     // ------------------------------------------------------------
-    if (hasPath && hasReport && carrier.invariants_report.phase === "invariants_pass_1") {
-        return {
-            phase: "invariants_request_pass_1_checkpoint",
-            invariants_report: carrier.invariants_report,
-            next_path: "front_desk"
-        };
-    }
-
-    // ------------------------------------------------------------
-    // PASS 2: path present, but no pass 2 report yet → send to coord_invariants (pass 2)
-    // ------------------------------------------------------------
-    if (hasPath && !hasReport) {
-        return {
-            phase: "invariants_request_pass_2",
-            invariants_report: null,
-            next_path: "coord_invariants"
-        };
-    }
-
-    // ------------------------------------------------------------
-    // CHECKPOINT AFTER PASS 2: full invariants report → hand to front_desk
-    // ------------------------------------------------------------
-    if (hasPath && hasReport && carrier.invariants_report.phase === "invariants_pass_2") {
-        return {
-            phase: "invariants_request_pass_2_checkpoint",
-            invariants_report: carrier.invariants_report,
-            next_path: "front_desk"
-        };
-    }
-
-    // Fallback: undefined state
     return {
-        phase: "invariants_request",
-        invariants_report: null,
-        next_path: null,
-        error: "Invariants request reached an undefined state"
+        phase: pass === 1 ? "invariants_request_initial" : "invariants_request_pass_2",
+        metadata_id: metadataId,
+        invariants_report: lastReport,
+        domain,
+        pass,
+        next_path: "coord_invariants",
+        carrier
     };
 }
