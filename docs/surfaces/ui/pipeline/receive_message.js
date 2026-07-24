@@ -6,12 +6,19 @@ import { ChatWindow } from "../components/chat_window.js";
 
 export function receiveMessage(systemText) {
 
+  // Ensure systemText is always a string
+  const safeText =
+    typeof systemText === "string"
+      ? systemText
+      : JSON.stringify(systemText, null, 2);
+
   // 1. Store system bubble in Surfaces history
   addMessage({
     type: "system",
-    text: systemText
+    text: safeText
   });
 
   // 2. Re-render chat window
   ChatWindow.render();
 }
+

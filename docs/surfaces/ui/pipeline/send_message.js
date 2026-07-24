@@ -3,8 +3,10 @@
 
 import { buildEnvelope } from "./build_envelope.js";
 import { receiveMessage } from "./receive_message.js";
+import { eventBus } from "../state/event_bus.js";
 
 export async function sendMessage(text) {
+  console.log("SEND MESSAGE FIRED:", text);
 
   // 1. Build the envelope (message + tag)
   const envelope = buildEnvelope(text);
@@ -13,5 +15,7 @@ export async function sendMessage(text) {
   window.__system_handleEnvelope(envelope, (systemText) => {
     // 3. Deliver system output back into UI
     receiveMessage(systemText);
+
+    eventBus.emit("final_output", systemText);
   });
 }

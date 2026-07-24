@@ -3,9 +3,9 @@
 
 import { buildTag } from "./build_tag.js";
 
-export function buildEnvelope(message) {
+export function buildEnvelope(text) {
   return {
-    message,
+    text,
     tag: buildTag()
   };
 }

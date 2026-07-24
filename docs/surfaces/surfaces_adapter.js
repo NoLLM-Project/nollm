@@ -1,4 +1,4 @@
-// surfaces/adapter/surfaces_adapter.js
+// surfaces_adapter
 export const surfacesAdapter = {
   sendEnvelope(envelope, onReply) {
     const fn = window.__system_handleEnvelope;

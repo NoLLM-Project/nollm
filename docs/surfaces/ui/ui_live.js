@@ -35,66 +35,67 @@ import { actionNewConversationId } from "./actions/new_conversation.js";
 import { actionDeleteHistory as actionClearHistory } from "./actions/delete_history.js";
 
 // -----------------------------
-// Chat pipeline (your request)
+// Chat pipeline
 // -----------------------------
 import { sendMessage } from "./pipeline/send_message.js";
 
 // ------------------------------------------------------------
-// Minimal async bridge to system
+// SYSTEM-PLANE HANDLER (Node bridge)
 // ------------------------------------------------------------
-function sendToSystem(envelope) {
-  return new Promise((resolve, reject) => {
-    const fn = window.__system_handleEnvelope;
-    if (typeof fn !== "function") {
-      return reject(new Error("System receiver not registered"));
-    }
+window.__system_handleEnvelope = async (envelope, resolve) => {
+  try {
+    const response = await fetch("http://localhost:3000/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(envelope)
+    });
 
-    try {
-      fn(envelope, resolve);
-    } catch (err) {
-      reject(err);
+    const { ok, result, error } = await response.json();
+
+    if (ok) {
+      eventBus.emit("final_output", result);
+      resolve(result);
+    } else {
+      eventBus.emit("final_output", error);
+      resolve(error);
     }
-  });
-}
+  } catch (err) {
+    const msg = err.message || String(err);
+    eventBus.emit("final_output", msg);
+    resolve(msg);
+  }
+};
 
 
 // ------------------------------------------------------------
 // Minimal error panel helper
 // ------------------------------------------------------------
 function showSystemError(text) {
+  console.error("RAW SYSTEM ERROR:", text);
   const el = document.getElementById("system-error-panel");
   if (el) el.textContent = text;
 }
-
 
 // ------------------------------------------------------------
 // DOMContentLoaded — Surfaces init + merged UI wiring
 // ------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
 
-  // --- Surfaces state ---
   initUserId();
   initConversationId();
   loadHistory();
 
-  // --- Surfaces UI ---
   ChatWindow.init();
   ChatInput.init(onUserSubmit);
   Menu.init();
 
-  // --- System UI ---
-  // InputPanel.init(onUserSubmit);
   WorkflowPanel.init();
   CarrierPanel.init();
   OutputPanel.init();
 
-  // --- Event bus ---
   wireEventBus();
-
-  // --- Merged UI wiring ---
   mergedUIInit();
 });
-
 
 // ------------------------------------------------------------
 // USER SUBMISSION HANDLER
@@ -109,37 +110,8 @@ async function onUserSubmit(text) {
   WorkflowPanel.render();
   CarrierPanel.render();
 
-  const envelope = {
-    message: text,
-    tag: {
-      user_id: getUserId(),
-      conversation_id: getConversationId(),
-      timestamp: Date.now()
-    }
-  };
-
-  try {
-    const systemText = await sendToSystem(envelope);
-
-    addMessage({ type: "system", text: systemText });
-    ChatWindow.render();
-
-    uiState.finalOutput = systemText;
-    OutputPanel.render();
-
-    showSystemError("");
-
-  } catch (err) {
-
-    const errorText = `System Error: ${err.message || err}`;
-
-    showSystemError(errorText);
-
-    uiState.finalOutput = errorText;
-    OutputPanel.render();
-  }
+  sendMessage(text);
 }
-
 
 // ------------------------------------------------------------
 // EVENT BUS WIRING
@@ -159,13 +131,13 @@ function wireEventBus() {
   eventBus.on("final_output", (output) => {
     uiState.finalOutput = output;
 
-    addMessage({ type: "system", text: output });
-    ChatWindow.render();
+    // ⭐ PATCHED: pretty-print workflowContext so the UI actually shows it
+    addMessage({ type: "system", text: JSON.stringify(output, null, 2) });
 
+    ChatWindow.render();
     OutputPanel.render();
   });
 }
-
 
 // ------------------------------------------------------------
 // MERGED UI LOGIC
@@ -257,9 +229,6 @@ function mergedUIInit() {
     renderMessages();
   }
 
-  // -------------------------------
-  // Wire UI buttons
-  // -------------------------------
   document.querySelector(".sidebar-new-convo").addEventListener("click", () => {
     actionNewConversationId();
     newConversation();
@@ -276,9 +245,6 @@ function mergedUIInit() {
     ChatWindow.render();
   });
 
-  // -------------------------------
-  // Sidebar collapse
-  // -------------------------------
   const sidebarToggle = document.getElementById("sidebar-toggle");
   const sidebar = document.getElementById("sidebar");
 
@@ -288,9 +254,6 @@ function mergedUIInit() {
     });
   }
 
-  // -------------------------------
-  // Settings drawer wiring
-  // -------------------------------
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const settingsDrawer = document.getElementById("settings-drawer");
@@ -312,9 +275,6 @@ function mergedUIInit() {
     });
   });
 
-  // -------------------------------
-  // Thinking + Diagnostics toggles
-  // -------------------------------
   const thinkingToggle = document.getElementById("toggle-thinking");
   const diagnosticsToggle = document.getElementById("toggle-diagnostics");
 
@@ -330,16 +290,32 @@ function mergedUIInit() {
     });
   }
 
-  // -------------------------------
-  // Chat input wiring (your change)
-  // -------------------------------
+  // ⭐ INSERTED: Toggle listeners for Thinking + Diagnostics
+  window.addEventListener("toggleThinking", (e) => {
+    const show = e.detail;
+
+    const workflow = document.getElementById("workflow-panel");
+    const carrier = document.getElementById("carrier-panel");
+
+    if (workflow) workflow.style.display = show ? "block" : "none";
+    if (carrier) carrier.style.display = show ? "block" : "none";
+  });
+
+  window.addEventListener("toggleDiagnostics", (e) => {
+    const show = e.detail;
+
+    const output = document.getElementById("output-panel");
+
+    if (output) output.style.display = show ? "block" : "none";
+  });
+
   document.getElementById("chat-send").addEventListener("click", () => {
     const input = document.getElementById("chat-input");
     const text = input.value.trim();
     if (!text) return;
     input.value = "";
     sendLocalUserMessage(text);
-    sendMessage(text);   // ← your requested change
+    sendMessage(text);
   });
 
   document.getElementById("chat-input").addEventListener("keydown", e => {
@@ -348,13 +324,10 @@ function mergedUIInit() {
       if (!text) return;
       e.target.value = "";
       sendLocalUserMessage(text);
-      sendMessage(text);   // ← your requested change
+      sendMessage(text);
     }
   });
 
-  // -------------------------------
-  // Initialize UI
-  // -------------------------------
   updateSettingsUserIdDisplay();
   newConversation();
 }
